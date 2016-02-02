@@ -52,6 +52,7 @@ If not A_IsAdmin
 #Include FullLoop.ahk
 #Include BattleCycle.ahk
 #Include AutoQuest.ahk
+#Include AlliHelp.ahk
 
 ;#Include OCR
 #Include OCR.ahk
