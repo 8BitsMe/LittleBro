@@ -50,6 +50,7 @@ If not A_IsAdmin
 #Include SmartSort.ahk
 
 #Include FullLoop.ahk
+#Include BattleCycle.ahk
 #Include AutoQuest.ahk
 
 ;#Include OCR
