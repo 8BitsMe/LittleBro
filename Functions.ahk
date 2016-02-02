@@ -184,7 +184,7 @@ lblog(info, bOpen:=0, headerstyle:=0)
      filename := a_scriptdir . "\LBLog.txt"
      headerstyle1 := "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
      headerstyle2 := "*******************************************"
-     FormatTime, Timestamp, %A_now%, HH:mm:ss
+     FormatTime, Timestamp, %A_now%, yyyy_MM_dd HH:mm:ss
      
      info := Timestamp . " " . info
      If (headerstyle == 1)
@@ -225,4 +225,38 @@ getXCoord(xPercent){
 getYCoord(yPercent){
      global
      return (wTop + wHeight * yPercent) 
+}
+
+NavigateToScreen(screen)
+{
+	;always reset to 'home'
+
+	;If (screen == "main") 
+		;navigate to main
+	;Else If (screen == "vs")
+		;navigate to vs
+	;Else If (screen == "quest")
+		;navigate to quests
+	;Else
+		;navigate to main
+}
+
+ClickIfColor(ratioX, ratioY, clickColor)
+{
+	global
+	bColorFound = 0
+	clickX := wLeft + wWidth * ratioX 
+	clickY := wTop + wHeight * ratioY
+
+	PixelGetColor, gColor, clickX, clickY
+	MouseMove, clickX, clickY
+
+	If (gColor == clickColor)
+	{ 
+		bColorFound = 1
+		Click %clickX%, %clickY% 
+	}
+
+	lblog("******** ClickIfColor ==> clickX: " . clickX . " - clickY: " . clickY . " ... clickColor: " . clickColor . " -- gColor: " . gColor . " .. Return: " . bColorFound)	
+	return bColorFound
 }
