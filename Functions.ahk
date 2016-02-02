@@ -1,5 +1,6 @@
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-; OUR BEAUTIFUL FUNCTIONS LIVE HERE
+; ADDS UP COLOR CHANNELS TO GET "BRIGHTNESS" - USED TO ANALYZE HEALTH BAR
+; SINCE IT CHANGES COLOR OVER TIME
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 BrightnessIndex(pColor) {
@@ -10,6 +11,8 @@ BrightnessIndex(pColor) {
      Return BI
 }
 
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; COUNTS DOWN FROM A CERTAIN NUMBER OF SECONDS, WITH EXPLANATION
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 CountDown(Why,TimeOut) {
@@ -23,8 +26,9 @@ CountDown(Why,TimeOut) {
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
 ; WAIT FOR A CHANGE ON SCREEN
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 WaitForChange(Why,Timeout := 0) {
      global
      PixelGetColor, aColor, MidX, MidY
@@ -40,10 +44,10 @@ WaitForChange(Why,Timeout := 0) {
      }
 }
 
-
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; WAIT FOR A STATIC SCREEN
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-; WAIT FOR A STATIC SCREEN
 WaitForNoChange(Why,Timeout := 0) {
      global
      PixelGetColor, aColor, MidX, MidY
@@ -61,6 +65,8 @@ WaitForNoChange(Why,Timeout := 0) {
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; SHOWS MOUSE POSITION IN RATIO SYSTEM COORDINATES, BRIGHTNESS INDEX & COLOR
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 ShowMouseRatio() {
      global
@@ -74,6 +80,8 @@ ShowMouseRatio() {
      ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% , X+12, Y+24
 }
 
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; SHOWS YOUR SUMMONER XP AS A PERCENTAGE IF THE BAR IS VISIBLE
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 XPercentage() {
@@ -103,12 +111,11 @@ XPercentage() {
      
      C := Round(100 + ((B - BMAX) / Sum) * 100, 1)
      ToolTip, %C%, X, Y
-     
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; UNIVERSAL BUTTON WAIT FUNCTION, DATA IN SAME FORMAT AS F10 SCAN
-
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 WaitForButton(Click, Why, X, Y, Color, TimeOut := 0) {
      global
@@ -138,40 +145,30 @@ WaitForButton(Click, Why, X, Y, Color, TimeOut := 0) {
           Sleep, 250
           ToolTip, Tap!, Px+12, Py+24, 2
      }
-     
 }
-
-SmartClick(X,Y) {
-     MouseClick, left, (wLeft + wWidth * X),(wTop + wHeight * Y)
-}
-
-SmartDrag(AX,AY,BX,BY,Speed) {
-     MouseClickDrag, left, (wLeft + wWidth * AX),(wTop + wHeight * AY),(wLeft + wWidth * BX),(wTop + wHeight * BY),Speed
-}
-
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
 ; CALL OCR LIBRARY
 ; Top left x and y, bottom right x and y (percentages)
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 GetOCRArea(tlX, tlY, brX, brY) {
-	global
-	
-	topLeftX := wLeft + wWidth * tlX
-	topLeftY := wTop + wHeight * tlY
-	widthToScan := (wLeft + wWidth * brX) - topLeftX
-	heightToScan := (wTop + wHeight * brY) - topLeftY
-
-	magicalText := GetOCR(topLeftX, topLeftY, widthToScan, heightToScan, "numeric")
-
-;	ToolTip, Says: %magicalText%, Px+12, Py+24, 2
-;Sleep, 1000
-
-	Return magicalText
+     global
+     
+     topLeftX := wLeft + wWidth * tlX
+     topLeftY := wTop + wHeight * tlY
+     widthToScan := (wLeft + wWidth * brX) - topLeftX
+     heightToScan := (wTop + wHeight * brY) - topLeftY
+     
+     magicalText := GetOCR(topLeftX, topLeftY, widthToScan, heightToScan, "numeric")
+     
+     ;	ToolTip, Says: %magicalText%, Px+12, Py+24, 2
+     ;Sleep, 1000
+     
+     Return magicalText
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
 ; LOGGING -- *bOpen* is optional, if set to 1 it will open the log file (this is baked into F10 for me).  
 ;	     *headerstyle* is also optional, the default value of 0 will just print a normal time stamp, see below for other options
 ;		we should set a convention for this to improve the readability of the log ... e.g. headerstyle1 for loops/main modules and headerstyle2
@@ -180,52 +177,52 @@ GetOCRArea(tlX, tlY, brX, brY) {
 ; 			 lblog("my info")
 ; 			 lblog("F10 pressed",1,2)
 ; 		         lblog("Panic button pressed",0,2)
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 lblog(info, bOpen:=0, headerstyle:=0)
 {
-   filename := a_scriptdir . "\LBLog.txt"
-   headerstyle1 := "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
-   headerstyle2 := "*******************************************"
-   FormatTime, Timestamp, %A_now%, HH:mm:ss
-
-   info := Timestamp . " " . info
-   If (headerstyle == 1)
-   {
-	LogLine := headerstyle1 . "`n" . info . "`n" . headerstyle1 . "`n" . LogLine
-   }
-   Else If (headerstyle == 2)
-   {
-	LogLine := headerstyle2 . "`n" . info . "`n" . headerstyle2 . "`n" . LogLine
-   }
-   Else
-   {
-   	LogLine := info . "`n" . LogLine 
-   }
-
-   FileAppend, %LogLine%, %filename%
-
-   IF (bOpen) ; I use this with F10 or you can set this to 1 when LB knows it crashed to have the log open and waiting
-   {
-      WinClose, LBLog.txt - Notepad ; close it if already open   
-      Run, Notepad.exe %filename%
-   }
+     filename := a_scriptdir . "\LBLog.txt"
+     headerstyle1 := "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+     headerstyle2 := "*******************************************"
+     FormatTime, Timestamp, %A_now%, HH:mm:ss
+     
+     info := Timestamp . " " . info
+     If (headerstyle == 1)
+     {
+          LogLine := headerstyle1 . "`n" . info . "`n" . headerstyle1 . "`n" . LogLine
+     }
+     Else If (headerstyle == 2)
+     {
+          LogLine := headerstyle2 . "`n" . info . "`n" . headerstyle2 . "`n" . LogLine
+     }
+     Else
+     {
+          LogLine := info . "`n" . LogLine 
+     }
+     
+     FileAppend, %LogLine%, %filename%
+     
+     IF (bOpen) ; I use this with F10 or you can set this to 1 when LB knows it crashed to have the log open and waiting
+     {
+          WinClose, LBLog.txt - Notepad ; close it if already open   
+          Run, Notepad.exe %filename%
+     }
 }
-
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; DETERMINE OFFSET X-COORDINATE FROM X PERCENT 
-
-getXCoord(xPercent){
-	global
-	return (wLeft + wWidth * xPercent) 
-	
-}
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+getXCoord(xPercent){
+     global
+     return (wLeft + wWidth * xPercent) 
+}
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; DETERMINE OFFSET Y-COORDINATE FROM Y PERCENT 
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 getYCoord(yPercent){
-	global
-	return (wTop + wHeight * yPercent) 
-	
+     global
+     return (wTop + wHeight * yPercent) 
 }
