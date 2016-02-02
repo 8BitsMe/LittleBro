@@ -5,7 +5,7 @@ SetTitleMatchMode, 2
 SetBatchLines, -1
 
 ;~ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-;~ ydobemos LittleBro v 0.9992 & US
+;~ ydobemos LittleBro v 0.9992 & PEOPLE
 ;~ Thanks to those who contribute with code, tips and ideas, I won't mention you here in
 ;~ case some salty person ever leaks this to Kabam so only I go down with the ship ;)
 ;~ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
