@@ -7,7 +7,7 @@ ChampSel() {
      
      ;set bParanoidMode = 1 if you want to skip help
      bParanoidMode := 0
-
+     
      ; HELP TAP LOCATION
      HelpStepX := wWidth * 0.181
      HelpStepY := wHeight * 0.281
@@ -77,16 +77,16 @@ ChampSel() {
                     
                     ; IF WE FIND RED SKIP IT
                     PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x1B239C, 5, Fast
-		    RedErrorLevel := ErrorLevel
-
-		    ; IF WE FIND GREEN ALSO SKIP IT  *paranoid mode*
-		    GreenErrorLevel := 1
-		    If (bParanoidMode)
-		    {
-	                    PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x096F16, 5, Fast
-			    GreenErrorLevel := ErrorLevel
-		    }
-
+                    RedErrorLevel := ErrorLevel
+                    
+                    ; IF WE FIND GREEN ALSO SKIP IT  *paranoid mode*
+                    GreenErrorLevel := 1
+                    If (bParanoidMode)
+                    {
+                         PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x096F16, 5, Fast
+                         GreenErrorLevel := ErrorLevel
+                    }
+                    
                     If (RedErrorLevel < 1 || GreenErrorLevel < 1) {
                          ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nSkipping busy champions..., ToolTipX, ToolTipY, 1
                          MouseMove, Px, Py, 1
@@ -96,51 +96,53 @@ ChampSel() {
                          Obstruction = 0
                     }
                     
-		    If (!bParanoidMode)
-		    {
-	                    ; IF WE FIND GREEN CLICK IT AND START ANEW (AS WE DON'T KNOW WHERE THE CHAMPION WILL GO)
-        	            PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x096F16, 10, Fast
-                	    If (ErrorLevel < 1) {
-                        	 ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nAsking for help..., ToolTipX, ToolTipY, 1
-	                         MouseClick, left, Px, Py, 1
-        	                 Sleep, 2000
-                	         Goto, Rescan
-		    }
+                    If (!bParanoidMode)
+                    {
+                         ; IF WE FIND GREEN CLICK IT AND START ANEW (AS WE DON'T KNOW WHERE THE CHAMPION WILL GO)
+                         PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x096F16, 10, Fast
+                         If (ErrorLevel < 1) {
+                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nAsking for help..., ToolTipX, ToolTipY, 1
+                              MouseClick, left, Px, Py, 1
+                              Sleep, 2000
+                              Goto, Rescan
+                         }
+                         
+                    }
                     
+                    ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                    ; HAVE WE MOVED OVER ALL THE SPOTS AND FOUND NO SUITABLE CHAMPIONS?
+                    ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                    
+                    If (Repeats >= 11) or (DetY > (wTop + wHeight*0.8)) {
+                         MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
+                         Sleep, 2000
+                         Goto, TopScan
+                    }
+                    
+                    ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                    ; IF WE HAVE ENDED UP HERE THAT MEANS THE CURRENT POSITION HAS NO RED OR GREEN BADGE
+                    ; LET'S TRY TO DRAG IT ONTO AN EMPTY SPOT
+                    ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+                    
+                    currentPI := GetOCRArea(0.270, 0.453, 0.345, 0.491)
+                    ToolTip, [%OuterLoop%] EDIT TEAM`nDragging champion...`nPI: %currentPI%`nWinStreak: %winStreak%, ToolTipX, ToolTipY, 1
+                    ; SHIFT CHAMP PORTRAIT DRAG POINT NEXT TO LAST DETECTED SPOT
+                    ChampPortraitX := DetX + wWidth * 0.08
+                    ChampPortraitY := DetY + wHeight * 0.08
+                    
+                    MouseMove, ChampPortraitX,ChampPortraitY, 1
+                    
+                    MouseClickDrag, left, ChampPortraitX,ChampPortraitY,ChampDestinationX,ChampDestinationY, 15
+                    
+                    Sleep, 1000
                }
                
                ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-               ; HAVE WE MOVED OVER ALL THE SPOTS AND FOUND NO SUITABLE CHAMPIONS?
+               ; IS THE LAST SPOT STILL EMPTY?
                ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-               
-               If (Repeats >= 11) or (DetY > (wTop + wHeight*0.8)) {
-                    MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
-                    Sleep, 2000
-                    Goto, TopScan
-               }
-               
-               ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-               ; IF WE HAVE ENDED UP HERE THAT MEANS THE CURRENT POSITION HAS NO RED OR GREEN BADGE
-               ; LET'S TRY TO DRAG IT ONTO AN EMPTY SPOT
-               ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-               
-		currentPI := GetOCRArea(0.270, 0.453, 0.345, 0.491)
-		ToolTip, [%OuterLoop%] EDIT TEAM`nDragging champion...`nPI: %currentPI%`nWinStreak: %winStreak%, ToolTipX, ToolTipY, 1
-               ; SHIFT CHAMP PORTRAIT DRAG POINT NEXT TO LAST DETECTED SPOT
-               ChampPortraitX := DetX + wWidth * 0.08
-               ChampPortraitY := DetY + wHeight * 0.08
-               
-               MouseMove, ChampPortraitX,ChampPortraitY, 1
-               
-               MouseClickDrag, left, ChampPortraitX,ChampPortraitY,ChampDestinationX,ChampDestinationY, 15
-               
-               Sleep, 1000
+               PixelGetColor, gColor, ChampDestinationX, ChampDestinationY
           }
           
-          ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-          ; IS THE LAST SPOT STILL EMPTY?
-          ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-          PixelGetColor, gColor, ChampDestinationX, ChampDestinationY
      }
      
 }
@@ -199,3 +201,4 @@ MatchSel() {
           Return
      }
 }
+

@@ -254,7 +254,7 @@ ClickIfColor(ratioX, ratioY, clickColor)
 	If (gColor == clickColor)
 	{ 
 		bColorFound = 1
-		Click %clickX%, %clickY% 
+		MouseClick, left, clickX, clickY
 	}
 
 	lblog("******** ClickIfColor ==> clickX: " . clickX . " - clickY: " . clickY . " ... clickColor: " . clickColor . " -- gColor: " . gColor . " .. Return: " . bColorFound)	
