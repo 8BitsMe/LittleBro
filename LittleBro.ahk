@@ -176,6 +176,10 @@ MouseMove, 0,1,0,R
 ShowMouseRatio()
 Return
 
+ButtonHelp:
+AlliHelp()
+Return
+
 ButtonQuest:
 AutoQuest()
 Return

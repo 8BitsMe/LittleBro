@@ -57,13 +57,13 @@ SingleFight() {
           
           ToolTip, NoDmg: %NoDmg% - DamageLevel: %DamageLevel%`nHAvg: %HAvg% [HMin: %HMin% - HMax: %HMax%] [%HCount%], ToolTipX+wWidth*0.15, ToolTipY, 6
           
-          If (OurDmg > 0) {
+          ;~ If (OurDmg > 0) {
                
-               LogTip := % "[" Action "] " OurDmg " / " TheirDmg "`n" LogTip
-               StringLeft, LogTip, LogTip, 600
+               ;~ LogTip := % "[" Action "] " OurDmg " / " TheirDmg "`n" LogTip
+               ;~ StringLeft, LogTip, LogTip, 600
                
-               ToolTip, %LogTip%, wLeft + wWidth, wTop, 10
-          }
+               ;~ ToolTip, %LogTip%, wLeft + wWidth, wTop, 10
+          ;~ }
           
           StrataDev()
           

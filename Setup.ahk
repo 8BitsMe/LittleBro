@@ -133,40 +133,42 @@ global ArrowC := wTop + wHeight * 0.644
 
 gWidth = 80
 gHeight = 40
-gPad = 8
+gPad = 4
 
-gFHeight := gHeight + gPad * 2
+gFWidth := gWidth + gPad * 2
 
-gIX := gPad
+gIY := gPad
 
 Gui, Color, 303030
 Gui, -Caption +Border
 Gui, Font, s14
 
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , Quest
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , Fight
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , Battle
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , CC
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , C-B
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , B-Z
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , WAR-B
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , WAR-C
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , WAR-Y
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , WAR-Z
-gIX += gPad + gWidth
-Gui, Add, Button, x%gIX% y%gPad% w%gWidth% h%gHeight% , PANIC
-gIX += gPad + gWidth
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , Help
+gIY += gPad + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , Quest
+gIY += gPad + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , Fight
+gIY += gPad + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , Battle
+gIY += gPad*2 + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , CC
+gIY += gPad + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , C-B
+gIY += gPad + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , B-Z
+gIY += gPad*2 + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-B
+gIY += gPad + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-C
+gIY += gPad + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-Y
+gIY += gPad + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-Z
+gIY += gPad*2 + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , PANIC
+gIY += gPad + gHeight
 
-gX := wLeft + wWidth - (gIX) - 4
-gY := wTop + wHeight + 4
+gX := wLeft + wWidth + 4
+gY := wTop
 
-Gui, Show, NoActivate x%gX% y%gY% h%gFHeight% w%gIX%, LittleBro 0.9992
+Gui, Show, NoActivate x%gX% y%gY% w%gFWidth% h%gIY%, LittleBro 0.9993
