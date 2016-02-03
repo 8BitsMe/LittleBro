@@ -57,6 +57,18 @@ If not A_IsAdmin
 ;#Include OCR
 #Include OCR.ahk
 
+;Import local config or create if it doesn't exist. No error checking on keys not found in config file yet.
+IfExist, LBConfig.ini
+     CreateConfig := False
+IF (CreateConfig = False) {
+     ;add additional local settings here
+     IniRead, LBCAutoHelp, LBConfig.ini, HELP, AutoHelp
+     IniRead, LBCOnlyLVL3, LBConfig.ini, SPECIALS, OnlyLVL3
+} Else {
+     ;add additional local settings here 
+     IniWrite, Yes, LBConfig.ini, HELP, AutoHelp
+     IniWrite, Yes, LBConfig.ini, SPECIALS, OnlyLVL3
+}
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; PRESS F1 TO SOMETHING
