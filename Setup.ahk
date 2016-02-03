@@ -133,7 +133,7 @@ global ArrowC := wTop + wHeight * 0.644
 
 gWidth = 80
 gHeight = 40
-gPad = 4
+gPad = 8
 
 gFWidth := gWidth + gPad * 2
 
@@ -145,26 +145,30 @@ Gui, Font, s14
 
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , Help
 gIY += gPad + gHeight
+
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , Quest
-gIY += gPad + gHeight
+gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , Fight
-gIY += gPad + gHeight
+gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , Battle
-gIY += gPad*2 + gHeight
+
+gIY += gPad + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , CC
-gIY += gPad + gHeight
+gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , C-B
-gIY += gPad + gHeight
+gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , B-Z
-gIY += gPad*2 + gHeight
+
+gIY += gPad + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-B
-gIY += gPad + gHeight
+gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-C
-gIY += gPad + gHeight
+gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-Y
-gIY += gPad + gHeight
+gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-Z
-gIY += gPad*2 + gHeight
+
+gIY += gPad + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , PANIC
 gIY += gPad + gHeight
 
