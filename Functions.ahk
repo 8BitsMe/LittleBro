@@ -154,7 +154,7 @@ SmartDrag(AX,AY,BX,BY,Speed) {
 
 ; CALL OCR LIBRARY
 ; Top left x and y, bottom right x and y (percentages)
-GetOCRArea(tlX, tlY, brX, brY) {
+GetOCRArea(tlX, tlY, brX, brY, options="numeric") {
 	global
 	
 	topLeftX := wLeft + wWidth * tlX
@@ -162,7 +162,7 @@ GetOCRArea(tlX, tlY, brX, brY) {
 	widthToScan := (wLeft + wWidth * brX) - topLeftX
 	heightToScan := (wTop + wHeight * brY) - topLeftY
 
-	magicalText := GetOCR(topLeftX, topLeftY, widthToScan, heightToScan, "numeric")
+	magicalText := GetOCR(topLeftX, topLeftY, widthToScan, heightToScan, options)
 
 ;	ToolTip, Says: %magicalText%, Px+12, Py+24, 2
 ;Sleep, 1000
