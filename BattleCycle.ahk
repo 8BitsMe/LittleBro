@@ -46,6 +46,13 @@ BattleCycle() {
      ; WAIT FOR NEXT SCREEN
      WaitForNoChange("Waiting to start battle...")
      
+     ; GET CURRENT POINTS
+     previousPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215)
+
+     lblog("Starting points: " . previousPoints)
+
+     ToolTip, Points %previousPoints% To start with, ToolTipX, ToolTipY, 1
+     
      ; PLAY THREE MATCHES
      Loop, 3 {
           ; TAP BEGIN BATTLE, WAIT FOR THE TRANSITION TO LOADING, THEN WAIT FOR LOADING TO END
@@ -63,7 +70,16 @@ BattleCycle() {
           WaitForNoChange("Fight finished...")
           
           ToolTip, Fight finished..., ToolTipX, ToolTipY, 1
+
+     ; GET CURRENT POINTS
+     currentPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215)
+     lblog("Starting points:  " . previousPoints . ", Current points: " . currentPoints)
+
      }
+     lblog("AFTER::: Starting points:  " . previousPoints . ", Current points: " . currentPoints)
+
+     rPoints := currentPoints  - previousPoints
+     lblog("Gained: " . rPoints . " points")
      
      ToolTip, Battles complete!, ToolTipX, ToolTipY, 1
      
