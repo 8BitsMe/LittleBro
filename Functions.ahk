@@ -1,4 +1,3 @@
-@@ -1,262 +0,0 @@
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; ADDS UP COLOR CHANNELS TO GET "BRIGHTNESS" - USED TO ANALYZE HEALTH BAR
 ; SINCE IT CHANGES COLOR OVER TIME
