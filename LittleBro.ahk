@@ -5,7 +5,7 @@ SetTitleMatchMode, 2
 SetBatchLines, -1
 
 ;~ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-;~ ydobemos LittleBro v 0.9992  & PEOPLE
+;~ ydobemos LittleBro v 0.9992 & PEOPLE
 ;~ Thanks to those who contribute with code, tips and ideas, I won't mention you here in
 ;~ case some salty person ever leaks this to Kabam so only I go down with the ship ;)
 ;~ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -52,6 +52,7 @@ If not A_IsAdmin
 #Include FullLoop.ahk
 #Include BattleCycle.ahk
 #Include AutoQuest.ahk
+#Include AlliHelp.ahk
 
 ;#Include OCR
 #Include OCR.ahk
@@ -126,6 +127,14 @@ Return
 
 F6::
 BattleCycle()
+Return
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; PRESS F7 TO MANUALLY CALL ALLIHELP
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+F7::
+AlliHelp()
 Return
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

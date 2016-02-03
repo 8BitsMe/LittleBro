@@ -5,6 +5,9 @@
 ChampSel() {
      global
      
+     ;set bParanoidMode = 1 if you want to skip help
+     bParanoidMode := 0
+
      ; HELP TAP LOCATION
      HelpStepX := wWidth * 0.181
      HelpStepY := wHeight * 0.281
@@ -74,7 +77,17 @@ ChampSel() {
                     
                     ; IF WE FIND RED SKIP IT
                     PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x1B239C, 5, Fast
-                    If (ErrorLevel < 1) {
+		    RedErrorLevel := ErrorLevel
+
+		    ; IF WE FIND GREEN ALSO SKIP IT  *paranoid mode*
+		    GreenErrorLevel := 1
+		    If (bParanoidMode)
+		    {
+	                    PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x096F16, 5, Fast
+			    GreenErrorLevel := ErrorLevel
+		    }
+
+                    If (RedErrorLevel < 1 || GreenErrorLevel < 1) {
                          ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nSkipping busy champions..., ToolTipX, ToolTipY, 1
                          MouseMove, Px, Py, 1
                          DetX += HelpStepX
@@ -83,14 +96,16 @@ ChampSel() {
                          Obstruction = 0
                     }
                     
-                    ; IF WE FIND GREEN CLICK IT AND START ANEW (AS WE DON'T KNOW WHERE THE CHAMPION WILL GO)
-                    PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x096F16, 10, Fast
-                    If (ErrorLevel < 1) {
-                         ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nAsking for help..., ToolTipX, ToolTipY, 1
-                         MouseClick, left, Px, Py, 1
-                         Sleep, 2000
-                         Goto, Rescan
-                    }
+		    If (!bParanoidMode)
+		    {
+	                    ; IF WE FIND GREEN CLICK IT AND START ANEW (AS WE DON'T KNOW WHERE THE CHAMPION WILL GO)
+        	            PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x096F16, 10, Fast
+                	    If (ErrorLevel < 1) {
+                        	 ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nAsking for help..., ToolTipX, ToolTipY, 1
+	                         MouseClick, left, Px, Py, 1
+        	                 Sleep, 2000
+                	         Goto, Rescan
+		    }
                     
                }
                
