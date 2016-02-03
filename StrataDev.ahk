@@ -92,6 +92,23 @@ StrataDev() {
           Return
      }
      
+    ; If we have a L3 special - launch it!
+	;If (WeHaveASpecial > 100) {
+	;	Strategy = L3 SPECIAL!
+	;	Action = 123
+	;	Return
+	; If we are hurting and get any special - launch it!
+	;} Else If (OurHealth < 40) && (WeHaveASpecial > 0) {
+	;	Strategy = SPECIAL!
+	;	Action = 123
+	;	Return
+	; If we get a L2 and are doing okay - launch it!
+	;} Else If (OurHealth < 75) && (WeHaveASpecial > 10) {
+	;	Strategy = SPECIAL!
+	;	Action = 123
+	;	Return
+	;}
+     
      ; DAMAGE
      ; ======
      
