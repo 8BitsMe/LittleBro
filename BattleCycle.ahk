@@ -44,7 +44,7 @@ BattleCycle() {
      Goto StepA
      
      ; WAIT FOR NEXT SCREEN
-     WaitForNoChange("Waiting to start battle...")
+     WaitForNoChange(0.5,0.75,"Waiting to start battle...")
      
      ; GET CURRENT POINTS
 ;     previousPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215)
@@ -70,20 +70,20 @@ BattleCycle() {
 	  curStars := StrLen(curStars) . "*" . duped
           WaitFoRButton(1, "Starting fight...", 0.910, 0.910, 0X024B03, 60)
           
-          WaitForNoChange("Starting fight...",30)
+          WaitForNoChange(0.5,0.75,"Starting fight...",30)
           
-          WaitForChange("Fight started...",30)
+          WaitForChange(0.5,0.75,"Fight started...",30)
           
           SingleFight()
           
           Sleep, 2000
           
-          WaitForNoChange("Fight finished...")
+          WaitForNoChange(0.5,0.75,"Fight finished...")
           
           ToolTip, Fight finished..., ToolTipX, ToolTipY, 1
 
 	  Sleep, 500
-	  WaitForNoChange("Calculating Score...")
+	  WaitForNoChange(0.5,0.75,"Calculating Score...")
 
      ; GET CURRENT POINTS
 	fightPoints := GetOCRArea(0.440, 0.470 + (.12 * (A_Index-1) ), 0.512, 0.505 + (.12 * (A_Index-1) ), "numeric")
@@ -102,13 +102,13 @@ BattleCycle() {
      
      Sleep, 2000
      
-     WaitForNoChange("Waiting for ACHIEVEMENTS...")
+     WaitForNoChange(0.5,0.75,"Waiting for ACHIEVEMENTS...")
      
      WaitFoRButton(1, "ACHIEVEMENTS Screen green Button...", 0.910, 0.910, 0X024B03, 20)
      
      Sleep, 2000
      
-     WaitForNoChange("Are we back on VERSUS Screen?")
+     WaitForNoChange(0.5,0.75,"Are we back on VERSUS Screen?")
      
      ToolTip,
      

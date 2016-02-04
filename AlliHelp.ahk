@@ -35,9 +35,10 @@ AlliHelp()
           
           If(bAllianceHelpColorFound)
           {
-               WaitForChange("Loading ALLIANCE screen...",30)
+               WaitForChange(0.24,0.7,"Loading ALLIANCE screen...",3)
+               WaitForNoChange(0.24,0.7,"Loading ALLIANCE screen...",10)
                
-               HelpTabRatioX := 0.483
+               HelpTabRatioX := 0.484
                HelpTabRatioY := 0.268
                helpColor := 0x000059
                
@@ -46,7 +47,8 @@ AlliHelp()
                If(bHelpTabColorFound)
                {
                     ; NOTE: in this section we look at the Help button to see if it's grey (otherwise it's a pulsing green)
-                    WaitForChange("Loading HELP screen...",5)
+                    WaitForChange(0.5,0.75,"Loading HELP screen...",3)
+                    WaitForNoChange(0.5,0.75,"Loading HELP screen...",10)
                     
                     HelpButtonRatioX := 0.781
                     HelpButtonRatioY := 0.357

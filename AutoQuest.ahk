@@ -84,7 +84,7 @@ AutoQuest() {
                Break
           }
           
-          WaitForChange("AUTOQUEST™ : Entering fight...",10)
+          WaitForChange(0.5,0.75,"AUTOQUEST™ : Entering fight...",10)
           
           MouseClick, left, ContinueButtonX, ContinueButtonY
           ToolTip, Tap!, ContinueButtonX, ContinueButtonY
@@ -92,13 +92,13 @@ AutoQuest() {
           MouseClick, left, ContinueButtonX, ContinueButtonY
           Sleep, 2000
           
-          WaitForNoChange("AUTOQUEST™ : Starting fight...",10)
+          WaitForNoChange(0.5,0.75,"AUTOQUEST™ : Starting fight...",10)
           
-          WaitForChange("AUTOQUEST™ : Fight started...",10)
+          WaitForChange(0.5,0.75,"AUTOQUEST™ : Fight started...",10)
           
           SingleFight()
           
-          WaitForChange("AUTOQUEST™ : Looking for green node...", 10)
+          WaitForChange(0.5,0.75,"AUTOQUEST™ : Looking for green node...", 10)
           
      }
      
