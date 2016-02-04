@@ -213,10 +213,12 @@ lbFightLog(info, bOpen:=0)
 {
      filename := a_scriptdir . "\LBFightLog.csv"
      FormatTime, Timestamp, %A_now%, yyyy_MM_dd HH:mm:ss
+
+     WinClose, Microsoft Excel - LBFightLog.csv ; close it if already open   
      
      IfNotExist, %filename%
      {
-	     header := "Timestamp,Hero,Stars,Fight Points,Current Points,Streak,Multiplier,Successful Hits, Hits Recieved,Successful Combos, Highest Combo`n" . LogLine
+	     header := "Timestamp,Hero,Stars, Fight Time, Fight Points,Current Points,Streak,Multiplier,Successful Hits, Hits Recieved,Successful Combos, Highest Combo`n" . LogLine
 	     FileAppend, %header%, %filename%
      }
 
