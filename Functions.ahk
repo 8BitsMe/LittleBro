@@ -217,15 +217,15 @@ lbFightLog(info, bOpen:=0)
 {
      filename := a_scriptdir . "\LBFightLog.csv"
      FormatTime, Timestamp, %A_now%, yyyy_MM_dd HH:mm:ss
-
+     
      WinClose, Microsoft Excel - LBFightLog.csv ; close it if already open   
      
      IfNotExist, %filename%
      {
-	     header := "Timestamp,Hero,Stars, Fight Time, Fight Points,Current Points,Streak,Multiplier,Successful Hits, Hits Recieved,Successful Combos, Highest Combo`n" . LogLine
-	     FileAppend, %header%, %filename%
+          header := "Timestamp,Hero,Stars, Fight Time, Fight Points,Current Points,Streak,Multiplier,Successful Hits, Hits Recieved,Successful Combos, Highest Combo`n" . LogLine
+          FileAppend, %header%, %filename%
      }
-
+     
      info := Timestamp . "," . info
      LogLine := info . "`n" . LogLine 
      
@@ -290,4 +290,23 @@ ClickIfColor(ratioX, ratioY, clickColor)
      return bColorFound
 }
 
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; WAITS FOR A SPECIFIC COLOR TO SHOW UP AT A SPECIFIC LOCATION
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+WaitForColor(X,Y,Color,Timeout)
+{     
+     global
+     X := wLeft + wWidth * X
+     Y := wTop + wHeight * Y
+     PixelGetColor, ComColor, X, Y
+     Z = 0
+     Skip := false
+     While (ComColor <> Color) && !Skip {
+          PixelGetColor, ComColor, X, Y
+          ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`nWaiting for color..." "(Press F9 to skip)`n" ComColor " - " Color " : " Z++ , ToolTipX, ToolTipY, 1
+          Sleep, 1000
+          If (Timeout > 0 && Z > Timeout)
+          Skip := true
+     }
+}

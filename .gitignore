@@ -1,5 +1,8 @@
+/ocr-archive
 *.bak
 *.log
 *.txt
 *.csv
 *.ini
+*.pnm
+*.jpg

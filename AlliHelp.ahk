@@ -35,8 +35,8 @@ AlliHelp()
           
           If(bAllianceHelpColorFound)
           {
-               WaitForChange(0.24,0.7,"Loading ALLIANCE screen...",3)
-               WaitForNoChange(0.24,0.7,"Loading ALLIANCE screen...",10)
+               ; IS THE ALLIANCE PAGE PANEL VISIBLE?
+               WaitForColor(0.06,0.5,0x302C2B,0) ;WaitForColor(X,Y,Color,Timeout)
                
                HelpTabRatioX := 0.484
                HelpTabRatioY := 0.268
@@ -47,8 +47,9 @@ AlliHelp()
                If(bHelpTabColorFound)
                {
                     ; NOTE: in this section we look at the Help button to see if it's grey (otherwise it's a pulsing green)
-                    WaitForChange(0.5,0.75,"Loading HELP screen...",3)
-                    WaitForNoChange(0.5,0.75,"Loading HELP screen...",10)
+                    
+                    ; ARE WE ON THE HELP PAGE?
+                    WaitForColor(0.5,0.33,0X302C2B,0) ;WaitForColor(X,Y,Color,Timeout)
                     
                     HelpButtonRatioX := 0.781
                     HelpButtonRatioY := 0.357
