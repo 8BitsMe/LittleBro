@@ -209,6 +209,29 @@ lblog(info, bOpen:=0, headerstyle:=0)
      }
 }
 
+lbFightLog(info, bOpen:=0)
+{
+     filename := a_scriptdir . "\LBFightLog.csv"
+     FormatTime, Timestamp, %A_now%, yyyy_MM_dd HH:mm:ss
+     
+     IfNotExist, %filename%
+     {
+	     header := "Timestamp,Hero,Stars,Fight Points,Current Points,Streak,Multiplier,Successful Hits, Hits Recieved,Successful Combos, Highest Combo`n" . LogLine
+	     FileAppend, %header%, %filename%
+     }
+
+     info := Timestamp . "," . info
+     LogLine := info . "`n" . LogLine 
+     
+     FileAppend, %LogLine%, %filename%
+     
+     IF (bOpen) ; I use this with F10 or you can set this to 1 when LB knows it crashed to have the log open and waiting
+     {
+          WinClose, LBLog.txt - Notepad ; close it if already open   
+          Run, Notepad.exe %filename%
+     }
+}
+
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; DETERMINE OFFSET X-COORDINATE FROM X PERCENT 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

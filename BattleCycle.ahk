@@ -89,9 +89,8 @@ BattleCycle() {
 	currentPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215, "numeric")
 	fightPoints := GetOCRArea(0.440, 0.470 + (.12 * (A_Index-1) ), 0.507, 0.505 + (.12 * (A_Index-1) ), "numeric")
 
-	msg := "Hero: " . curHero . " " . curStars . " got " . fightPoints . " bringing the total to: " . currentPoints . " Streak: " . winStreak . " Multiplier: " . multiplier . " Successful Hits: " . sucHits . " Hits Received: " . hitsRec . " Successful Combos: " . sucCombo . " Highest Combo: " . highCombo
-	lblog(msg, 0, 1)
-
+	msg := curHero . "," . curStars . "," . fightPoints . "," . currentPoints . "," . winStreak . "," . multiplier . "," . sucHits . "," . hitsRec . "," . sucCombo . "," . highCombo
+	lbFightLog(msg)
      }
 
      ToolTip, Battles complete!, ToolTipX, ToolTipY, 1
