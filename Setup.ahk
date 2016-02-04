@@ -100,6 +100,12 @@ global OldOurHealth = 100
 global TheirHealth = 100
 global OldTheirHealth = 100
 
+global sucHits  = 0
+global hitsRec = 0
+global sucCombo = 0
+global highCombo = 0
+
+
 global CycleTime = 0
 global CycleOld = A_TickCount
 global CycleSum = 0

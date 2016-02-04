@@ -83,6 +83,17 @@ BattleScan() {
      bColor := fastPixelGetColor(MatchRight, MatchY)
      
      If (aColor = 0x302C2B) && (bColor = 0x302C2B) {
+          WaitForNoChange("Reading result plaque...",1)
+	  sucHits  := GetOCRArea(0.450, 0.592, 0.491, 0.622, "numeric")
+	  if ( !sucHits ) {
+	        ToolTip, "Can't see Hits", wLeft, wTop-32, 9
+	  	Sleep, 6000
+	  	sucHits  := GetOCRArea(0.450, 0.592, 0.491, 0.622, "numeric")
+	  }
+	  hitsRec := GetOCRArea(0.450, 0.620, 0.491, 0.650, "numeric")
+	  sucCombo := GetOCRArea(0.672, 0.592, 0.712, 0.622, "numeric")
+	  highCombo := GetOCRArea(0.672, 0.620, 0.712, 0.650, "numeric")
+
           DoActions = 0
           ToolTip, "Fight ended cleanly with result plaque", wLeft, wTop-32, 9
      }
