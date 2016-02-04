@@ -98,13 +98,13 @@ BattleCycle() {
      
      ; WAIT FOR STATUS SCREEN
      
-     WaitFoRButton(1, "REWARDS Screen green Button...", 0.910, 0.910, 0X024B03, 20)
+     WaitFoRButton(1, "REWARDS Screen green Button...", 0.910, 0.910, 0X024B03, 10)
      
      Sleep, 2000
      
      WaitForNoChange(0.5,0.75,"Waiting for ACHIEVEMENTS...")
      
-     WaitFoRButton(1, "ACHIEVEMENTS Screen green Button...", 0.910, 0.910, 0X024B03, 20)
+     WaitFoRButton(1, "ACHIEVEMENTS Screen green Button...", 0.910, 0.910, 0X024B03, 10)
      
      Sleep, 2000
      
