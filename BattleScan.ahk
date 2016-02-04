@@ -92,7 +92,7 @@ BattleScan() {
 
 ; TRY TO OCR END RESULTS FROM THE PLAQUE
 ReadResultsPlaque() {
-	WaitForNoChange("Reading result plaque...",1)
+	WaitForNoChange(0.28,0.72,"Reading result plaque...",1)
 	shColor := fastPixelGetColor(getXCoord(0.473), getYCoord(0.473))
 	If (shColor = 0x94C7C6) {
 		ToolTip, "Sleepy time", wLeft, wTop-32, 9
