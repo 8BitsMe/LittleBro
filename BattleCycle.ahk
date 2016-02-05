@@ -7,8 +7,8 @@ BattleCycle() {
      ToolTip, EDIT TEAM`nFinding match..., ToolTipX, ToolTipY, 1
      MouseClick, left, FindMatchButtonX, FindMatchButtonY,5
      
-     WaitFoRButton(0,"OPPONENT SELECT`nPicking easy match with most points`nOr medium among hard ones",0.910,0.910, 0X024B03, 60)
-     
+     WaitForColor(Are we in match selection?,0.4,0.3,0x302C2B,60)
+     Sleep, 250
      MatchSel()
      
      ; STALLCHECK
@@ -47,27 +47,31 @@ BattleCycle() {
      WaitForNoChange(0.5,0.75,"Waiting to start battle...")
      
      ; GET CURRENT POINTS
-;     previousPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215)
-;     currentPoints := %previousPoints%
-
+     ;     previousPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215)
+     ;     currentPoints := %previousPoints%
+     
      winStreak := GetOCRArea(0.217, 0.174, 0.286, 0.215, "numeric")
      multiplier := GetOCRArea(0.383, 0.174, 0.434, 0.215)
-
+     
      ToolTip, Points %previousPoints% To start with, ToolTipX, ToolTipY, 1
      
      ; PLAY THREE MATCHES
      Loop, 3 {
           ; TAP BEGIN BATTLE, WAIT FOR THE TRANSITION TO LOADING, THEN WAIT FOR LOADING TO END
           
+          ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
           WaitFoRButton(0, "Starting fight...", 0.910, 0.910, 0X024B03, 60)
-	  curHero := GetOCRArea(0.136, 0.457 + (.12 * (A_Index-1) ), 0.301, 0.490 + (.12 * (A_Index-1) ), "debug")
-	  curStars := GetOCRArea(0.136, 0.425 + (.12 * (A_Index-1) ), 0.235, 0.463 + (.12 * (A_Index-1) ), "debug")
-	  duped := ""
-	  IfInString, curStars, & 
-	  {
-		duped := "(Unduped)"
-	  }
-	  curStars := StrLen(curStars) . "*" . duped
+          
+          curHero := GetOCRArea(0.136, 0.457 + (.12 * (A_Index-1) ), 0.301, 0.490 + (.12 * (A_Index-1) ), "debug")
+          curStars := GetOCRArea(0.136, 0.425 + (.12 * (A_Index-1) ), 0.235, 0.463 + (.12 * (A_Index-1) ), "debug")
+          duped := ""
+          IfInString, curStars, & 
+          {
+               duped := "(Unduped)"
+          }
+          curStars := StrLen(curStars) . "*" . duped
+          ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+          
           WaitFoRButton(1, "Starting fight...", 0.910, 0.910, 0X024B03, 60)
           
           WaitForNoChange(0.5,0.75,"Starting fight...",30)
@@ -81,19 +85,21 @@ BattleCycle() {
           WaitForNoChange(0.5,0.75,"Fight finished...")
           
           ToolTip, Fight finished..., ToolTipX, ToolTipY, 1
-
-	  Sleep, 500
-	  WaitForNoChange(0.5,0.75,"Calculating Score...")
-
-     ; GET CURRENT POINTS
-	fightPoints := GetOCRArea(0.440, 0.470 + (.12 * (A_Index-1) ), 0.512, 0.505 + (.12 * (A_Index-1) ), "numeric")
-	currentPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215, "numeric")
-	Everything := GetOCRArea(0.136, 0.425 + (.12 * (A_Index-1) ), 0.304, 0.516 + (.12 * (A_Index-1) ), "debug")
-
-	msg := curHero . " , " . curStars . " , " . CycleSum/1000 . " , " . fightPoints . " , " . currentPoints . " , " . winStreak . " , " . multiplier . " , " . sucHits . " , " . hitsRec . " , " . sucCombo . " , " . highCombo . " `n " . Everything
-	lbFightLog(msg)
+          
+          ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+          Sleep, 500
+          WaitForNoChange(0.5,0.75,"Calculating Score...")
+          
+          ; GET CURRENT POINTS
+          fightPoints := GetOCRArea(0.440, 0.470 + (.12 * (A_Index-1) ), 0.512, 0.505 + (.12 * (A_Index-1) ), "numeric")
+          currentPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215, "numeric")
+          Everything := GetOCRArea(0.136, 0.425 + (.12 * (A_Index-1) ), 0.304, 0.516 + (.12 * (A_Index-1) ), "debug")
+          
+          msg := curHero . " , " . curStars . " , " . CycleSum/1000 . " , " . fightPoints . " , " . currentPoints . " , " . winStreak . " , " . multiplier . " , " . sucHits . " , " . hitsRec . " , " . sucCombo . " , " . highCombo . " `n " . Everything
+          lbFightLog(msg)
+          ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
      }
-
+     
      ToolTip, Battles complete!, ToolTipX, ToolTipY, 1
      
      ; WAIT FOR STATUS SCREEN
@@ -113,3 +119,5 @@ BattleCycle() {
      ToolTip,
      
 }
+
+

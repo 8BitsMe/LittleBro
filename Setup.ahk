@@ -145,7 +145,7 @@ gFWidth := gWidth + gPad * 2
 
 gIY := gPad
 
-Gui, Color, 303030
+Gui, Color, 302C2B
 Gui, -Caption +Border
 Gui, Font, s14
 

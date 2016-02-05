@@ -47,6 +47,7 @@ If not A_IsAdmin
 
 #Include Functions.ahk
 #Include ChampSel.ahk
+#Include MatchSel.ahk
 #Include SmartSort.ahk
 
 #Include FullLoop.ahk
@@ -54,12 +55,11 @@ If not A_IsAdmin
 #Include AutoQuest.ahk
 #Include AlliHelp.ahk
 
-;#Include OCR
 #Include OCR.ahk
 
 ;Import local config or create if it doesn't exist. No error checking on keys not found in config file yet.
 IfExist, LBConfig.ini
-     CreateConfig := False
+CreateConfig := False
 IF (CreateConfig = False) {
      ;add additional local settings here
      IniRead, LBCAutoHelp, LBConfig.ini, HELP, AutoHelp
@@ -101,21 +101,21 @@ Sleep, 750
 ; Tap FILTER
 MouseClick, left, (wLeft + wWidth * 0.88),(wTop + wHeight * 0.88)
 Sleep, 750
-; DRAG BOTTOM UP
-MouseClickDrag, left, (wLeft + wWidth * 0.88),(wTop + wHeight * 0.88),(wLeft + wWidth * 0.88),(wTop + wHeight * 0.55),5
-Sleep, 500
-MouseClickDrag, left, (wLeft + wWidth * 0.88),(wTop + wHeight * 0.88),(wLeft + wWidth * 0.88),(wTop + wHeight * 0.55),5
-Sleep, 500
-; TAP ***
-MouseClick, left, (wLeft + wWidth * 0.88),(wTop + wHeight * 0.75)
-Sleep, 750
-; TAP ****
-MouseClick, left, (wLeft + wWidth * 0.88),(wTop + wHeight * 0.83)
-Sleep, 750
-; Tap Funnel
-MouseClick, left, (wLeft + wWidth * 0.75),(wTop + wHeight * 0.84)
-Sleep, 1500
-Return
+;~ ; DRAG BOTTOM UP
+;~ MouseClickDrag, left, (wLeft + wWidth * 0.88),(wTop + wHeight * 0.88),(wLeft + wWidth * 0.88),(wTop + wHeight * 0.55),5
+;~ Sleep, 500
+;~ MouseClickDrag, left, (wLeft + wWidth * 0.88),(wTop + wHeight * 0.88),(wLeft + wWidth * 0.88),(wTop + wHeight * 0.55),5
+;~ Sleep, 500
+;~ ; TAP ***
+;~ MouseClick, left, (wLeft + wWidth * 0.88),(wTop + wHeight * 0.75)
+;~ Sleep, 750
+;~ ; TAP ****
+;~ MouseClick, left, (wLeft + wWidth * 0.88),(wTop + wHeight * 0.83)
+;~ Sleep, 750
+;~ ; Tap Funnel
+;~ MouseClick, left, (wLeft + wWidth * 0.75),(wTop + wHeight * 0.84)
+;~ Sleep, 1500
+;~ Return
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; PRESS F4 TO PICK FREE CHAMPIONS
@@ -259,4 +259,3 @@ Return
 ButtonPANIC:
 Reload
 Return
-

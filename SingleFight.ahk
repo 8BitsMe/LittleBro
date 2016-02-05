@@ -57,14 +57,6 @@ SingleFight() {
           
           ToolTip, NoDmg: %NoDmg% - DamageLevel: %DamageLevel%`nHAvg: %HAvg% [HMin: %HMin% - HMax: %HMax%] [%HCount%], ToolTipX+wWidth*0.15, ToolTipY, 6
           
-          ;~ If (OurDmg > 0) {
-               
-               ;~ LogTip := % "[" Action "] " OurDmg " / " TheirDmg "`n" LogTip
-               ;~ StringLeft, LogTip, LogTip, 600
-               
-               ;~ ToolTip, %LogTip%, wLeft + wWidth, wTop, 10
-          ;~ }
-          
           StrataDev()
           
      }
@@ -80,4 +72,46 @@ SingleFight() {
      ToolTip,,,,5
      ToolTip,,,,6
      
+     WaitForColor(Is the plaque visible?,0.270,0.5,0x302C2B,0) ;WaitForColor(Why,X,Y,Color,Timeout)
+     
+     ;ReadResultsPlaque()
+     
+     ; WHILE THAT PLAQUE IS VISIBLE TAP THAT
+     
+     X := wLeft + wWidth * 0.270
+     Y := wTop + wHeight * 0.5
+     PixelGetColor, Color, X, Y
+     
+     While (Color = 0x302C2B) {
+          MouseClick, left, ContinueButtonX, ContinueButtonY
+          Sleep, 3000
+          PixelGetColor, Color, X, Y
+     }
+     
+}
+
+; TRY TO OCR END RESULTS FROM THE PLAQUE
+ReadResultsPlaque() {
+     
+     shColor := fastPixelGetColor(getXCoord(0.473), getYCoord(0.473))
+     If (shColor = 0x94C7C6) {
+          ToolTip, "Sleepy time", wLeft, wTop-32, 9
+          Sleep, 6000
+     }
+     
+     sucHits  := GetOCRArea(0.450, 0.449, 0.491, 0.480, "numeric")
+     if (sucHits > -1) {
+          ; KO LOCATIONS
+          ; got sucHits just above
+          hitsRec := GetOCRArea(0.450, 0.483, 0.491, 0.515, "numeric")
+          sucCombo := GetOCRArea(0.672, 0.449, 0.712, 0.480, "numeric")
+          highCombo := GetOCRArea(0.672, 0.483, 0.712, 0.515, "numeric")
+     }
+     else {
+          ; VICTORY LOCATIONS
+          sucHits  := GetOCRArea(0.450, 0.592, 0.491, 0.622, "numeric")
+          hitsRec := GetOCRArea(0.450, 0.620, 0.491, 0.650, "numeric")
+          sucCombo := GetOCRArea(0.672, 0.592, 0.712, 0.622, "numeric")
+          highCombo := GetOCRArea(0.672, 0.620, 0.712, 0.650, "numeric")
+     }
 }

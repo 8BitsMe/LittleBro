@@ -48,7 +48,9 @@ FullLoop(WhichWar,LoopLimit) {
                WaitFoRButton(1, "Last versus match Button...", 0.6, 0.850, 0X024B04)
           }
           
-          WaitForChange(0.5,0.75,"Picked 3v3 ARENA...", 60)
+          Sleep, 500
+          
+          WaitForColor(Have we entered champion selection?,0.1,0.7,0x302C2B,60)
           
           ; =-= FIX POSSIBLE STALL HERE =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
           PixelGetColor, aColor, (wLeft + wWidth * 0.8),(wTop + wHeight * 0.6)
@@ -59,8 +61,6 @@ FullLoop(WhichWar,LoopLimit) {
                Continue
           }
           ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-          
-          WaitForNoChange(0.5,0.75,"EDIT TEAM")
           
           BattleCycle()
           

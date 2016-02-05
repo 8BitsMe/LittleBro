@@ -31,6 +31,8 @@ AutoQuest() {
           ; LOOK FOR FIGHT! BUTTON
           PixelSearch, Px, Py, ContinueButtonX-4, ContinueButtonY-4, ContinueButtonX+4, ContinueButtonY+4, 0x014903, 32, Fast
           
+          DrawRect(SearchLeft,SearchTop,SearchRight,SearchBottom,"FF0000")
+          
           While (ErrorLevel > 0) {
                
                Z++
@@ -76,6 +78,8 @@ AutoQuest() {
                Sleep, 500
           }
           
+          HideRect()
+          
           ; QUEST COMPLETE?
           PixelGetColor, aColor, CompleteA, CompleteY
           PixelGetColor, bColor, CompleteB, CompleteY
@@ -84,13 +88,9 @@ AutoQuest() {
                Break
           }
           
-          WaitForChange(0.5,0.75,"AUTOQUEST™ : Entering fight...",10)
+          WaitForColor(Are we in fight screen?,0.755,0.525,0x302C2B,10) ;WaitForColor(X,Y,Color,Timeout)
           
-          MouseClick, left, ContinueButtonX, ContinueButtonY
-          ToolTip, Tap!, ContinueButtonX, ContinueButtonY
-          Sleep, 2000
-          MouseClick, left, ContinueButtonX, ContinueButtonY
-          Sleep, 2000
+          WaitFoRButton(1, "Entering FIGHT...", 0.835, 0.875, 0x066122)
           
           WaitForNoChange(0.5,0.75,"AUTOQUEST™ : Starting fight...",10)
           

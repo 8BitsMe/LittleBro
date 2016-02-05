@@ -5,15 +5,6 @@
 StrataDev() {
      global
      
-     ; IS THE FIGHT OVER?
-     If (DoActions = 0) {
-          ; IT DOESN'T ALWAYS WORK RIGHT WITH THE FIRST TAP SO WE HAVE TWO
-          Sleep, 500
-          MouseClick, left, ContinueButtonX, ContinueButtonY
-          Sleep, 250
-          MouseClick, left, ContinueButtonX, ContinueButtonY
-     }
-     
      ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
      ;  TIME
      ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -90,17 +81,18 @@ StrataDev() {
 		Strategy = L3 SPECIAL!
 		Action = 123
         Return
-	; If we are hurting and get any special - launch it!
-	} Else If (OurHealth < 40) && (WeHaveASpecial > 0) && (OnlyLVL3 == No){
-		Strategy = SPECIAL!
-		Action = 123
-		Return
-	; If we get a L2 and are doing okay - launch it!
-	} Else If (OurHealth < 75) && (WeHaveASpecial > 10) && (OnlyLVL3 == No) {
-		Strategy = SPECIAL!
-		Action = 123
-		Return
 	}
+
+     ;~ If (OurHealth < 40) && (WeHaveASpecial > 0) && (OnlyLVL3 == No){
+		;~ Strategy = SPECIAL!
+		;~ Action = 123
+		;~ Return
+	;~ ; If we get a L2 and are doing okay - launch it!
+	;~ } Else If (OurHealth < 75) && (WeHaveASpecial > 10) && (OnlyLVL3 == No) {
+		;~ Strategy = SPECIAL!
+		;~ Action = 123
+		;~ Return
+	;~ }
      
      ; DAMAGE
      ; ======
