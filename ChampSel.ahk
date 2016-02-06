@@ -29,7 +29,7 @@ ChampSel() {
           ; OVERCOME MISCLICKS (DARKENED SCREEN)
           If (gColor = 0x060606) {
                MouseClick, left, ChampDestinationX, ChampDestinationY
-               WaitForChange("Fixing misClick...",5)
+               WaitForChange(0.5,0.75,"Fixing misClick...",5)
           }
           
           ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

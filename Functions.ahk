@@ -29,14 +29,16 @@ CountDown(Why,TimeOut) {
 ; WAIT FOR A CHANGE ON SCREEN
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-WaitForChange(Why,Timeout := 0) {
+WaitForChange(X,Y,Why,Timeout := 0) {
      global
-     PixelGetColor, aColor, MidX, MidY
-     PixelGetColor, bColor, MidX, MidY
+     X := wLeft + wWidth * X
+     Y := wTop + wHeight * Y
+     PixelGetColor, aColor, X, Y
+     PixelGetColor, bColor, X, Y
      Z = 0
      Skip := false
      While (aColor = bColor) && !Skip {
-          PixelGetColor, bColor, MidX, MidY
+          PixelGetColor, bColor, X, Y
           ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`nWaiting for change... (Press F9 to skip)`n" aColor " - " bColor " : " Z++, ToolTipX, ToolTipY, 1
           Sleep, 1500
           If (Timeout > 0 && Z > Timeout)
@@ -48,15 +50,17 @@ WaitForChange(Why,Timeout := 0) {
 ; WAIT FOR A STATIC SCREEN
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-WaitForNoChange(Why,Timeout := 0) {
+WaitForNoChange(X,Y,Why,Timeout := 0) {
      global
-     PixelGetColor, aColor, MidX, MidY
+     X := wLeft + wWidth * X
+     Y := wTop + wHeight * Y
+     PixelGetColor, aColor, X, Y
      bColor := 0
      Z = 0
      Skip := false
      While (aColor <> bColor) && !Skip {
           aColor := bColor
-          PixelGetColor, bColor, MidX, MidY
+          PixelGetColor, bColor, X, Y
           ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`nWaiting for no change... (Press F9 to skip)`n" aColor " - " bColor " : " Z++ , ToolTipX, ToolTipY, 1
           Sleep, 1500
           If (Timeout > 0 && Z > Timeout)
@@ -213,15 +217,15 @@ lbFightLog(info, bOpen:=0)
 {
      filename := a_scriptdir . "\LBFightLog.csv"
      FormatTime, Timestamp, %A_now%, yyyy_MM_dd HH:mm:ss
-
+     
      WinClose, Microsoft Excel - LBFightLog.csv ; close it if already open   
      
      IfNotExist, %filename%
      {
-	     header := "Timestamp,Hero,Stars, Fight Time, Fight Points,Current Points,Streak,Multiplier,Successful Hits, Hits Recieved,Successful Combos, Highest Combo`n" . LogLine
-	     FileAppend, %header%, %filename%
+          header := "Timestamp,Hero,Stars, Fight Time, Fight Points,Current Points,Streak,Multiplier,Successful Hits, Hits Recieved,Successful Combos, Highest Combo`n" . LogLine
+          FileAppend, %header%, %filename%
      }
-
+     
      info := Timestamp . "," . info
      LogLine := info . "`n" . LogLine 
      
@@ -254,34 +258,55 @@ getYCoord(yPercent){
 
 NavigateToScreen(screen)
 {
-	;always reset to 'home'
-
-	;If (screen == "main") 
-		;navigate to main
-	;Else If (screen == "vs")
-		;navigate to vs
-	;Else If (screen == "quest")
-		;navigate to quests
-	;Else
-		;navigate to main
+     ;always reset to 'home'
+     
+     ;If (screen == "main") 
+     ;navigate to main
+     ;Else If (screen == "vs")
+     ;navigate to vs
+     ;Else If (screen == "quest")
+     ;navigate to quests
+     ;Else
+     ;navigate to main
 }
 
 ClickIfColor(ratioX, ratioY, clickColor)
 {
-	global
-	bColorFound = 0
-	clickX := wLeft + wWidth * ratioX 
-	clickY := wTop + wHeight * ratioY
+     global
+     bColorFound = 0
+     clickX := wLeft + wWidth * ratioX 
+     clickY := wTop + wHeight * ratioY
+     
+     
+     PixelSearch, Px, Py, clickX-8, clickY-8, clickX+8, clickY+8, clickColor, 10, Fast
+     
+     If (ErrorLevel < 1)
+     { 
+          bColorFound = 1
+          MouseClick, left, clickX, clickY
+     }
+     
+     lblog("******** ClickIfColor ==> clickX: " . clickX . " - clickY: " . clickY . " ... clickColor: " . clickColor . " -- gColor: " . gColor . " .. Return: " . bColorFound)	
+     return bColorFound
+}
 
-	PixelGetColor, gColor, clickX, clickY
-	MouseMove, clickX, clickY
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; WAITS FOR A SPECIFIC COLOR TO SHOW UP AT A SPECIFIC LOCATION
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-	If (gColor == clickColor)
-	{ 
-		bColorFound = 1
-		MouseClick, left, clickX, clickY
-	}
-
-	lblog("******** ClickIfColor ==> clickX: " . clickX . " - clickY: " . clickY . " ... clickColor: " . clickColor . " -- gColor: " . gColor . " .. Return: " . bColorFound)	
-	return bColorFound
+WaitForColor(X,Y,Color,Timeout)
+{     
+     global
+     X := wLeft + wWidth * X
+     Y := wTop + wHeight * Y
+     PixelGetColor, ComColor, X, Y
+     Z = 0
+     Skip := false
+     While (ComColor <> Color) && !Skip {
+          PixelGetColor, ComColor, X, Y
+          ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`nWaiting for color..." "(Press F9 to skip)`n" ComColor " - " Color " : " Z++ , ToolTipX, ToolTipY, 1
+          Sleep, 1000
+          If (Timeout > 0 && Z > Timeout)
+          Skip := true
+     }
 }

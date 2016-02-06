@@ -91,12 +91,12 @@ StrataDev() {
 		Action = 123
         Return
 	; If we are hurting and get any special - launch it!
-	} Else If (OurHealth < 40) && (WeHaveASpecial > 0) && (OnlyLVL3 = No){
+	} Else If (OurHealth < 40) && (WeHaveASpecial > 0) && (OnlyLVL3 == No){
 		Strategy = SPECIAL!
 		Action = 123
 		Return
 	; If we get a L2 and are doing okay - launch it!
-	} Else If (OurHealth < 75) && (WeHaveASpecial > 10) && (OnlyLVL3 = No) {
+	} Else If (OurHealth < 75) && (WeHaveASpecial > 10) && (OnlyLVL3 == No) {
 		Strategy = SPECIAL!
 		Action = 123
 		Return
