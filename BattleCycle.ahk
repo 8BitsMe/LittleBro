@@ -1,6 +1,22 @@
 BattleCycle() {
+     global
      
      StepA:
+     
+     WinActivate, BlueStacks
+     
+     If (OuterLoop < 9) {
+          ; Tap Funnel
+          MouseClick, left, (wLeft + wWidth * 0.97),(wTop + wHeight * 0.85)
+          Sleep, 1000
+          ; Tap sort by hero rating
+          MouseClick, left, (wLeft + wWidth * 0.9),(wTop + wHeight * 0.57)
+          Sleep, 1000
+          ; Tap FILTER
+          MouseClick, left, (wLeft + wWidth * 0.750),(wTop + wHeight * 0.855)
+          Sleep, 1000
+     }
+     
      ChampSel()
      
      ; CLICK FIND MATCH BUTTON
@@ -119,5 +135,3 @@ BattleCycle() {
      ToolTip,
      
 }
-
-

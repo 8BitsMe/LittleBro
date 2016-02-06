@@ -88,6 +88,9 @@ SingleFight() {
           PixelGetColor, Color, X, Y
      }
      
+     Sleep, 1000
+     MouseClick, left, ContinueButtonX, ContinueButtonY
+     
 }
 
 ; TRY TO OCR END RESULTS FROM THE PLAQUE

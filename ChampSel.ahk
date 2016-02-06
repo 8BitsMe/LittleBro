@@ -6,7 +6,7 @@ ChampSel() {
      global
      
      ;set bParanoidMode = 1 if you want to skip help
-     bParanoidMode := 1
+     bParanoidMode := 0
      
      ; HELP TAP LOCATION
      HelpStepX := wWidth * 0.180
@@ -38,6 +38,8 @@ ChampSel() {
           If (gColor = 0x060606) {
                MouseClick, left, ChampDestinationX, ChampDestinationY
                WaitForChange(0.5,0.75,"Fixing misClick...",5)
+               MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
+               Sleep, 2000
           }
           
           DrawRect(bLeft,bTop,bRight,bBottom,"FFFF00")
