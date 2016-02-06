@@ -45,12 +45,15 @@ GetOCR(topLeftX="", topLeftY="", widthToScan="", heightToScan="", options="")
    ;process options from the options param, if they are there
    if options
    {
+; isDebugMode:=true
       if InStr(options, "debug")
          isDebugMode:=true
       if InStr(options, "numeral")
          isNumericMode:=true
       if InStr(options, "numeric")
          isNumericMode:=true
+      if InStr(options, "alpha")
+	 isAlphaMode:=true
       if InStr(options, "activeWindow")
          isActiveWindowMode:=true
       ;if InStr(options, "screenCoord")
@@ -124,6 +127,9 @@ GetOCR(topLeftX="", topLeftY="", widthToScan="", heightToScan="", options="")
    ;run the OCR command using my mixed cmdret hack
    if isNumericMode
       additionalParams .= "-C 0-9 "
+   if isAlphaMode
+      additionalParams .= "-C [A-Z.\-] "
+   
    runCmd=gocr.exe %additionalParams% %filenamePnm%
    Runwait, %comspec% /c %runCmd% > %filenameTxt%,, Hide
    while NOT FileExist(filenameTxt)

@@ -64,10 +64,20 @@ IF (CreateConfig = False) {
      ;add additional local settings here
      IniRead, LBCAutoHelp, LBConfig.ini, HELP, AutoHelp
      IniRead, LBCOnlyLVL3, LBConfig.ini, SPECIALS, OnlyLVL3
+     IniRead, LBCOLoopCount, LBConfig.ini, OMEGALOOP, OLoopCount
+     IniRead, LBCCMin, LBConfig.ini, C-B, CMin
+     IniRead, LBCCMax, LBConfig.ini, C-B, CMax
+     IniRead, LBCBMin, LBConfig.ini, C-B, BMin
+     IniRead, LBCBMax, LBConfig.ini, C-B, BMax
 } Else {
      ;add additional local settings here 
      IniWrite, Yes, LBConfig.ini, HELP, AutoHelp
      IniWrite, Yes, LBConfig.ini, SPECIALS, OnlyLVL3
+     IniWrite, 3, LBConfig.ini, OMEGALOOP, OLoopCount
+     IniWrite, 5, LBConfig.ini, C-B, CMin
+     IniWrite, 7, LBConfig.ini, C-B, CMax
+     IniWrite, 2, LBConfig.ini, C-B, BMin
+     IniWrite, 4, LBConfig.ini, C-B, BMax
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -209,12 +219,12 @@ ButtonC-B:
 OmegaLoop = 0
 Loop {
      OmegaLoop++
-     Random, A , 5, 7
+     Random, A , LBCCMin, LBCCMax
      FullLoop("WAR-C",A)
-     Random, A , 2, 4
+     Random, A , LBCBMin, LBCBMax
      FullLoop("WAR-B",A)
      
-     If (OmegaLoop > 3)
+     If (OmegaLoop > LBCOLoopCount)
      break
      
 }
