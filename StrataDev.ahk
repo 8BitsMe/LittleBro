@@ -91,12 +91,12 @@ StrataDev() {
 		Action = 123
         Return
 	; If we are hurting and get any special - launch it!
-	} Else If (OurHealth < 40) && (WeHaveASpecial > 0) && (OnlyLVL3 == No){
+	} Else If (OurHealth < 40) && (WeHaveASpecial > 0) && (LBCOnlyLVL3 = "No"){
 		Strategy = SPECIAL!
 		Action = 123
 		Return
 	; If we get a L2 and are doing okay - launch it!
-	} Else If (OurHealth < 75) && (WeHaveASpecial > 10) && (OnlyLVL3 == No) {
+	} Else If (OurHealth < 75) && (WeHaveASpecial > 10) && (LBCOnlyLVL3 = "No") {
 		Strategy = SPECIAL!
 		Action = 123
 		Return
@@ -140,7 +140,7 @@ StrataDev() {
           ; IT IS AFFECTED BY MASTERIES AND POSSIBLY OTHER THINGS SO YOU ADJUST IT BY EYE
           ; CURRENT DEFAULT IS
           ;
-          ; HAvg := Round(HMax*0.25,1)
+          ; HAvg := Round(HMax*0.28,1)
           ;
           ; IF YOUR CHAMPIONS ARE RETREATING AFTER A GOOD HIT YOU NEED TO MAKE IT LOWER
           ; IF THEY ARE SMASHING BLOCKS THEN YOU NEED TO MAKE IT HIGHER. EXPERIMENT BY ADJUSTING
