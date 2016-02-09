@@ -270,7 +270,7 @@ NavigateToScreen(screen)
      ;navigate to main
 }
 
-ClickIfColor(ratioX, ratioY, clickColor)
+ClickIfColor(ratioX, ratioY, clickColor, speed := 0)
 {
      global
      bColorFound = 0
@@ -283,7 +283,7 @@ ClickIfColor(ratioX, ratioY, clickColor)
      If (ErrorLevel < 1)
      { 
           bColorFound = 1
-          MouseClick, left, clickX, clickY
+          MouseClick, left, clickX, clickY, speed
      }
      
      lblog("******** ClickIfColor ==> clickX: " . clickX . " - clickY: " . clickY . " ... clickColor: " . clickColor . " -- gColor: " . gColor . " .. Return: " . bColorFound)	
@@ -309,4 +309,106 @@ WaitForColor(X,Y,Color,Timeout)
           If (Timeout > 0 && Z > Timeout)
           Skip := true
      }
+}
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; HeroFilter --Filters heros according to the passed in parameters
+;	     Able to filter and sort on unlimited number of options (parameters is variable)  
+;	     *Sorting* can be done with a single word, and a ^ to denote an up arrow, and no ^ to denote a down arrow.
+;		Rank
+;		Level
+;		Rating
+;		Tier
+;	     *Filtering*
+;		Green
+;		Red
+;		Yellow
+;		LBlue
+;		DBlue
+;		Purple
+;		1*
+;		2*
+;		3*
+;		4*
+;		5*
+;	     *Examples*: HeroSort("Rating^","3*", "4*")
+; 			 HeroSort("Green", "Purple")
+; 			 HeroSort("Level^", "Purple","Red","Green","LBlue","DBlue","1*", "3*", "4*")
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+HeroFilter(params*) {
+	xCoord = 0.860
+	sorts := Object("Rank", 0.410,"Level", 0.489,"Rating",0.563,"Tier",0.718)
+	class := Object("Green",0.441, "Red",0.441,"Yellow",0.547,"LBlue",0.547,"DBlue",0.655,"Purple",0.655)
+	tier  := Object("1*",0.588,"2*",0.663,"3*",0.738,"4*",0.817,"5*",0.890)
+	;SINCE THE FILTER OPEN/CLOSE ISN'T DEPENDABLE, LOOP TO MAKE SURE OPEN
+
+	while true {
+		PixelGetColor, aColor, getXCoord(0.790), getYCoord(0.382)
+
+		if(aColor <> 0X302C2B){
+			;OPEN FILTER MENU
+			ssX = 0.966
+			found = 0
+			While(0 = found){
+				found := ClickIfColor(ssX, 0.838, 0X716E6E,1)
+				;KEEP LOOKING
+				ssX -= 0.002
+			}
+			ToolTip, AFTer LOOP, Px+12, Py+24, 2
+			Sleep,100
+		}
+		else {
+			break
+		}
+	}
+	;RESET FILTERS
+	MouseClick, left, getXCoord(xCoord), getYCoord(0.180), 2
+	for index,param in params {
+		;CLICK SORT
+		MouseClick, left, getXCoord(xCoord), getYCoord(0.258),2,10
+		for k, v in sorts {
+			If InStr(param, k){
+				clickCt = 1
+				if InStr(param, "^")
+					clickCt = 2
+				MouseClick, left, getXCoord(xCoord), getYCoord(v),clickCt,10
+			}
+		}
+		for k, v in class {
+			If InStr(param, k){
+				;CLICK FILTER
+				MouseClick, left, getXCoord(xCoord), getYCoord(0.873),1,10
+				Sleep,500
+				;MAY NEED TO SCROLL TO THE TOP - CHECK IF IT'S AT TOP
+				PixelGetColor, aColor, getXCoord(xCoord), getYCoord(0.481)
+				If ( aColor <> 0X1E942A ) {
+				     PixelSearch, Px, Py, getXCoord(xCoord), getYCoord(0.405), getXCoord(xCoord+3), getYCoord(0.698), 0XD33318, 10, Fast
+				     ;SCROLL..
+				     MouseClickDrag, left, Px, Py, getXCoord(xCoord), getYCoord(0.805), 10
+				}
+				MouseClick, left, getXCoord(xCoord + (Mod(a_index,2) * .09)), getYCoord(v),1,10
+			}
+		}
+		for k, v in tier {
+			If InStr(param, k){
+				;CLICK FILTER
+				MouseClick, left, getXCoord(xCoord), getYCoord(0.873),1,10
+				Sleep,500				
+				;MAY NEED TO SCROLL TO THE BOTTOM - CHECK IF IT'S AT BOTTOM
+				PixelGetColor, aColor, getXCoord(0.854), getYCoord(0.421)
+				If ( aColor <> 0XD33318 ) {
+				     PixelSearch, Px, Py, getXCoord(xCoord), getYCoord(0.405), getXCoord(xCoord+3), getYCoord(0.698), 0XD33318, 10, Fast
+				     ;SCROLL..
+				     MouseClickDrag, left, Px, Py, getXCoord(xCoord), getYCoord(0.200), 7
+				}
+				MouseClick, left, getXCoord(xCoord), getYCoord(v),1,10
+			}
+		}
+	}
+	
+	;CLOSE FILTER MENU
+	MouseClick, left, getXCoord(0.753), getYCoord(0.845),1,10
+;	ToolTip, DONE!, Px+12, Py+24, 2
+
 }
