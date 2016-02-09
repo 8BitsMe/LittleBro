@@ -369,9 +369,9 @@ HeroFilter(params*) {
 		MouseClick, left, getXCoord(xCoord), getYCoord(0.258),2,10
 		for k, v in sorts {
 			If InStr(param, k){
-				clickCt = 1
+				clickCt = 2
 				if InStr(param, "^")
-					clickCt = 2
+					clickCt = 1
 				MouseClick, left, getXCoord(xCoord), getYCoord(v),clickCt,10
 			}
 		}
