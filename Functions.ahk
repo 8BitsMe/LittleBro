@@ -283,7 +283,7 @@ ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
      If (ErrorLevel < 1)
      { 
           bColorFound = 1
-          MouseClick, left, clickX, clickY, speed
+          MouseClick, left, clickX, clickY, 1, speed
      }
      
      lblog("******** ClickIfColor ==> clickX: " . clickX . " - clickY: " . clickY . " ... clickColor: " . clickColor . " -- gColor: " . gColor . " .. Return: " . bColorFound)	

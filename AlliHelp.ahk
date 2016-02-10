@@ -12,9 +12,8 @@ AlliHelp()
      MainMenuHelpRatioX = 0.193
      MainMenuHelpRatioY = 0.075
      helpColor = 0x000059
-     
-     bMainHelpColorFound := ClickIfColor(MainMenuHelpRatioX, MainMenuHelpRatioY, helpColor) ; checks if red alert circle exists on the main menu icon
-     
+
+     bMainHelpColorFound := ClickIfColor(MainMenuHelpRatioX, MainMenuHelpRatioY, helpColor, 10) ; checks if red alert circle exists on the main menu icon
      ; Is the menu open? Perhaps we just looked if help is needed
      OpenMainMenuHelpX := getXCoord(0.166)
      OpenMainMenuHelpY := getYCoord(0.075)
@@ -23,20 +22,20 @@ AlliHelp()
      PixelGetColor, MenuColor, OpenMainMenuHelpX, OpenMainMenuHelpY ; checks top margin for grey background meaning menu is open
      
      If(bMainHelpColorFound) or (MenuColor = BackColor) ; at this point the menu should be open
-     {
+     {	
 	  WaitForColor(0.166,0.075,0x272323,0) ; Checking menu background again to ensure loaded
           AllianceHelpRatioX := 0.416
           AllianceHelpRatioY := 0.161
           helpColor := 0x000059	
           
-          bAllianceHelpColorFound := ClickIfColor(AllianceHelpRatioX, AllianceHelpRatioY, helpColor) ; checks red alert circle exists on Alliance tab button
+          bAllianceHelpColorFound := ClickIfColor(AllianceHelpRatioX, AllianceHelpRatioY, helpColor, 10) ; checks red alert circle exists on Alliance tab button
           
           If(bAllianceHelpColorFound)
           {
 	       ; In the case the user was already on the alliance tab, click the menu close button
 	       MenuCloseClickX := getXCoord(0.144)
 	       MenuCloseClickY := getYCoord(0.334)
-	       MouseClick, left, MenuCloseClickX, MenuCloseClickY
+	       MouseClick, left, MenuCloseClickX, MenuCloseClickY, 1, 10
 
                ; IS THE ALLIANCE PAGE PANEL VISIBLE?
 	       Sleep, 500 ; chill half a sec for menu to close
@@ -48,23 +47,22 @@ AlliHelp()
 	       ActiveColor := 0xB07A2D
 
                PixelGetColor, HelpTabColor, getXCoord(HelpTabRatioX), getYCoord(HelpTabRatioY) ; checks to see if help tab is already active (blue, no red alert circle)
-               bHelpTabColorFound := ClickIfColor(HelpTabRatioX, HelpTabRatioY, helpColor) ; checks red alert circle exists on Alliance tab, help button
+               bHelpTabColorFound := ClickIfColor(HelpTabRatioX, HelpTabRatioY, helpColor, 10) ; checks red alert circle exists on Alliance tab, help button
                
                If(bHelpTabColorFound) or (HelpTabColor = ActiveColor)
                {    
                     ; ARE WE ON THE HELP PAGE?
-		    WaitForColor(0.344,0.435,0x533C15,0) ; Checking blue bar labeled "MY REQUESTS"
-                 
+		    WaitForColor(0.225,0.34,0x302C2B,0) ; checking grey top margin that's only on help tab
+		    HelpClickX := getXCoord(0.781)
+		    HelpClickY := getYCoord(0.357) 
+
                     lblog("Beginning while help click loop")
                     helpButtonClickCounter :=0
-
                     While checkHelpNeeded()
                     {
                          ToolTip, Helped %helpButtonClickCounter% times, ToolTipX, ToolTipY, 1
-
-		         HelpClickX := getXCoord(0.781)
-		         HelpClickY := getYCoord(0.357)                         
-                         MouseClick, left, HelpClickX, HelpClickY
+                        
+                         MouseClick, left, HelpClickX, HelpClickY, 1, 10
                          
                          Sleep, 500
                          helpButtonClickCounter++
@@ -84,9 +82,19 @@ AlliHelp()
 checkHelpNeeded()
 {
     bHelpNeeded := 0
-                   
-    HelpNeededCheckX := getXCoord(0.353)
-    HelpNeededCheckY := getYCoord(0.555)
+    
+    ;Does the user have the blue 'my requests' bar?
+    PixelGetColor, HelpTabPanelColor, getXCoord(0.344),getYCoord(0.435)
+    If HelpTabPanelColor = 0x533C15
+    {
+    	HelpNeededCheckX := getXCoord(0.353)
+    	HelpNeededCheckY := getYCoord(0.555)
+    }
+    Else If HelpTabPanelColor = 0x111111
+    {
+    	HelpNeededCheckX := getXCoord(0.344)
+    	HelpNeededCheckY := getYCoord(0.435)	
+    }
                     
     PixelGetColor, helpCheckColor, HelpNeededCheckX, HelpNeededCheckY ; checking background of first help request bar (if there)
 
