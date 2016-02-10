@@ -331,9 +331,9 @@ WaitForColor(X,Y,Color,Timeout)
 ;		3*
 ;		4*
 ;		5*
-;	     *Examples*: HeroSort("Rating^","3*", "4*")
-; 			 HeroSort("Green", "Purple")
-; 			 HeroSort("Level^", "Purple","Red","Green","LBlue","DBlue","1*", "3*", "4*")
+;	     *Examples*: HeroFilter("Rating^","3*", "4*")
+; 			 HeroFilter("Green", "Purple")
+; 			 HeroFilter("Level^", "3*", "Purple","Red", "4*","Green","DBlue","1*","LBlue")
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 HeroFilter(params*) {
@@ -355,7 +355,7 @@ HeroFilter(params*) {
 				;KEEP LOOKING
 				ssX -= 0.002
 			}
-			ToolTip, AFTer LOOP, Px+12, Py+24, 2
+			ToolTip, Hold on...Confirming panel is fully open, Px+12, Py+24, 2
 			Sleep,100
 		}
 		else {
