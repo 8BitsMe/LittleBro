@@ -270,7 +270,7 @@ NavigateToScreen(screen)
      ;navigate to main
 }
 
-ClickIfColor(ratioX, ratioY, clickColor, speed := 0)
+ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
 {
      global
      bColorFound = 0
