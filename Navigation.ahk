@@ -35,9 +35,21 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
 		OpenMainMenu()
 	    
 		; Click on alliance button
+		MouseClick, left, getXCoord(0.416), getYCoord(0.161), 1, 10
+
+		; In the case the user was already on the alliance tab, click the menu close button
+		CloseMainMenu()
+
+		;verify we're on Alliance page
+		WaitForColor(0.06,0.5,0x302C2B,0) ; checks left margin for grey background (all other tabs are colorful)
+
 	    	If (Sub = "Help")
 		{
-			; Navigate to Help
+			; Click Help Tab
+			MouseClick, left, getXCoord(0.484), getYCoord(0.268), 1, 10
+		
+			; verify we're on the Help Tab
+			WaitForColor(0.225,0.34,0x302C2B,0) ;			
 		}
 	}
 	Else If (Menu = "champions")
@@ -48,11 +60,12 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
 
 OpenMainMenu()
 {
-     ; Click main menu button to open ... if main menu already open click there anyways
-     MainMenuRatioX = 0.193
-     MainMenuRatioY = 0.075
+     MouseClick, left, getXCoord(0.193), getYCoord(0.075), 1, 10
+     WaitForColor(0.166,0.075,0x272323,0) ; Checking menu background again to ensure loaded
 
-     MouseClick, left, getXCoord(MainMenuRatioX), getYCoord(MainMenuRatioY), 1, 10
-
-     ; not handled: messaging screen open
+     ; TODO: hanlde if the messaging screen open which covers entire screen and hides main menu button   
+}
+CloseMainMenu()
+{
+     MouseClick, left, getXCoord(0.144), getYCoord(0.334), 1, 10
 }
