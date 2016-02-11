@@ -10,23 +10,47 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
      }
      Else If (Menu = "fight")
      {
-          ; Navigate to fight
+          ; Open main menu
+          OpenMainMenu()
+          
+          ; Click on Fight button
+          MouseClick, left, getXCoord(0.270), getYCoord(0.199), 1, 10
+          
+          ; In the case the user was already on the alliance tab, click the menu close button
+          CloseMainMenu()     
+          
+          ; verify we're on the Fight page
+          WaitForColor(0.304,0.466,0x005C02,0) ; green view quests button ... TODO: find a better verification.
           
           If (Sub = "default")
           {
-               ; return
+               return
           }
           Else If (Sub = "versus")	
           {
-               ; Navigate to versus
+               ; Click Versus Box
+               MouseClick, left, getXCoord(0.575), getYCoord(0.440), 1, 10
+               
+               ; verify we're on the Versus page
+               WaitForColor(0.285,0.143,0xAD782C,0) ; light blue background behind 'multiverse arenas' ... TODO: find a better verification.
           }		
           Else If	(Sub = "story")
           {
-               ; Navigate to story
+               ; Click Story Box
+               MouseClick, left, getXCoord(0.290), getYCoord(0.337), 1, 10
+               
+               ; verify we're on the Story page
+               ; WaitForColor(0.###,0.###,0x######,0) ; TODO: verification. // probably should try OCR on title
+               
+               ; TODO: eventually find a path to 3.4.1 for xp/gold farming via auto quest
           }
           Else If	(Sub = "event")
           {
-               ; Navigate to event
+               ; Click Event Box
+               MouseClick, left, getXCoord(0.290), getYCoord(0.681), 1, 10
+               
+               ; verify we're on the Events page
+               ; WaitForColor(0.###,0.###,0x######,0) ; TODO: verification. // probably should try OCR on title
           }
      }
      Else If (Menu = "alliance")
@@ -69,4 +93,5 @@ CloseMainMenu()
 {
      MouseClick, left, getXCoord(0.144), getYCoord(0.334), 1, 10
 }
+
 

@@ -216,6 +216,7 @@ BattleCycle()
 Return
 
 ButtonC-B:
+NavigateToScreen("Fight","Versus")
 
 OmegaLoop = 0
 Loop {
@@ -237,6 +238,8 @@ MsgBox OmegaLoop finished at: %TimeString%.
 Return
 
 ButtonB-Z:
+NavigateToScreen("Fight","Versus")
+
 OmegaLoop = 0
 Loop {
      OmegaLoop++
@@ -248,22 +251,27 @@ Loop {
 Return
 
 ButtonCC:
+NavigateToScreen("Fight","Versus")
 FullLoop("CC",0)
 Return
 
 ButtonWAR-B:
+NavigateToScreen("Fight","Versus")
 FullLoop("WAR-B",0)
 Return
 
 ButtonWAR-C:
+NavigateToScreen("Fight","Versus")
 FullLoop("WAR-C",0)
 Return
 
 ButtonWAR-Y:
+NavigateToScreen("Fight","Versus")
 FullLoop("WAR-Y",0)
 Return
 
 ButtonWAR-Z:
+NavigateToScreen("Fight","Versus")
 FullLoop("WAR-Z",0)
 Return
 
