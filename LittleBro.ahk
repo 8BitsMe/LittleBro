@@ -46,6 +46,7 @@ If not A_IsAdmin
 #Include Actions.ahk
 
 #Include Functions.ahk
+#Include Navigation.ahk
 #Include ChampSel.ahk
 #Include SmartSort.ahk
 

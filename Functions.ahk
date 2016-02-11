@@ -256,20 +256,6 @@ getYCoord(yPercent){
      return (wTop + wHeight * yPercent) 
 }
 
-NavigateToScreen(screen)
-{
-     ;always reset to 'home'
-     
-     ;If (screen == "main") 
-     ;navigate to main
-     ;Else If (screen == "vs")
-     ;navigate to vs
-     ;Else If (screen == "quest")
-     ;navigate to quests
-     ;Else
-     ;navigate to main
-}
-
 ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
 {
      global
