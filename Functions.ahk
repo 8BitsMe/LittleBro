@@ -154,6 +154,11 @@ WaitForButton(Click, Why, X, Y, Color, TimeOut := 0) {
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; CALL OCR LIBRARY
 ; Top left x and y, bottom right x and y (percentages)
+; Options:
+;	debug
+;	numeric
+;	alpha
+;	(others that we don't use.  Look at OCR.ahk if you want to see them)
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 GetOCRArea(tlX, tlY, brX, brY, options="") {
@@ -337,12 +342,12 @@ HeroFilter(params*) {
 			ssX = 0.966
 			found = 0
 			While(0 = found){
-				found := ClickIfColor(ssX, 0.838, 0X716E6E,1)
+				found := ClickIfColor(ssX, 0.838, 0X716E6E)
 				;KEEP LOOKING
 				ssX -= 0.002
 			}
 			ToolTip, Hold on...Confirming panel is fully open, Px+12, Py+24, 2
-			Sleep,100
+			Sleep,500
 		}
 		else {
 			break

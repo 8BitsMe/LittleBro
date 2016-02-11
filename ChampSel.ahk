@@ -2,9 +2,9 @@
 ; HELP CHAMPIONS IN NEED, SKIP BUSY ONES, FORM A LINEUP
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-ChampSel() {
+ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      global
-     
+
      ;set bParanoidMode = 1 if you want to skip help
      bParanoidMode := 0
      
@@ -15,6 +15,18 @@ ChampSel() {
      ; INITIAL DRAG AND DROP LOCATION
      ChampDestinationX := wLeft + wWidth * 0.155
      ChampDestinationY := wTop + wHeight * 0.455
+     
+     if (WhichWar = "WAR-B") OR (WhichWar = "WAR-C"){
+;	     if(winStreak < 12)
+;		     HeroFilter("Rating^")
+     } else {
+;	     if(winStreak < 12)
+;		     HeroFilter("Rating^","3*", "4*")
+;     	     else
+;		     HeroFilter("3*", "4*")
+     }
+     
+;     msgBox BOOM!
      
      TopScan:
      
@@ -56,7 +68,7 @@ ChampSel() {
           } else {
                
                MouseMove, Px, Py
-               
+               sleep, 2000
                ; SET LOCATION OF HELP OR BUSY BADGES WITH KNOWN OFFSET
                DefX := Px - (wWidth * 0.010)
                DefY := Py - (wHeight * 0.144)
@@ -70,7 +82,20 @@ ChampSel() {
                ; TRY TO MOVE OVER THE CHAMPION PORTRAITS TO FIND A FREE ONE
                ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                
-               While (Obstruction <> 0) && (Repeats < 11) {
+               While (Obstruction <> 0) {
+                    
+		  ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+		  ; HAVE WE MOVED OVER ALL THE SPOTS AND FOUND NO SUITABLE CHAMPIONS?
+		  ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ 
+ 		    If (Repeats >= 8) or (DetY > (wTop + wHeight*0.8)) {
+		  	MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.65, 20
+		  	Sleep, 2000
+;			Goto, Rescan
+			Goto, TopScan
+		    }
+
+
                     
                     DetX := DefX + mod(Repeats,4) * HelpStepX
                     DetY := DefY + Floor(Repeats/4) * HelpStepY
@@ -78,6 +103,7 @@ ChampSel() {
                     ; IF WE FIND RED SKIP IT
                     PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x1B239C, 5, Fast
                     RedErrorLevel := ErrorLevel
+                    
                     
                     ; IF WE FIND GREEN ALSO SKIP IT  *paranoid mode*
                     GreenErrorLevel := 1
@@ -90,8 +116,9 @@ ChampSel() {
                     If (RedErrorLevel < 1 || GreenErrorLevel < 1) {
                          ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nSkipping busy champions..., ToolTipX, ToolTipY, 1
                          MouseMove, Px, Py, 1
-                         DetX += HelpStepX
+;                         DetX += HelpStepX
                          Repeats++
+                         continue
                     } Else {
                          Obstruction = 0
                     }
@@ -110,22 +137,12 @@ ChampSel() {
                     }
                     
                     ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                    ; HAVE WE MOVED OVER ALL THE SPOTS AND FOUND NO SUITABLE CHAMPIONS?
-                    ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                    
-                    If (Repeats >= 11) or (DetY > (wTop + wHeight*0.8)) {
-                         MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
-                         Sleep, 2000
-                         Goto, TopScan
-                    }
-                    
-                    ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                     ; IF WE HAVE ENDED UP HERE THAT MEANS THE CURRENT POSITION HAS NO RED OR GREEN BADGE
                     ; LET'S TRY TO DRAG IT ONTO AN EMPTY SPOT
                     ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                    
                     currentPI := GetOCRArea(0.270, 0.453, 0.345, 0.491)
-                    ToolTip, [%OuterLoop%] EDIT TEAM`nDragging champion...`nPI: %currentPI%`nWinStreak: %winStreak%, ToolTipX, ToolTipY, 1
+;                    msgbox %currentPI%
+                    ToolTip, [%OuterLoop%] EDIT TEAM`nDragging champion...`nPI: %currentPI%`nWinStreak: %winStreak%, ToolTipX, ToolTipY
                     ; SHIFT CHAMP PORTRAIT DRAG POINT NEXT TO LAST DETECTED SPOT
                     ChampPortraitX := DetX + wWidth * 0.08
                     ChampPortraitY := DetY + wHeight * 0.08

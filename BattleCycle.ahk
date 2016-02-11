@@ -1,7 +1,7 @@
-BattleCycle() {
+BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
      
      StepA:
-     ChampSel()
+     ChampSel( WhichWar, winStreak )
      
      ; CLICK FIND MATCH BUTTON
      ToolTip, EDIT TEAM`nFinding match..., ToolTipX, ToolTipY, 1
