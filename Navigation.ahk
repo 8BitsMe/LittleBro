@@ -19,8 +19,24 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           ; In the case the user was already on the alliance tab, click the menu close button
           CloseMainMenu()     
           
-          ; verify we're on the Fight page
-          WaitForColor(0.304,0.466,0x005C02,0) ; green view quests button ... TODO: find a better verification.
+          ; first verification we're on the fight page
+          WaitForColor(0.578,0.593,0x000000,0) ; black bottom half of alliance expanded box or versus box  ... TODO: find a better verification.
+          
+          ; Check if Alliance Mode box expanded
+          PixelGetColor, AllianceBoxColor, getXCoord(0.975),getYCoord(0.385)
+          If AllianceBoxColor = 0x302C2B
+          {
+               AllianceMode := 1
+               ; verify we're on the Fight page
+               WaitForColor(0.157,0.442,0x005C02,0) ; green view quests button ... TODO: find a better verification.
+               
+          }
+          Else
+          {
+               AllianceMode := 0
+               ; verify we're on the Fight page
+               WaitForColor(0.304,0.466,0x005C02,0) ; green view quests button ... TODO: find a better verification.
+          }
           
           If (Sub = "default")
           {
@@ -28,8 +44,18 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           }
           Else If (Sub = "versus")	
           {
-               ; Click Versus Box
-               MouseClick, left, getXCoord(0.575), getYCoord(0.440), 1, 10
+               ; Check if Alliance Mode box expanded
+               PixelGetColor, AllianceBoxColor, getXCoord(0.969),getYCoord(0.484)
+               If AllianceMode
+               {
+                    ; Click Versus Box
+                    MouseClick, left, getXCoord(0.298), getYCoord(0.466), 1, 10
+               }
+               Else
+               {
+                    ; Click Versus Box
+                    MouseClick, left, getXCoord(0.575), getYCoord(0.440), 1, 10
+               }
                
                ; verify we're on the Versus page
                WaitForColor(0.285,0.143,0xAD782C,0) ; light blue background behind 'multiverse arenas' ... TODO: find a better verification.
@@ -93,5 +119,6 @@ CloseMainMenu()
 {
      MouseClick, left, getXCoord(0.144), getYCoord(0.334), 1, 10
 }
+
 
 
