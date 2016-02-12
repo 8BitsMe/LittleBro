@@ -275,6 +275,10 @@ NavigateToScreen("Fight","Versus")
 FullLoop("WAR-Z",0)
 Return
 
+ButtonF9:
+skip := true
+Return
+
 ButtonPANIC:
 Reload
 Return

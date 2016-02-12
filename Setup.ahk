@@ -175,6 +175,8 @@ gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-Z
 
 gIY += gPad + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , F9
+gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , PANIC
 gIY += gPad + gHeight
 
