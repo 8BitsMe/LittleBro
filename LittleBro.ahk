@@ -174,6 +174,11 @@ F10:: ; ShowMouseRatio and BrightnessIndex
 ShowMouseRatio()
 Return
 
+F11:: ; testing hotkey
+;HeroFilter("Level^", "Purple","4*")
+NavigateToScreen("Fight", "Event")
+Return
+
 F12::
 Reload ; Reload script
 Return
