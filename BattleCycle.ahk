@@ -1,115 +1,105 @@
 BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
-     
-     StepA:
-     ChampSel( WhichWar, winStreak )
-     
-     ; CLICK FIND MATCH BUTTON
-     ToolTip, EDIT TEAM`nFinding match..., ToolTipX, ToolTipY, 1
-     MouseClick, left, FindMatchButtonX, FindMatchButtonY,5
-     
-     WaitFoRButton(0,"OPPONENT SELECT`nPicking easy match with most points`nOr medium among hard ones",0.910,0.910, 0X024B03, 60)
-     
-     MatchSel()
-     
-     ; STALLCHECK
-     PixelGetColor, gColor, ChampDestinationX, ChampDestinationY
-     If (gColor = 0x1A1917) or (gColor = 0x060606)
-     Goto StepA
-     
-     WaitFoRButton(1,"OPPONENT SELECT`nAccepting match",0.910,0.910, 0X024B03, 60)
-     
-     Sleep, 1000
-     
-     ; STALLCHECK
-     PixelGetColor, gColor, ChampDestinationX, ChampDestinationY
-     If (gColor = 0x1A1917) or (gColor = 0x060606)
-     Goto StepA
-     
-     WaitFoRButton(0,"SET LINEUP`nWaiting...",0.910,0.910, 0X024B03, 0)
-     
-     ToolTip, "SET LINEUP`nAttempting SmartSort...", ToolTipX, ToolTipY, 1
-     
-     SmartSort()
-     
-     ; STALLCHECK
-     PixelGetColor, gColor, ChampDestinationX, ChampDestinationY
-     If (gColor = 0x1A1917) or (gColor = 0x060606)
-     Goto StepA
-     
-     WaitFoRButton(1, "LINEUP`nAccepting SmartSort...", 0.910, 0.910, 0X024B03, 60)
-     
-     ; STALLCHECK
-     PixelGetColor, gColor, ChampDestinationX, ChampDestinationY
-     If (gColor = 0x1A1917) or (gColor = 0x060606)
-     Goto StepA
-     
-     ; WAIT FOR NEXT SCREEN
-     WaitForNoChange(0.5,0.75,"Waiting to start battle...")
-     
-     ; GET CURRENT POINTS
-;     previousPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215)
-;     currentPoints := %previousPoints%
+	 loop {
+	    title := getOCRArea(0.251, 0.119, 0.725, 0.226, "alpha")
 
-     winStreak := GetOCRArea(0.217, 0.174, 0.286, 0.215, "numeric")
-     multiplier := GetOCRArea(0.383, 0.174, 0.434, 0.215)
+		if InStr(title, "LIN_UP")
+			BattleMatchFights()
+	    else if InStr(title,"EDIT T_AM") {
+	    	ChampSel( WhichWar, winStreak )
+			ToolTip,
+			; CLICK FIND MATCH BUTTON
+			ToolTip, EDIT TEAM`nFinding match..., ToolTipX, ToolTipY, 1
+			MouseClick, left, FindMatchButtonX, FindMatchButtonY,1, 5
+		}
+		else if InStr(title, "OPPONENT SELE") {
+			MatchSel()
+			ClickContinue("OPPONENT SELECT`nAccepting match")
+		}
+		else if InStr(title,"_ET LINEUP") {
+			SmartSort()
+			ClickContinue("SET LINEUP`nAccepting match")
+		} else if InStr(title, "REWARDS" )
+			ClickContinue("REWARDS Screen green Button...")
+		else if InStr(title, "ACHI_V_M_NTS" )
+			ClickContinue("ACHIEVEMENTS Screen green Button...")
 
-     ToolTip, Points %previousPoints% To start with, ToolTipX, ToolTipY, 1
-     
-     ; PLAY THREE MATCHES
+		Sleep, 100
+
+	 } Until InStr(title, "MULTM")
+
+     ToolTip,
+
+}
+
+BattleMatchFights() {
+
      Loop, 3 {
           ; TAP BEGIN BATTLE, WAIT FOR THE TRANSITION TO LOADING, THEN WAIT FOR LOADING TO END
-          
-          WaitFoRButton(0, "Starting fight...", 0.910, 0.910, 0X024B03, 60)
-	  curHero := GetOCRArea(0.136, 0.457 + (.12 * (A_Index-1) ), 0.301, 0.490 + (.12 * (A_Index-1) ), "alpha")
-	  curStars := GetOCRArea(0.136, 0.425 + (.12 * (A_Index-1) ), 0.235, 0.463 + (.12 * (A_Index-1) ))
-	  duped := ""
-	  IfInString, curStars, & 
-	  {
-		duped := "(Unduped)"
-	  }
-	  curStars := StrLen(curStars) . "*" . duped
-          WaitFoRButton(1, "Starting fight...", 0.910, 0.910, 0X024B03, 60)
-          
-          WaitForNoChange(0.5,0.75,"Starting fight...",30)
-          
-          WaitForChange(0.5,0.75,"Fight started...",30)
-          
+	 	  Sleep, 3500
+
+
+
+
+		  PixelGetColor, gColor, getXCoord(0.250), getYCoord(0.425 + (.12 * (A_Index-1) ))
+		  ; LOOKING FOR RED OR GREEN
+     	  If ((gColor = 0x2E5526) OR (gColor = 0x1A1A72))
+     	  	 continue
+
+	  	  curHero := GetOCRArea(0.136, 0.457 + (.12 * (A_Index-1) ), 0.301, 0.490 + (.12 * (A_Index-1) ), "alpha")
+	  	  curStars := GetOCRArea(0.136, 0.425 + (.12 * (A_Index-1) ), 0.235, 0.463 + (.12 * (A_Index-1) ))
+	  	  duped := ""
+
+	  	  IfInString, curStars, &
+			 duped := "(Unduped)"
+
+	  	  curStars := StrLen(curStars) . "*" . duped
+
+		  WhatLoop := "Starting fight1... Loop " . A_Index
+		  ClickContinue(WhatLoop, 60)
+
+		  ; LOOKING FOR GREEN AT THE TOP OF THE WINDOW
+		  WaitForColor(0.485, 0.078, 0x065108,30)
+
+          ToolTip, Found Green, ToolTipX, ToolTipY, 1
+
           SingleFight()
-          
-          Sleep, 2000
-          
-          WaitForNoChange(0.5,0.75,"Fight finished...")
-          
-          ToolTip, Fight finished..., ToolTipX, ToolTipY, 1
 
-	  Sleep, 500
-	  WaitForNoChange(0.5,0.75,"Calculating Score...")
+          ToolTip, Fight finished...`nWaiting on screenload, ToolTipX, ToolTipY, 1
 
-     ; GET CURRENT POINTS
-	fightPoints := GetOCRArea(0.440, 0.470 + (.12 * (A_Index-1) ), 0.512, 0.505 + (.12 * (A_Index-1) ), "numeric")
-	currentPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215, "numeric")
-	Everything := GetOCRArea(0.136, 0.425 + (.12 * (A_Index-1) ), 0.304, 0.516 + (.12 * (A_Index-1) ), "debug")
+		  Sleep, 5
 
-	msg := curHero . " , " . curStars . " , " . CycleSum/1000 . " , " . fightPoints . " , " . currentPoints . " , " . winStreak . " , " . multiplier . " , " . sucHits . " , " . hitsRec . " , " . sucCombo . " , " . highCombo . " `n " . Everything
-	lbFightLog(msg)
+		  loop
+		  	title := getOCRArea(0.251, 0.119, 0.725, 0.226, "alpha")
+		  Until InStr(title, "LIN_UP")
+
+
+		  WaitForNoChange(getXCoord(0.250), getYCoord(0.425 + (.12 * (A_Index-1) )),"Calculating Score...", 20)
+
+
+		  ; GET CURRENT POINTS
+		  fightPoints := GetOCRArea(0.440, 0.470 + (.12 * (A_Index-1) ), 0.512, 0.505 + (.12 * (A_Index-1) ), "numeric")
+		  currentPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215, "numeric")
+		  Everything := GetOCRArea(0.136, 0.425 + (.12 * (A_Index-1) ), 0.304, 0.516 + (.12 * (A_Index-1) ), "debug")
+
+		  msg := curHero . " , " . curStars . " , " . CycleSum/1000 . " , " . fightPoints . " , " . currentPoints . " , " . winStreak . " , " . multiplier . " , " . sucHits . " , " . hitsRec . " , " . sucCombo . " , " . highCombo . " `n " . Everything
+		  lbFightLog(msg)
      }
 
+	  ; GET CURRENT POINTS
+	  fightPoints := GetOCRArea(0.440, 0.470 + (.12 * (2) ), 0.512, 0.505 + (.12 * (2) ), "numeric")
+	  currentPoints := GetOCRArea(0.526, 0.167, 0.641, 0.215, "numeric")
+	  Everything := GetOCRArea(0.136, 0.425 + (.12 * (2) ), 0.304, 0.516 + (.12 * (2) ), "debug")
+
+	  msg := curHero . " , " . curStars . " , " . CycleSum/1000 . " , " . fightPoints . " , " . currentPoints . " , " . winStreak . " , " . multiplier . " , " . sucHits . " , " . hitsRec . " , " . sucCombo . " , " . highCombo . " `n " . Everything
+	  lbFightLog(msg)
+
      ToolTip, Battles complete!, ToolTipX, ToolTipY, 1
-     
-     ; WAIT FOR STATUS SCREEN
-     
-     WaitFoRButton(1, "REWARDS Screen green Button...", 0.910, 0.910, 0X024B03, 10)
-     
-     Sleep, 2000
-     
-     WaitForNoChange(0.5,0.75,"Waiting for ACHIEVEMENTS...")
-     
-     WaitFoRButton(1, "ACHIEVEMENTS Screen green Button...", 0.910, 0.910, 0X024B03, 10)
-     
-     Sleep, 2000
-     
-     WaitForNoChange(0.5,0.75,"Are we back on VERSUS Screen?")
-     
-     ToolTip,
-     
+
+
+}
+
+
+
+ClickContinue(Why, timeout :=10){
+     WaitFoRButton(1, Why, 0.910, 0.910, 0X024B03, timeout)
 }

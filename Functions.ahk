@@ -77,11 +77,13 @@ ShowMouseRatio() {
      MouseGetPos,X,Y
      RatioX := Round((X - wLeft)/wWidth,3)
      RatioY := Round((Y - wTop)/wHeight,3)
-     
+
      PixelGetColor, gColor, X, Y
      B := BrightnessIndex(gColor)
-     
-     ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% , X+12, Y+24
+
+ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% ... W: %wWidth% - H: %wHeight% , X+12, Y+24
+
+;     ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% , X+12, Y+24
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -90,16 +92,16 @@ ShowMouseRatio() {
 
 XPercentage() {
      global
-     
+
      A := wLeft + wWidth * 0.360
      B := wLeft + wWidth * 0.458
      BMAX := B
-     
+
      Y := wTop + wHeight * 0.09
-     
+
      C := (B-A)
      Sum := C
-     
+
      Loop, 9 {
           C := C/2
           PixelGetColor, gColor, A+C, Y
@@ -109,10 +111,10 @@ XPercentage() {
                B := (A+C)
           }
      }
-     
+
      X := wLeft + wWidth * 0.43
      Y := wTop + wHeight * 0.059
-     
+
      C := Round(100 + ((B - BMAX) / Sum) * 100, 1)
      ToolTip, %C%, X, Y
 }
@@ -124,30 +126,30 @@ XPercentage() {
 WaitForButton(Click, Why, X, Y, Color, TimeOut := 0) {
      global
      Z = 0
-     
+
      X := wLeft + wWidth * X
      Y := wTop + wHeight * Y
-     
+
      Skip := false
      MouseMove, X, Y
      PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
      While (ErrorLevel > 0 && !Skip)	{
           Sleep, 1000
           PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
-          
+
           ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`n(Press F9 to skip) : " Z++ , ToolTipX, ToolTipY, 1
-          
+
           If (Timeout > 0 && Z > Timeout) OR (Z > 100)
           Skip := True
      }
-     
+
      If Click && !Skip {
           MouseClick, left, X, Y
           Sleep, 250
           ToolTip, Tap!, Px+12, Py+24, 2
-          MouseClick, left, X, Y
-          Sleep, 250
-          ToolTip, Tap!, Px+12, Py+24, 2
+;          MouseClick, left, X, Y
+;          Sleep, 250
+;          ToolTip, Tap!, Px+12, Py+24, 2
      }
 }
 
@@ -163,22 +165,37 @@ WaitForButton(Click, Why, X, Y, Color, TimeOut := 0) {
 
 GetOCRArea(tlX, tlY, brX, brY, options="") {
      global
-     
+
      topLeftX := wLeft + wWidth * tlX
      topLeftY := wTop + wHeight * tlY
      widthToScan := (wLeft + wWidth * brX) - topLeftX
      heightToScan := (wTop + wHeight * brY) - topLeftY
-     
+
      magicalText := GetOCR(topLeftX, topLeftY, widthToScan, heightToScan, options)
-     
-     ;	ToolTip, Says: %magicalText%, Px+12, Py+24, 2
+
+;     	ToolTip, Says: %magicalText%, Px+12, Py+24, 2
      ;Sleep, 1000
-     
+
      Return SubStr(magicalText, 1,-2)
 }
 
+
+getPI(tlX, tlY, brX, brY, options) {
+
+     loop, 15 {
+
+	cPI := getOCRArea(tlX, tlY, brX-=.02, brY+=.005, options)
+	cPI := RegExReplace(cPI, "i)[^0-9]")
+;	msgbox PI: '%cPI%' Loop: '%A_Index%'
+	if  cPI > 0
+		return cPI
+     }
+     return cPI
+}
+
+
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-; LOGGING -- *bOpen* is optional, if set to 1 it will open the log file (this is baked into F10 for me).  
+; LOGGING -- *bOpen* is optional, if set to 1 it will open the log file (this is baked into F10 for me).
 ;	     *headerstyle* is also optional, the default value of 0 will just print a normal time stamp, see below for other options
 ;		we should set a convention for this to improve the readability of the log ... e.g. headerstyle1 for loops/main modules and headerstyle2
 ;		for sub-functions
@@ -194,7 +211,7 @@ lblog(info, bOpen:=0, headerstyle:=0)
      headerstyle1 := "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
      headerstyle2 := "*******************************************"
      FormatTime, Timestamp, %A_now%, yyyy_MM_dd HH:mm:ss
-     
+
      info := Timestamp . " " . info
      If (headerstyle == 1)
      {
@@ -206,14 +223,14 @@ lblog(info, bOpen:=0, headerstyle:=0)
      }
      Else
      {
-          LogLine := info . "`n" . LogLine 
+          LogLine := info . "`n" . LogLine
      }
-     
+
      FileAppend, %LogLine%, %filename%
-     
+
      IF (bOpen) ; I use this with F10 or you can set this to 1 when LB knows it crashed to have the log open and waiting
      {
-          WinClose, LBLog.txt - Notepad ; close it if already open   
+          WinClose, LBLog.txt - Notepad ; close it if already open
           Run, Notepad.exe %filename%
      }
 }
@@ -222,62 +239,62 @@ lbFightLog(info, bOpen:=0)
 {
      filename := a_scriptdir . "\LBFightLog.csv"
      FormatTime, Timestamp, %A_now%, yyyy_MM_dd HH:mm:ss
-     
-     WinClose, Microsoft Excel - LBFightLog.csv ; close it if already open   
-     
+
+     WinClose, Microsoft Excel - LBFightLog.csv ; close it if already open
+
      IfNotExist, %filename%
      {
           header := "Timestamp,Hero,Stars, Fight Time, Fight Points,Current Points,Streak,Multiplier,Successful Hits, Hits Recieved,Successful Combos, Highest Combo`n" . LogLine
           FileAppend, %header%, %filename%
      }
-     
+
      info := Timestamp . "," . info
-     LogLine := info . "`n" . LogLine 
-     
+     LogLine := info . "`n" . LogLine
+
      FileAppend, %LogLine%, %filename%
-     
+
      IF (bOpen) ; I use this with F10 or you can set this to 1 when LB knows it crashed to have the log open and waiting
      {
-          WinClose, LBLog.txt - Notepad ; close it if already open   
+          WinClose, LBLog.txt - Notepad ; close it if already open
           Run, Notepad.exe %filename%
      }
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-; DETERMINE OFFSET X-COORDINATE FROM X PERCENT 
+; DETERMINE OFFSET X-COORDINATE FROM X PERCENT
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 getXCoord(xPercent){
      global
-     return (wLeft + wWidth * xPercent) 
+     return (wLeft + wWidth * xPercent)
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-; DETERMINE OFFSET Y-COORDINATE FROM Y PERCENT 
+; DETERMINE OFFSET Y-COORDINATE FROM Y PERCENT
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 getYCoord(yPercent){
      global
-     return (wTop + wHeight * yPercent) 
+     return (wTop + wHeight * yPercent)
 }
 
 ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
 {
      global
      bColorFound = 0
-     clickX := wLeft + wWidth * ratioX 
+     clickX := wLeft + wWidth * ratioX
      clickY := wTop + wHeight * ratioY
-     
-     
+
+
      PixelSearch, Px, Py, clickX-8, clickY-8, clickX+8, clickY+8, clickColor, 10, Fast
-     
+
      If (ErrorLevel < 1)
-     { 
+     {
           bColorFound = 1
           MouseClick, left, clickX, clickY, 1, speed
      }
-     
-     lblog("******** ClickIfColor ==> clickX: " . clickX . " - clickY: " . clickY . " ... clickColor: " . clickColor . " -- gColor: " . gColor . " .. Return: " . bColorFound)	
+
+     lblog("******** ClickIfColor ==> clickX: " . clickX . " - clickY: " . clickY . " ... clickColor: " . clickColor . " -- gColor: " . gColor . " .. Return: " . bColorFound)
      return bColorFound
 }
 
@@ -286,15 +303,16 @@ ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 WaitForColor(X,Y,Color,Timeout)
-{     
+{
      global
      X := wLeft + wWidth * X
      Y := wTop + wHeight * Y
      PixelGetColor, ComColor, X, Y
      Z = 0
      Skip := false
-     While (ComColor <> Color) && !Skip {
-          PixelGetColor, ComColor, X, Y
+     PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
+     While ErrorLevel > 0 && !Skip {
+          PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
           ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`nWaiting for color..." "(Press F9 to skip)`n" ComColor " - " Color " : " Z++ , ToolTipX, ToolTipY, 1
           Sleep, 1000
           If (Timeout > 0 && Z > Timeout)
@@ -304,7 +322,7 @@ WaitForColor(X,Y,Color,Timeout)
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; HeroFilter --Filters heros according to the passed in parameters
-;	     Able to filter and sort on unlimited number of options (parameters is variable)  
+;	     Able to filter and sort on unlimited number of options (parameters is variable)
 ;	     *Sorting* can be done with a single word, and a ^ to denote an up arrow, and no ^ to denote a down arrow.
 ;		Rank
 ;		Level
@@ -356,14 +374,17 @@ HeroFilter(params*) {
 	;RESET FILTERS
 	MouseClick, left, getXCoord(xCoord), getYCoord(0.180), 2
 	for index,param in params {
+		Sleep,250
 		;CLICK SORT
 		MouseClick, left, getXCoord(xCoord), getYCoord(0.258),2,10
+		Sleep,250
 		for k, v in sorts {
 			If InStr(param, k){
 				clickCt = 2
 				if InStr(param, "^")
 					clickCt = 1
 				MouseClick, left, getXCoord(xCoord), getYCoord(v),clickCt,10
+				Sleep,250
 			}
 		}
 		for k, v in class {
@@ -379,13 +400,14 @@ HeroFilter(params*) {
 				     MouseClickDrag, left, Px, Py, getXCoord(xCoord), getYCoord(0.805), 10
 				}
 				MouseClick, left, getXCoord(xCoord + (Mod(a_index,2) * .09)), getYCoord(v),1,10
+				Sleep,250
 			}
 		}
 		for k, v in tier {
 			If InStr(param, k){
 				;CLICK FILTER
 				MouseClick, left, getXCoord(xCoord), getYCoord(0.873),1,10
-				Sleep,500				
+				Sleep,500
 				;MAY NEED TO SCROLL TO THE BOTTOM - CHECK IF IT'S AT BOTTOM
 				PixelGetColor, aColor, getXCoord(0.854), getYCoord(0.421)
 				If ( aColor <> 0XD33318 ) {
@@ -394,10 +416,11 @@ HeroFilter(params*) {
 				     MouseClickDrag, left, Px, Py, getXCoord(xCoord), getYCoord(0.200), 7
 				}
 				MouseClick, left, getXCoord(xCoord), getYCoord(v),1,10
+				Sleep,250
 			}
 		}
 	}
-	
+
 	;CLOSE FILTER MENU
 	MouseClick, left, getXCoord(0.753), getYCoord(0.845),1,10
 ;	ToolTip, DONE!, Px+12, Py+24, 2
