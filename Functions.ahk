@@ -341,10 +341,10 @@ HeroFilter(params*) {
 ; MsgBox, %aColor%
 		if(aColor <> 0X302C2B){
 			;OPEN FILTER MENU
-			ssX = 0.966
+			ssX = 0.975
 			found = 0
 			While(0 = found){
-				found := ClickIfColor(ssX, 0.838, 0X716E6E)
+				found := ClickIfColor(ssX, 0.904, 0X716E6E)
 				;KEEP LOOKING
 				ssX -= 0.002
 			}
