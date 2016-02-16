@@ -426,3 +426,43 @@ HeroFilter(params*) {
 ;	ToolTip, DONE!, Px+12, Py+24, 2
 
 }
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; RECTANGLE FUNCTIONS, FOR MAKING DEBUGGING EASIER
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+; DRAWS A RECTANGLE 
+DrawRect(Left,Top,Right,Bottom,BorderColor) {
+     Border := 2
+     
+     Gui, 99: Destroy
+     
+     ; MAKE A WINDOW, SET IT TO OUR COLOR OF CHOICE
+     Gui, 99: Margin, %Border%, %Border% 
+     
+     ;Gui, 99: Color, FF0000 
+     Gui, 99: Color, %BorderColor% 
+     
+     ; GET WINDOW AND INSIDE SIZE
+     tW := Right-Left
+     tH := Bottom-Top
+     W := tW + Border*2
+     H := tH + Border*2
+     Left -= Border
+     Top -= Border
+     
+     
+     ; ADD AN AREA TO MAKE TRANSPARENT
+     Gui, 99: Add, Text, w%tW% h%tH% 0x6 ; Draw a white static control 
+     Gui 99: +LastFound 
+     WinSet, TransColor, FFFFFF 
+     Gui 99: -Caption +AlwaysOnTop +ToolWindow 
+     
+     ; SHOW WHAT WE CREATED
+     Gui, 99: Show, NoActivate x%Left% y%Top% w%W% h%H% ;The Gui will not steal keyboard focus 
+}
+
+; HIDES A RECTANGLE
+HideRect() {
+     Gui, 99: Destroy
+}

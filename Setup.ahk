@@ -6,9 +6,14 @@
 ; CALIBRATE CURRENT WINDOW
 WinGetPos, wLeft, wTop, wWidth, wHeight, BlueStacks
 
+SysGet, xborder, 32
+SysGet, yborder, 33
 SysGet, caption, 4
-wTop += caption
-wHeight-= (caption + 48)
+
+wTop += caption + yborder/2
+wHeight -= (caption + 48 + yborder)
+wLeft += xborder/2
+wWidth -= xborder
 
 ; MAKE ALL ACTIONS RELATIVE TO THE SCREEN
 CoordMode, Pixel, Screen
@@ -16,9 +21,6 @@ CoordMode, Mouse, Screen
 CoordMode, ToolTip, Screen
 
 SetDefaultMouseSpeed, 1
-
-; CALIBRATE CURRENT WINDOW
-WinGetPos, wLeft, wTop, wWidth, wHeight, BlueStacks
 
 ; CENTER WINDOW JUST BECAUSE I LIKE IT THAT WAY
 WinMove, BlueStacks,, (A_ScreenWidth/2)-(wWidth/2), 64
@@ -142,6 +144,9 @@ global ArrowB := wTop + wHeight * 0.522
 global ArrowC := wTop + wHeight * 0.644
 
 ; ACTIONS ARE AT THE END OF LITTLEBRO.AHK
+
+; SHOW US WHAT WE DETECTED AS OUR INSIDE WINDOW
+DrawRect(wLeft,wTop,wLeft + wWidth,wTop + wHeight,"FF0000")
 
 gWidth = 80
 gHeight = 40
