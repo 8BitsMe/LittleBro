@@ -175,8 +175,12 @@ ShowMouseRatio()
 Return
 
 F11:: ; testing hotkey
+title := getOCRArea(0.251, 0.119, 0.725, 0.226, "ALPHA")
+
+msgBox '%title%'
+
 ;HeroFilter("Level^", "Purple","4*")
-NavigateToScreen("Fight", "Event")
+;NavigateToScreen("Fight", "Event")
 Return
 
 F12::

@@ -3,6 +3,13 @@
 ; NEEDS TO BE CHANGED
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+; CALIBRATE CURRENT WINDOW
+WinGetPos, wLeft, wTop, wWidth, wHeight, BlueStacks
+
+SysGet, caption, 4
+wTop += caption
+wHeight-= (caption + 48)
+
 ; MAKE ALL ACTIONS RELATIVE TO THE SCREEN
 CoordMode, Pixel, Screen
 CoordMode, Mouse, Screen
@@ -15,7 +22,6 @@ WinGetPos, wLeft, wTop, wWidth, wHeight, BlueStacks
 
 ; CENTER WINDOW JUST BECAUSE I LIKE IT THAT WAY
 WinMove, BlueStacks,, (A_ScreenWidth/2)-(wWidth/2), 64
-
 ; TOOLTIP LOCATION
 global ToolTipX := wLeft
 global ToolTipY := wTop + wHeight + 4

@@ -5,7 +5,7 @@
 SmartSort() {
      global
 
-     WaitForColor(0.379,0.372,0x1A1917,20)
+     WaitForColor("",0.379,0.372,0x1A1917,20)
 
      ToolTip, [%OuterLoop%] SET LINEUP`nFind weaknesses..., ToolTipX, ToolTipY, 1
 

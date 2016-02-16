@@ -302,7 +302,7 @@ ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
 ; WAITS FOR A SPECIFIC COLOR TO SHOW UP AT A SPECIFIC LOCATION
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-WaitForColor(X,Y,Color,Timeout)
+WaitForColor(Why,X,Y,Color,Timeout)
 {
      global
      X := wLeft + wWidth * X

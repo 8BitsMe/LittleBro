@@ -96,10 +96,11 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                ; FOUND THE CHAMPION FRAME PIXEL, LET'S TRY TO ANALYZE IT
           } else {
 
-               MouseMove, Px, Py
-               If ( Py < ( DetY - (Scanner/2))) {
+; diff := (Py - DetY)/Scanner
+; msgbox %Py% < %DetY%  Difference %diff%
+               If ( Py < ( DetY + 15 )) {
 ; msgbox Should I move the screen down a little? %Py% < %DetY%
-	               MouseClickDrag, left, MidX,MidY,MidX,MidY+wHeight*0.09, 15
+	               MouseClickDrag, left, MidX,MidY,MidX,MidY+(Scanner/2), 15
 		       Goto, TopScan
                }
 
