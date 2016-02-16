@@ -16,11 +16,11 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      ChampDestinationX := wLeft + wWidth * 0.155
      ChampDestinationY := wTop + wHeight * 0.455
      
+     ; SIDE PANEL
      tx := ChampDestinationX - (wWidth * 0.09)
      
+     ; NOT IN CHAMPION SELECTION?
      PixelGetColor, gColor, tx, ChampDestinationY
-     
-     ; LOOKING FOR ???
      If (gColor <> 0x302C2B) {
           return -1
      }
@@ -29,25 +29,25 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      ; -----------------------------
      ; THIS IS THE VERTICAL LINE ON WHICH WE LOOK FOR THE CHAMPION PLAQUE CORNER
      
-     
-     
      DetX := getXCoord(0.268)
      DetY := getYCoord(0.40)
      Scanner := wHeight * 0.5
      
+     DrawRect(DetX-2,DetY,DetX+2,DetY+Scanner,"FFFF00")
+     
      ; FIND A PIXEL ON THE CORNER OF THE CHAMPION FRAME
      PixelSearch, Px, Py, DetX-2, DetY, DetX+2, DetY+Scanner, 0x35302D, 2, Fast
      
-     DefX := Px - (wWidth * 0.010)
-     DefY := Py - (wHeight * 0.144)
+     BadgeX := Px - (wWidth * 0.010)
+     BadgeY := Py - (wHeight * 0.144)
      
      Loop {
-          PixelSearch, Px, Py, DefX-12, DefY-12, DefX+12, DefY+12, 0x096F16, 5, Fast
+          PixelSearch, Px, Py, BadgeX-12, BadgeY-12, BadgeX+12, BadgeY+12, 0x096F16, 5, Fast
           if ( ErrorLevel < 1 ) {
                MouseClick, left, Px, Py, 1
                Sleep, 2200
           }
-     } Until (ErrorLevel = 1 )
+     } Until (ErrorLevel > 0 )
      
      ; -----------------------------
      ReverseFilter := 12
@@ -107,10 +107,9 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     Goto, TopScan
                }
                
-               ;               sleep, 1000
                ; SET LOCATION OF HELP OR BUSY BADGES WITH KNOWN OFFSET
-               DefX := Px - (wWidth * 0.010)
-               DefY := Py - (wHeight * 0.144)
+               BadgeX := Px - (wWidth * 0.010)
+               BadgeY := Py - (wHeight * 0.144)
                
                Rescan:
                
@@ -138,8 +137,8 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     
                     
                     
-                    DetX := DefX + mod(Repeats,4) * HelpStepX
-                    DetY := DefY + Floor(Repeats/4) * HelpStepY
+                    DetX := BadgeX + mod(Repeats,4) * HelpStepX
+                    DetY := BadgeY + Floor(Repeats/4) * HelpStepY
                     
                     ; IF WE FIND RED SKIP IT
                     PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x1B239C, 5, Fast
@@ -192,6 +191,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     ;		    Sleep, 3000
                     ;		    MouseMove, getXCoord(temp1 + 0.074), getYCoord(temp2 + 0.040)
                     currentPI := getPI(temp1, temp2, temp1 + 0.10, temp2 + 0.042, "numeric")
+                    
                     ;msgbox current PI: '%currentPI%'
                     ToolTip, [%OuterLoop%] EDIT TEAM`nDragging champion...`nPI: %currentPI%`nWinStreak: %winStreak%, ToolTipX, ToolTipY
                     If (WhichWar != "WAR-B") {
@@ -260,16 +260,6 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      }
      return 1
 }
-
-
-; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-; PICK EASY MATCHES BOTTOM TO TOP, MEDIUMS TOP TO BOTTOM, HARD LEAVE AS IS
-; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-HeroScroll() {
-     
-     
-}
-
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; PICK EASY MATCHES BOTTOM TO TOP, MEDIUMS TOP TO BOTTOM, HARD LEAVE AS IS

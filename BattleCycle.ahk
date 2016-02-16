@@ -39,7 +39,6 @@ BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
           
           ; Need a better way to wait between pages
           WaitForNoChange(0.850,0.876,"Page done, Looking for current page",5)
-          ;		Sleep, 500
           
      } Until (InStr(title, "ARENA") OR InStr(title, "MULTIVERSE"))
      
@@ -110,9 +109,4 @@ BattleMatchFights() {
      lbFightLog(msg)
      
      ToolTip, Battles complete!, ToolTipX, ToolTipY, 1
-}
-
-
-ClickContinue(Why, timeout := 10){
-     WaitFoRButton(1, Why, 0.826, 0.895, 0.992,0.992, 0X024B03, timeout)
 }

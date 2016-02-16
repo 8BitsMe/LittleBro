@@ -37,6 +37,7 @@ If not A_IsAdmin
 }
 
 #Include Setup.ahk
+#Include Buttons.ahk
 
 #Include fastPixelGetColor.ahk
 
