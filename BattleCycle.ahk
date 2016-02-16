@@ -38,7 +38,7 @@ BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
  WaitForNoChange(0.850,0.876,"Page done, Looking for current page",5)
 ;		Sleep, 500
 
-	 } Until (InStr(title, "MULTM") OR InStr(title, "MULTIVERSE"))
+	 } Until (InStr(title, "MULT") OR InStr(title, "MULTIVERSE"))
 
      ToolTip,
 
