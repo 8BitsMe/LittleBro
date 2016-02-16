@@ -13,7 +13,7 @@ BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
                ToolTip, SERIES MATCH - LINEUP`nDone with fights..., ToolTipX, ToolTipY, 1
           }
           else if ( InStr(title,"EDIT T_AM") OR InStr(title,"EDIT TEAM")){
-               ToolTip, EDIT TEAM`nPicking 3 heroes..., ToolTipX, ToolTipY, 1
+               ToolTip, EDIT TEAM`nLaunching ChampSel..., ToolTipX, ToolTipY, 1
                ChampSel( WhichWar, winStreak )
                ToolTip,
                ; CLICK FIND MATCH BUTTON

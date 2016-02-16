@@ -29,27 +29,27 @@ global ToolTipX := wLeft
 global ToolTipY := wTop + wHeight + 52
 
 ; HEALTH ANALYSIS COORDINATES
-global OurMinHealth := wLeft + wWidth * 0.16
+global OurMinHealth := wLeft + wWidth * 0.155
 global OurMaxHealth := wLeft + wWidth * 0.41
 global OurHealthX := wLeft + wWidth * 0.40
 
 global TheirMaxHealth := wLeft + wWidth * 0.59
-global TheirMinHealth := wLeft + wWidth * 0.84
+global TheirMinHealth := wLeft + wWidth * 0.845
 global TheirHealthX := wLeft + wWidth * 0.60
 
-global HealthY := wTop + wHeight * 0.138
+global HealthY := wTop + wHeight * 0.115
 global HealthBar := wWidth * 0.25
 
 ; SPECIAL ANALYSIS COORDINATES
 global Special1 := wLeft + wWidth * 0.224
 global Special2 := wLeft + wWidth * 0.282
 global Special3 := wLeft + wWidth * 0.344
-global SpecialY := wTop + wHeight * 0.929
+global SpecialY := wTop + wHeight * 0.930
 
 global TheirSpecial1 := wLeft + wWidth * 0.664
 global TheirSpecial2 := wLeft + wWidth * 0.726
 global TheirSpecial3 := wLeft + wWidth * 0.788
-global TheirSpecialY := wTop + wHeight * 0.929
+global TheirSpecialY := wTop + wHeight * 0.930
 
 ; DETECT CHANGES BEFORE/AFTER LOADING SCREEN
 global ChangeXA := wLeft + wWidth * 0.01

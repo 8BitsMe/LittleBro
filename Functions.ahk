@@ -77,13 +77,23 @@ ShowMouseRatio() {
      MouseGetPos,X,Y
      RatioX := Round((X - wLeft)/wWidth,3)
      RatioY := Round((Y - wTop)/wHeight,3)
-
+     
      PixelGetColor, gColor, X, Y
      B := BrightnessIndex(gColor)
-
-ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% ... W: %wWidth% - H: %wHeight% , X+12, Y+24
-
-;     ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% , X+12, Y+24
+     
+     ReverseColor := SubStr(gColor, 7 , 2) . SubStr(gColor, 5 , 2) . SubStr(gColor, 3 , 2)
+     
+     X += 16
+     
+     ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% R:%ReverseColor% - W: %wWidth% - H: %wHeight%, X+21, Y
+     
+     Gui, 98: Destroy
+     Gui, 98: Color, %ReverseColor% 
+     Gui 98: -Caption +AlwaysOnTop +ToolWindow +Border
+     
+     ; SHOW WHAT WE CREATED
+     Gui, 98: Show, NoActivate x%X% y%Y% w18 h18 ;The Gui will not steal keyboard focus 
+     
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

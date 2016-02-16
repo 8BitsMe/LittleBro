@@ -20,7 +20,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      
      PixelGetColor, gColor, tx, ChampDestinationY
      
-     ; LOOKING FOR
+     ; LOOKING FOR ???
      If (gColor <> 0x302C2B) {
           return -1
      }
@@ -28,6 +28,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      ; CLICK ON ALL GREEN HELP BADGES
      ; -----------------------------
      ; THIS IS THE VERTICAL LINE ON WHICH WE LOOK FOR THE CHAMPION PLAQUE CORNER
+     
      
      
      DetX := getXCoord(0.268)
