@@ -53,8 +53,8 @@ global TheirSpecialY := wTop + wHeight * 0.930
 
 ; DETECT CHANGES BEFORE/AFTER LOADING SCREEN
 global ChangeXA := wLeft + wWidth * 0.01
-global ChangeXB := wLeft + wWidth * 0.90
-global ChangeY := wTop + wHeight * 0.15
+global ChangeXB := wLeft + wWidth * 0.99
+global ChangeY := wTop + wHeight * 0.03
 
 global MatchLeft := wLeft + wWidth * 0.28
 global MatchRight := wLeft + wWidth * 0.72
