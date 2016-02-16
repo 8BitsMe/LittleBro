@@ -158,13 +158,13 @@ GetOurHealth() {
 ScanSpecials(Color) {
      Result = 0
      ; GREEN
-     If (Color = 0x0B7700) OR ( Color = 0x0B7800 ) OR ( Color = 0x0B7A00 ) OR ( Color = 0x0C7B00 ) OR ( Color = 0x0A6E00)
+     If ( Color = 0x0C7C00 ) OR ( Color = 0x0C7B00 ) OR ( Color = 0x0A6E00)
      Result = 1
-     ; ) OR (ANGE
-     If (Color = 0x006295) OR ( Color = 0x006396 ) OR ( Color = 0x006498 ) OR ( Color = 0x006599 ) OR ( Color = 0x005B89)
+     ; ORANGE
+     If (Color = 0x00679B)
      Result = 11
      ; RED
-     If  ( Color = 0x000095 ) OR ( Color = 0x000098 ) OR ( Color = 0x000089)
+     If  ( Color = 0x00009E) OR ( Color = 0x000099 )
      Result = 111
      Return Result
 }

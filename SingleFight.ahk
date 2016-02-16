@@ -43,6 +43,8 @@ SingleFight() {
      
      ComboFrenzy = 0
      
+     HideRect()
+     
      ; o=-=-=-=-=-=o
      ;   MAIN LOOP
      ; o=-=-=-=-=-=o
@@ -56,14 +58,6 @@ SingleFight() {
           ToolTip, [%OmegaLoop%][%OuterLoop%] Action: %Action%`n[%Strategy%]`nC: %Cycles% @ %CycleTime% (%AvgCycle%) T: %CycleSec% D: %DynaRatio%, ToolTipX, ToolTipY, 1
           
           ToolTip, NoDmg: %NoDmg% - DamageLevel: %DamageLevel%`nHAvg: %HAvg% [HMin: %HMin% - HMax: %HMax%] [%HCount%], ToolTipX+wWidth*0.15, ToolTipY, 6
-          
-          ;~ If (OurDmg > 0) {
-               
-               ;~ LogTip := % "[" Action "] " OurDmg " / " TheirDmg "`n" LogTip
-               ;~ StringLeft, LogTip, LogTip, 600
-               
-               ;~ ToolTip, %LogTip%, wLeft + wWidth, wTop, 10
-          ;~ }
           
           StrataDev()
           

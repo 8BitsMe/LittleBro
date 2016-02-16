@@ -123,19 +123,24 @@ XPercentage() {
 ; UNIVERSAL BUTTON WAIT FUNCTION, DATA IN SAME FORMAT AS F10 SCAN
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-WaitForButton(Click, Why, X, Y, Color, TimeOut := 0) {
+WaitForButton(Click, Why, L, T, R, B, Color, TimeOut := 0) {
      global
      Z = 0
 
-     X := wLeft + wWidth * X
-     Y := wTop + wHeight * Y
+     L := wLeft + wWidth * L
+     T := wTop + wHeight * T
+     R := wLeft + wWidth * R
+     B := wTop + wHeight * B
 
      Skip := false
      MouseMove, X, Y
-     PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
+     
+     DrawRect(L,T,R,B,"FFFF00")
+     
+     PixelSearch, Px, Py, L, T, R, B, Color, 30, Fast
      While (ErrorLevel > 0 && !Skip)	{
           Sleep, 1000
-          PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
+          PixelSearch, Px, Py, L, T, R, B, Color, 30, Fast
 
           ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`n(Press F9 to skip) : " Z++ , ToolTipX, ToolTipY, 1
 
@@ -143,14 +148,16 @@ WaitForButton(Click, Why, X, Y, Color, TimeOut := 0) {
           Skip := True
      }
 
-     If Click && !Skip {
-          MouseClick, left, X, Y
-          Sleep, 250
+     PixelSearch, Px, Py, L, T, R, B, Color, 30, Fast
+     
+     ; TRY TO CLICK IT UNTIL IT FINALLY GIVES IN
+     While (ErrorLevel < 1 && Click && !Skip) {
+          MouseClick, left, Px, Py
+          Sleep, 100
           ToolTip, Tap!, Px+12, Py+24, 2
-;          MouseClick, left, X, Y
-;          Sleep, 250
-;          ToolTip, Tap!, Px+12, Py+24, 2
+          PixelSearch, Px, Py, L, T, R, B, Color, 30, Fast
      }
+     
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -170,6 +177,8 @@ GetOCRArea(tlX, tlY, brX, brY, options="") {
      topLeftY := wTop + wHeight * tlY
      widthToScan := (wLeft + wWidth * brX) - topLeftX
      heightToScan := (wTop + wHeight * brY) - topLeftY
+     
+     DrawRect(topLeftX,topLeftY,topLeftX+widthToScan,topLeftY+heightToScan,"FFFF00")
 
      magicalText := GetOCR(topLeftX, topLeftY, widthToScan, heightToScan, options)
 
