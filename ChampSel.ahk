@@ -191,10 +191,8 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     ;		    Sleep, 3000
                     ;		    MouseMove, getXCoord(temp1 + 0.074), getYCoord(temp2 + 0.040)
                     currentPI := getPI(temp1, temp2, temp1 + 0.10, temp2 + 0.042, "numeric")
-
-; POSSIBLE MERGE CONFLICT HERE ========================================================================================
-
-		    ;msgbox current PI: '%currentPI%'
+<<<<<<< HEAD
+;msgbox current PI: '%currentPI%'
 
 				If (currentPI < 100 OR currentPI > 8000) {
 					 Repeats++
@@ -202,12 +200,10 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
 
 				}
 
-
+=======
                     
                     ;msgbox current PI: '%currentPI%'
-
-; POSSIBLE MERGE CONFLICT HERE ========================================================================================
-
+>>>>>>> X2
                     ToolTip, [%OuterLoop%] EDIT TEAM`nDragging champion...`nPI: %currentPI%`nWinStreak: %winStreak%, ToolTipX, ToolTipY
                     If (WhichWar != "WAR-B") {
                          If (winStreak > 20 AND currentPI < 1650){
