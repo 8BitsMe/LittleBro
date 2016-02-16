@@ -264,6 +264,11 @@ ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
      clickX := wLeft + wWidth * ratioX
      clickY := wTop + wHeight * ratioY
 
+     cicX := getXCoord(ratioX)
+     cicY := getYCoord(ratioY)
+     cicScanner := wHeight * 0.5
+     
+     DrawRect(cicX-2,cicY,cicX+2,cicY+cicScanner,"FFFF00")
 
      PixelSearch, Px, Py, clickX-8, clickY-8, clickX+8, clickY+8, clickColor, 10, Fast
 
@@ -333,7 +338,7 @@ HeroFilter(params*) {
 
 	while true {
 		PixelGetColor, aColor, getXCoord(0.790), getYCoord(0.382)
-
+; MsgBox, %aColor%
 		if(aColor <> 0X302C2B){
 			;OPEN FILTER MENU
 			ssX = 0.966
