@@ -6,9 +6,14 @@
 ; CALIBRATE CURRENT WINDOW
 WinGetPos, wLeft, wTop, wWidth, wHeight, BlueStacks
 
+SysGet, xborder, 32
+SysGet, yborder, 33
 SysGet, caption, 4
-wTop += caption
-wHeight-= (caption + 48)
+
+wTop += caption + yborder/2
+wHeight -= (caption + 48 + yborder)
+wLeft += xborder/2 - 1
+wWidth -= xborder - 2
 
 ; MAKE ALL ACTIONS RELATIVE TO THE SCREEN
 CoordMode, Pixel, Screen
@@ -17,42 +22,39 @@ CoordMode, ToolTip, Screen
 
 SetDefaultMouseSpeed, 1
 
-; CALIBRATE CURRENT WINDOW
-WinGetPos, wLeft, wTop, wWidth, wHeight, BlueStacks
-
 ; CENTER WINDOW JUST BECAUSE I LIKE IT THAT WAY
 WinMove, BlueStacks,, (A_ScreenWidth/2)-(wWidth/2), 64
 ; TOOLTIP LOCATION
 global ToolTipX := wLeft
-global ToolTipY := wTop + wHeight + 4
+global ToolTipY := wTop + wHeight + 52
 
 ; HEALTH ANALYSIS COORDINATES
-global OurMinHealth := wLeft + wWidth * 0.16
+global OurMinHealth := wLeft + wWidth * 0.155
 global OurMaxHealth := wLeft + wWidth * 0.41
 global OurHealthX := wLeft + wWidth * 0.40
 
 global TheirMaxHealth := wLeft + wWidth * 0.59
-global TheirMinHealth := wLeft + wWidth * 0.84
+global TheirMinHealth := wLeft + wWidth * 0.845
 global TheirHealthX := wLeft + wWidth * 0.60
 
-global HealthY := wTop + wHeight * 0.138
+global HealthY := wTop + wHeight * 0.115
 global HealthBar := wWidth * 0.25
 
 ; SPECIAL ANALYSIS COORDINATES
-global Special1 := wLeft + wWidth * 0.222
-global Special2 := wLeft + wWidth * 0.284
-global Special3 := wLeft + wWidth * 0.346
-global SpecialY := wTop + wHeight * 0.882
+global Special1 := wLeft + wWidth * 0.224
+global Special2 := wLeft + wWidth * 0.282
+global Special3 := wLeft + wWidth * 0.344
+global SpecialY := wTop + wHeight * 0.930
 
-global TheirSpecial1 := wLeft + wWidth * 0.662
-global TheirSpecial2 := wLeft + wWidth * 0.724
-global TheirSpecial3 := wLeft + wWidth * 0.786
-global TheirSpecialY := wTop + wHeight * 0.882
+global TheirSpecial1 := wLeft + wWidth * 0.664
+global TheirSpecial2 := wLeft + wWidth * 0.726
+global TheirSpecial3 := wLeft + wWidth * 0.788
+global TheirSpecialY := wTop + wHeight * 0.930
 
 ; DETECT CHANGES BEFORE/AFTER LOADING SCREEN
 global ChangeXA := wLeft + wWidth * 0.01
 global ChangeXB := wLeft + wWidth * 0.99
-global ChangeY := wTop + wHeight * 0.10
+global ChangeY := wTop + wHeight * 0.03
 
 global MatchLeft := wLeft + wWidth * 0.28
 global MatchRight := wLeft + wWidth * 0.72
@@ -142,6 +144,9 @@ global ArrowB := wTop + wHeight * 0.522
 global ArrowC := wTop + wHeight * 0.644
 
 ; ACTIONS ARE AT THE END OF LITTLEBRO.AHK
+
+; SHOW US WHAT WE DETECTED AS OUR INSIDE WINDOW
+DrawRect(wLeft,wTop,wLeft + wWidth,wTop + wHeight,"FF0000")
 
 gWidth = 80
 gHeight = 40

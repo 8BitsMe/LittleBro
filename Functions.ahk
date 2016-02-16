@@ -77,13 +77,23 @@ ShowMouseRatio() {
      MouseGetPos,X,Y
      RatioX := Round((X - wLeft)/wWidth,3)
      RatioY := Round((Y - wTop)/wHeight,3)
-
+     
      PixelGetColor, gColor, X, Y
      B := BrightnessIndex(gColor)
-
-ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% ... W: %wWidth% - H: %wHeight% , X+12, Y+24
-
-;     ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% , X+12, Y+24
+     
+     ReverseColor := SubStr(gColor, 7 , 2) . SubStr(gColor, 5 , 2) . SubStr(gColor, 3 , 2)
+     
+     X += 16
+     
+     ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% R:%ReverseColor% - W: %wWidth% - H: %wHeight%, X+21, Y
+     
+     Gui, 98: Destroy
+     Gui, 98: Color, %ReverseColor% 
+     Gui 98: -Caption +AlwaysOnTop +ToolWindow +Border
+     
+     ; SHOW WHAT WE CREATED
+     Gui, 98: Show, NoActivate x%X% y%Y% w18 h18 ;The Gui will not steal keyboard focus 
+     
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -119,39 +129,7 @@ XPercentage() {
      ToolTip, %C%, X, Y
 }
 
-; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-; UNIVERSAL BUTTON WAIT FUNCTION, DATA IN SAME FORMAT AS F10 SCAN
-; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-WaitForButton(Click, Why, X, Y, Color, TimeOut := 0) {
-     global
-     Z = 0
-
-     X := wLeft + wWidth * X
-     Y := wTop + wHeight * Y
-
-     Skip := false
-     MouseMove, X, Y
-     PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
-     While (ErrorLevel > 0 && !Skip)	{
-          Sleep, 1000
-          PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
-
-          ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`n(Press F9 to skip) : " Z++ , ToolTipX, ToolTipY, 1
-
-          If (Timeout > 0 && Z > Timeout) OR (Z > 100)
-          Skip := True
-     }
-
-     If Click && !Skip {
-          MouseClick, left, X, Y
-          Sleep, 250
-          ToolTip, Tap!, Px+12, Py+24, 2
-;          MouseClick, left, X, Y
-;          Sleep, 250
-;          ToolTip, Tap!, Px+12, Py+24, 2
-     }
-}
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; CALL OCR LIBRARY
@@ -170,6 +148,8 @@ GetOCRArea(tlX, tlY, brX, brY, options="") {
      topLeftY := wTop + wHeight * tlY
      widthToScan := (wLeft + wWidth * brX) - topLeftX
      heightToScan := (wTop + wHeight * brY) - topLeftY
+     
+     DrawRect(topLeftX,topLeftY,topLeftX+widthToScan,topLeftY+heightToScan,"FFFF00")
 
      magicalText := GetOCR(topLeftX, topLeftY, widthToScan, heightToScan, options)
 
@@ -192,7 +172,6 @@ getPI(tlX, tlY, brX, brY, options) {
      }
      return cPI
 }
-
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; LOGGING -- *bOpen* is optional, if set to 1 it will open the log file (this is baked into F10 for me).
@@ -425,4 +404,44 @@ HeroFilter(params*) {
 	MouseClick, left, getXCoord(0.753), getYCoord(0.845),1,10
 ;	ToolTip, DONE!, Px+12, Py+24, 2
 
+}
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; RECTANGLE FUNCTIONS, FOR MAKING DEBUGGING EASIER
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+; DRAWS A RECTANGLE 
+DrawRect(Left,Top,Right,Bottom,BorderColor) {
+     Border := 2
+     
+     Gui, 99: Destroy
+     
+     ; MAKE A WINDOW, SET IT TO OUR COLOR OF CHOICE
+     Gui, 99: Margin, %Border%, %Border% 
+     
+     ;Gui, 99: Color, FF0000 
+     Gui, 99: Color, %BorderColor% 
+     
+     ; GET WINDOW AND INSIDE SIZE
+     tW := Right-Left
+     tH := Bottom-Top
+     W := tW + Border*2
+     H := tH + Border*2
+     Left -= Border
+     Top -= Border
+     
+     
+     ; ADD AN AREA TO MAKE TRANSPARENT
+     Gui, 99: Add, Text, w%tW% h%tH% 0x6 ; Draw a white static control 
+     Gui 99: +LastFound 
+     WinSet, TransColor, FFFFFF 
+     Gui 99: -Caption +AlwaysOnTop +ToolWindow 
+     
+     ; SHOW WHAT WE CREATED
+     Gui, 99: Show, NoActivate x%Left% y%Top% w%W% h%H% ;The Gui will not steal keyboard focus 
+}
+
+; HIDES A RECTANGLE
+HideRect() {
+     Gui, 99: Destroy
 }
