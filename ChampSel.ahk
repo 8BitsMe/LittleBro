@@ -194,7 +194,7 @@ ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nIn else..., ToolTipX, ToolTipY, 1
 
                     ;		    Sleep, 3000
                     ;		    MouseMove, getXCoord(temp1 + 0.074), getYCoord(temp2 + 0.040)
-                    currentPI := getPI(temp1, temp2, temp1 + 0.150, temp2 + 0.042, "numeric")
+                    currentPI := getPI(temp1, temp2, temp1 + 0.148, temp2 + 0.045, "numeric")
 
 	            ;msgbox current PI: '%currentPI%'
 ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nCurrent PI...%currentPI%, ToolTipX, ToolTipY, 1
