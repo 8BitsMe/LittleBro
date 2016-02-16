@@ -4,7 +4,7 @@ BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
 
 	    title := getOCRArea(0.251, 0.119, 0.725, 0.226, "alpha")
 
-		if InStr(title, "LIN_UP") {
+		if ( InStr(title, "LIN_UP") OR InStr(title, "_ LINEUP") ) {
 			ToolTip, SERIES MATCH - LINEUP`nContinue and fight..., ToolTipX, ToolTipY, 1
 			BattleMatchFights()
 			ToolTip, SERIES MATCH - LINEUP`nDone with fights..., ToolTipX, ToolTipY, 1
