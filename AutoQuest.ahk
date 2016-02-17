@@ -47,6 +47,7 @@ AutoQuest() {
           PixelSearch, Px, Py, PauseL, PauseT, PauseR, PauseB, 0x9BB99B, 10, Fast
           If (ErrorLevel < 1) {
                SingleFight()
+               F++
           }
           
           Sleep, 200
@@ -78,13 +79,10 @@ AutoQuest() {
           
           PixelSearch, Px, Py, FightL, FightT, FightR, FightB, 0x055A22, 32, Fast
           If (ErrorLevel < 1) {
-               
                MouseClick, L, FightL, FightT
                
                WaitForChange(0.5, 0.75, "AUTOQUEST™ : Fight started...", 5)
-               
                SingleFight()
-               
                F++
                
           }
