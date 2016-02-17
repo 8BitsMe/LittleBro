@@ -5,25 +5,28 @@
 AutoQuest() {
      global
      
-     SearchLeft := wLeft + wWidth * 0.15
-     SearchTop := wTop + wHeight * 0.25
-     SearchRight := wLeft + wWidth * 0.85
-     SearchBottom := wTop + wHeight * 0.75
+     SearchL := wLeft + wWidth * 0.15
+     SearchT := wTop + wHeight * 0.15
+     SearchR := wLeft + wWidth * 0.85
+     SearchB := wTop + wHeight * 0.85
      
-     FightLeft := wLeft + wWidth * 0.82
-     FightTop := wTop + wHeight * 0.88
-     FightRight := wLeft + wWidth * 0.99
-     FightBottom := wTop + wHeight * 0.98
+     FightL := wLeft + wWidth * 0.82
+     FightT := wTop + wHeight * 0.88
+     FightR := wLeft + wWidth * 0.99
+     FightB := wTop + wHeight * 0.98
      
-     SkipX := wLeft + wWidth * 0.5
-     SkipY := wTop + wHeight * 0.88
+     SkipL := wLeft + wWidth * 0.47
+     SkipT := wTop + wHeight * 0.91
+     SkipR := wLeft + wWidth * 0.53
+     SkipB := wTop + wHeight * 0.95
      
-     PauseX := wLeft + wWidth * 0.494
-     PauseY := wTop + wHeight * 0.075
+     PauseL := wLeft + wWidth * 0.485
+     PauseT := wTop + wHeight * 0.025
+     PauseR := wLeft + wWidth * 0.515
+     PauseB := wTop + wHeight * 0.075
      
      CloseX := wLeft + wWidth * 0.970
      CloseY := wTop + wHeight * 0.066
-     ;0x726F6D
      
      CompleteA := wLeft + wWidth * 0.200
      CompleteB := wLeft + wWidth * 0.800
@@ -37,52 +40,55 @@ AutoQuest() {
           
           ToolTip, AUTOQUEST™ : Detection loop: %Z% , ToolTipX, ToolTipY, 1
           
-          DrawRect(SkipX-8, SkipY-4, SkipX+8, SkipY+4,"FFFF00")
+          ; LOOK FOR A GREEN NODE TO CLICK
+          DrawRect(SearchL, SearchT, SearchR, SearchB, "FFFF00")
+          
+          PixelSearch, Px, Py, SearchL, SearchT, SearchR, SearchB, 0x00FF00, 10, Fast
+          If (ErrorLevel < 1) {
+               MouseClick, L, Px, Py, 1
+               ToolTip, Tap!, Px+12, Py+24, 2
+          }
+          
+          Sleep, 200
           
           ; PERHAPS WE NEED TO SKIP AN ANNOYING CUTSCENE?
-          PixelSearch, Px, Py, SkipX-8, SkipY-4, SkipX+8, SkipY+4, 0xEEEEEE, 10, Fast
+          DrawRect(SkipL, SkipT, SkipR, SkipB, "FFFF00")
+          
+          PixelSearch, Px, Py, SkipL, SkipT, SkipR, SkipB, 0xEEEEEE, 10, Fast
           If (ErrorLevel < 1) {
-               MouseClick, left, Px, Py, 1
+               MouseClick, L, Px, Py, 1
                ToolTip, Blah!, Px+12, Py+24, 2
           }
           
-          DrawRect(SearchLeft, SearchTop, SearchRight, SearchBottom,"FFFF00")
-          
-          ; IF THE FIGHT! BUTTON IS NOT THERE LOOK FOR A GREEN NODE TO CLICK
-          PixelSearch, Px, Py, SearchLeft, SearchTop, SearchRight, SearchBottom, 0x00FF00, 10, Fast
-          If (ErrorLevel < 1) {
-               MouseClick, left, Px, Py, 1
-               ToolTip, Tap!, Px+12, Py+24, 2
-          }
+          Sleep, 200
           
           ; HAVE WE OPENED THE CHAT BY ACCIDENT?
           PixelGetColor, aColor, CloseX, CloseY
           If (aColor = 0x726F6D) {
-               MouseClick, left, CloseX, CloseY
+               MouseClick, L, CloseX, CloseY
           }
           
+          Sleep, 200
+          
           ; IF WE SUDDENLY FIND OURSELVES FIGHTING
-          PixelGetColor, aColor, PauseX, PauseY
-          If (aColor = 0x9BBA9C) {
+          DrawRect(PauseL, PauseT, PauseR, PauseB, "FFFF00")
+          
+          PixelSearch, Px, Py, PauseL, PauseT, PauseR, PauseB, 0x9BB99B, 10, Fast
+          If (ErrorLevel < 1) {
                SingleFight()
           }
           
-          ; QUEST COMPLETE?
-          PixelGetColor, aColor, CompleteA, CompleteY
-          PixelGetColor, bColor, CompleteB, CompleteY
-          If (aColor = 0x302C2B) && (bColor = 0x302C2B){
-               Break
-          }
+          Sleep, 200
           
-          DrawRect(FightLeft,FightTop,FightRight,FightBottom,"FFFF00")
+          ; FIGHT BUTTON VISIBLE?
+          DrawRect(FightL, FightT, FightR, FightB, "FFFF00")
           
-          ; LOOK FOR FIGHT! BUTTON AGAIN SO ERRORCODES ARE CORRECT
-          PixelSearch, Px, Py, FightLeft,FightTop,FightRight,FightBottom, 0x055A22, 32, Fast
+          PixelSearch, Px, Py, FightL, FightT, FightR, FightB, 0x055A22, 32, Fast
           If (ErrorLevel < 1) {
                
-               MouseClick, left, FightLeft, FightTop
+               MouseClick, L, FightL, FightT
                
-               WaitForChange(0.5,0.75,"AUTOQUEST™ : Fight started...",10)
+               WaitForChange(0.5, 0.75, "AUTOQUEST™ : Fight started...", 10)
                
                SingleFight()
                
@@ -90,15 +96,20 @@ AutoQuest() {
                
           }
           
+          Sleep, 200
+          
           ; QUEST COMPLETE?
+          DrawRect(CompleteA, CompleteY-8, CompleteB, CompleteY+8, "FFFF00")
+          
           PixelGetColor, aColor, CompleteA, CompleteY
           PixelGetColor, bColor, CompleteB, CompleteY
           If (aColor = 0x302C2B) && (bColor = 0x302C2B){
-               ToolTip, Quest Complete!, CompleteB, CompleteY
+               ToolTip, Quest Complete!`nOr out of energy..., ToolTipX, ToolTipY, 1
                Break
           }
           
-          Sleep, 500
+          Sleep, 200
+          
      }
      
 }
