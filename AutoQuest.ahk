@@ -33,12 +33,13 @@ AutoQuest() {
      CompleteY := wTop + wHeight * 0.275
      
      Z = 0
+     F = 0
      
      Loop {
           
           Z++
           
-          ToolTip, AUTOQUEST™ : Detection loop: %Z% , ToolTipX, ToolTipY, 1
+          ToolTip, AUTOQUEST™`nDetection loop: %Z%`nFights so far: %F% , ToolTipX, ToolTipY, 1
           
           ; IF WE SUDDENLY FIND OURSELVES FIGHTING
           DrawRect(PauseL, PauseT, PauseR, PauseB, "FFFF00")
@@ -80,11 +81,11 @@ AutoQuest() {
                
                MouseClick, L, FightL, FightT
                
-               WaitForChange(0.5, 0.75, "AUTOQUEST™ : Fight started...", 10)
+               WaitForChange(0.5, 0.75, "AUTOQUEST™ : Fight started...", 5)
                
                SingleFight()
                
-               Z = 0
+               F++
                
           }
           
@@ -102,7 +103,7 @@ AutoQuest() {
           PixelGetColor, aColor, CompleteA, CompleteY
           PixelGetColor, bColor, CompleteB, CompleteY
           If (aColor = 0x302C2B) && (bColor = 0x302C2B){
-               ToolTip, Quest Complete!`nOr out of energy..., ToolTipX, ToolTipY, 1
+               ToolTip, Quest Complete!`nOr out of energy... :(, ToolTipX, ToolTipY, 1
                Break
           }
           
