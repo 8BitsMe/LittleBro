@@ -163,6 +163,7 @@ GetOCRArea(tlX, tlY, brX, brY, options="") {
 getPI(tlX, tlY, brX, brY, options) {
 
      loop, 15 {
+ ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nGetting current PI...`nloop: %A_Index%, ToolTipX, ToolTipY, 1
 
 	cPI := getOCRArea(tlX, tlY, brX-=.02, brY+=.005, options)
 	cPI := RegExReplace(cPI, "i)[^0-9]")
@@ -355,6 +356,8 @@ HeroFilter(params*) {
 			break
 		}
 	}
+	Tooltip, , , , 2
+
 	;RESET FILTERS
 	MouseClick, left, getXCoord(xCoord), getYCoord(0.180), 2
 	for index,param in params {
@@ -418,6 +421,8 @@ HeroFilter(params*) {
 ; DRAWS A RECTANGLE
 DrawRect(Left,Top,Right,Bottom,BorderColor) {
      Border := 2
+
+; MSGBOX %Left%,%Top%,%Right%,%Bottom%,%BorderColor%
 
      Gui, 99: Destroy
 

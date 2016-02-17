@@ -19,7 +19,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      ; SIDE PANEL
      tx := ChampDestinationX - (wWidth * 0.09)
 
-     ; NOT IN CHAMPION SELECTION?
+     ; NOT IN CHAMPION SELECTION? Looking for Gray color on left side
      PixelGetColor, gColor, tx, ChampDestinationY
      If (gColor <> 0x302C2B) {
           return -1
@@ -29,14 +29,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      ; -----------------------------
      ; THIS IS THE VERTICAL LINE ON WHICH WE LOOK FOR THE CHAMPION PLAQUE CORNER
 
-     DetX := getXCoord(0.268)
-     DetY := getYCoord(0.40)
-     Scanner := wHeight * 0.5
-
-     DrawRect(DetX-2,DetY,DetX+2,DetY+Scanner,"FFFF00")
-
-     ; FIND A PIXEL ON THE CORNER OF THE CHAMPION FRAME
-     PixelSearch, Px, Py, DetX-2, DetY, DetX+2, DetY+Scanner, 0x35302D, 2, Fast
+	 FindChampionPlaque()
 
      BadgeX := Px - (wWidth * 0.010)
      BadgeY := Py - (wHeight * 0.144)
@@ -80,13 +73,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
           ; ALIGN TO CHAMPION PORTRAITS AND CHECK THEM FOR NEED TO HELP OR BEING BUSY
           ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-          ; THIS IS THE VERTICAL LINE ON WHICH WE LOOK FOR THE CHAMPION PLAQUE CORNER
-          DetX := getXCoord(0.268)
-          DetY := getYCoord(0.40)
-          Scanner := wHeight * 0.5
-
-          ; FIND A PIXEL ON THE CORNER OF THE CHAMPION FRAME
-          PixelSearch, Px, Py, DetX-2, DetY, DetX+2, DetY+Scanner, 0x35302D, 2, Fast
+		  FindChampionPlaque()
 ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nFind pixel?, ToolTipX, ToolTipY, 1
 
 
@@ -188,7 +175,7 @@ ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nIn else..., ToolTipX, ToolTipY, 1
 
                     ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nGetting current PI..., ToolTipX, ToolTipY, 1
                     temp1 := ((DetX - wLeft)/wWidth) + 0.010
-                    temp2 := ((DetY - wTop)/wHeight) + 0.20
+                    temp2 := ((DetY - wTop)/wHeight) + 0.175
 
                     ;		    MouseMove, getXCoord(temp1), getYCoord(temp2)
 
@@ -274,6 +261,22 @@ ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nCurrent PI...%currentPI%, ToolTip
 
      }
      return 1
+}
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; FIND THE SPOT ON THE CHAMPION PLAQUE OF GRAY COLOR
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+FindChampionPlaque() {
+	 global
+     DetX := getXCoord(0.268)
+     DetY := getYCoord(0.40)
+     Scanner := wHeight * 0.5
+
+     DrawRect(DetX-2,DetY,DetX+2,DetY+Scanner,"FFFF00")
+
+     ; FIND A PIXEL ON THE CORNER OF THE CHAMPION FRAME
+     PixelSearch, Px, Py, DetX-2, DetY, DetX+2, DetY+Scanner, 0x35302D, 2, Fast
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
