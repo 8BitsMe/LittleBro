@@ -40,6 +40,16 @@ AutoQuest() {
           
           ToolTip, AUTOQUEST™ : Detection loop: %Z% , ToolTipX, ToolTipY, 1
           
+          ; IF WE SUDDENLY FIND OURSELVES FIGHTING
+          DrawRect(PauseL, PauseT, PauseR, PauseB, "FFFF00")
+          
+          PixelSearch, Px, Py, PauseL, PauseT, PauseR, PauseB, 0x9BB99B, 10, Fast
+          If (ErrorLevel < 1) {
+               SingleFight()
+          }
+          
+          Sleep, 200
+          
           ; LOOK FOR A GREEN NODE TO CLICK
           DrawRect(SearchL, SearchT, SearchR, SearchB, "FFFF00")
           
@@ -62,24 +72,6 @@ AutoQuest() {
           
           Sleep, 200
           
-          ; HAVE WE OPENED THE CHAT BY ACCIDENT?
-          PixelGetColor, aColor, CloseX, CloseY
-          If (aColor = 0x726F6D) {
-               MouseClick, L, CloseX, CloseY
-          }
-          
-          Sleep, 200
-          
-          ; IF WE SUDDENLY FIND OURSELVES FIGHTING
-          DrawRect(PauseL, PauseT, PauseR, PauseB, "FFFF00")
-          
-          PixelSearch, Px, Py, PauseL, PauseT, PauseR, PauseB, 0x9BB99B, 10, Fast
-          If (ErrorLevel < 1) {
-               SingleFight()
-          }
-          
-          Sleep, 200
-          
           ; FIGHT BUTTON VISIBLE?
           DrawRect(FightL, FightT, FightR, FightB, "FFFF00")
           
@@ -98,17 +90,21 @@ AutoQuest() {
           
           Sleep, 200
           
-          ; QUEST COMPLETE?
-          DrawRect(CompleteA, CompleteY-8, CompleteB, CompleteY+8, "FFFF00")
+          HideRect()
           
+          ; HAVE WE OPENED THE CHAT BY ACCIDENT?
+          PixelGetColor, aColor, CloseX, CloseY
+          If (aColor = 0x726F6D) {
+               MouseClick, L, CloseX, CloseY
+          }
+          
+          ; QUEST COMPLETE?
           PixelGetColor, aColor, CompleteA, CompleteY
           PixelGetColor, bColor, CompleteB, CompleteY
           If (aColor = 0x302C2B) && (bColor = 0x302C2B){
                ToolTip, Quest Complete!`nOr out of energy..., ToolTipX, ToolTipY, 1
                Break
           }
-          
-          Sleep, 200
           
      }
      
