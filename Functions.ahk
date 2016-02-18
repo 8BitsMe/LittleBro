@@ -269,7 +269,7 @@ ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
      cicY := getYCoord(ratioY)
      cicScanner := wHeight * 0.5
 
-     DrawRect(cicX-2,cicY,cicX+2,cicY+cicScanner,"FFFF00")
+     DrawRect(cicX-10,cicY-10,cicX+10,cicY+10,"FF00FF")
 
      PixelSearch, Px, Py, clickX-8, clickY-8, clickX+8, clickY+8, clickColor, 10, Fast
 
@@ -295,6 +295,8 @@ WaitForColor(Why,X,Y,Color,Timeout)
      PixelGetColor, ComColor, X, Y
      Z = 0
      Skip := false
+
+     DrawRect(X-6,Y-6,X+6,Y+6,"00FFFF")
      PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
      While ErrorLevel > 0 && !Skip {
           PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
