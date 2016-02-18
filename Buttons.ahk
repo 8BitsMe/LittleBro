@@ -33,9 +33,9 @@ WaitForButton(Click, Why, L, T, R, B, Color, TimeOut := 0) {
 
      Skip := false
      MouseMove, X, Y
-     
+
      DrawRect(L,T,R,B,"FFFF00")
-     
+
      PixelSearch, Px, Py, L, T, R, B, Color, 30, Fast
      While (ErrorLevel > 0 && !Skip)	{
           Sleep, 1000
@@ -48,13 +48,14 @@ WaitForButton(Click, Why, L, T, R, B, Color, TimeOut := 0) {
      }
 
      PixelSearch, Px, Py, L, T, R, B, Color, 30, Fast
-     
+
      ; TRY TO CLICK IT UNTIL IT FINALLY GIVES IN
      While (ErrorLevel < 1 && Click && !Skip) {
           MouseClick, left, Px, Py
-          Sleep, 200
+;          Sleep, 200
           ToolTip, Tap!, Px+12, Py+24, 2
           PixelSearch, Px, Py, L, T, R, B, Color, 30, Fast
+          ErrorLevel := 1
      }
-     
+
 }

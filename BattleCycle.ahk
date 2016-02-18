@@ -2,7 +2,6 @@ BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
      loop {
           ;ToolTip, ARENA FIGHTS`nLooking for page name..., ToolTipX, ToolTipY, 1
 
-          Sleep, 2000
 
           title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
 
@@ -12,7 +11,8 @@ BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
                ToolTip, SET LINEUP`nDeciding hero vs hero..., ToolTipX, ToolTipY, 1
                SmartSort()
                ClickContinue("SET LINEUP`nAccepting match")
-          } else if ( InStr(title, "LIN_UP") OR InStr(title, "LINEUP") ) {
+          }
+          else if ( InStr(title, "LIN_UP") OR InStr(title, "LINEUP") ) {
                ToolTip, SERIES MATCH - LINEUP`nContinue and fight..., ToolTipX, ToolTipY, 1
                BattleMatchFights()
                ToolTip, SERIES MATCH - LINEUP`nDone with fights..., ToolTipX, ToolTipY, 1
@@ -33,7 +33,8 @@ BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
           else if InStr(title, "WARDS" ){
                ToolTip, REWARDS screen`nClicking continue..., ToolTipX, ToolTipY, 1
                ClickContinue("REWARDS Screen green Button...")
-          } else if InStr(title, "ACHI_V_M_NTS" ) {
+          }
+          else if InStr(title, "ACHI_V_M_NTS" ) {
                ToolTip, ACHIEVEMENTS`nClicking continue..., ToolTipX, ToolTipY, 1
                ClickContinue("ACHIEVEMENTS Screen green Button...")
           }
@@ -58,6 +59,7 @@ BattleMatchFights() {
           WaitForColor("SERIES MATCH - LINEUP`nLooking for loss in round",0.283,0.443+ loopOffset,0X1A1A72,1)
           If ( ErrorLevel = 0 )
 	          continue
+
           WaitForColor("SERIES MATCH - LINEUP`nLooking for win in round",0.283,0.443+ loopOffset,0X2F5428,1)
           If ( ErrorLevel = 0 )
 	          continue
