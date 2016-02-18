@@ -173,9 +173,9 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
 
                     ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nGetting current PI..., ToolTipX, ToolTipY, 1
                     temp1 := ((DetX - wLeft)/wWidth) + 0.015
-                    temp2 := ((DetY - wTop)/wHeight) + 0.177
+                    temp2 := ((DetY - wTop)/wHeight) + 0.170
 
-                    currentPI := getPI(temp1, temp2, temp1 + 0.11, temp2 + 0.045, "numeric")
+                    currentPI := getPI(temp1, temp2, temp1 + 0.11, temp2 + 0.055, "numeric")
 
                     ;msgbox current PI: '%currentPI%'
                     ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nCurrent PI...%currentPI%, ToolTipX, ToolTipY, 1
