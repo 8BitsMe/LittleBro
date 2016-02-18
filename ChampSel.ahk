@@ -173,10 +173,10 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
                     
                     ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nGetting current PI..., ToolTipX, ToolTipY, 1
-                    temp1 := ((DetX - wLeft)/wWidth) + 0.015
-                    temp2 := ((DetY - wTop)/wHeight) + 0.170
+                    temp1 := ((DetX - wLeft)/wWidth) + 0.014
+                    temp2 := ((DetY - wTop)/wHeight) + 0.176
                     
-                    currentPI := getPI(temp1, temp2, temp1 + 0.11, temp2 + 0.055, "numeric")
+                    currentPI := getPI(temp1, temp2, temp1 + 0.11, temp2 + 0.05, "numeric")
                     
                     If(!currentPI) {
                          ToolTip, [%OmegaLoop%][%OuterLoop%] OCR GOT CONFUSED`nProbably tried to scan a face`nAttempting to fix..., ToolTipX, ToolTipY, 1
