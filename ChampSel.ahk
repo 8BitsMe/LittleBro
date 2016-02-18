@@ -34,6 +34,8 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      BadgeX := Px - (wWidth * 0.010)
      BadgeY := Py - (wHeight * 0.144)
      
+     DrawRect(BadgeX-12, BadgeY-12, BadgeX+12, BadgeY+12,"FFFF00")
+     
      Loop {
           PixelSearch, Px, Py, BadgeX-12, BadgeY-12, BadgeX+12, BadgeY+12, 0x096F16, 5, Fast
           if ( ErrorLevel < 1 ) {
@@ -75,7 +77,6 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
           
           FindChampionPlaque()
           ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nFind pixel?, ToolTipX, ToolTipY, 1
-          
           
           ; COULDN'T FIND THE CHAMPION FRAME PIXEL, LET'S TRY TO SCROLL TO GET TO SOME FRESH CHAMPIONS
           If (ErrorLevel > 0) {
@@ -129,6 +130,8 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     DetX := BadgeX + mod(Repeats,4) * HelpStepX
                     DetY := BadgeY + Floor(Repeats/4) * HelpStepY
                     
+                    DrawRect(DetX-12, DetY-12, DetX+12, DetY+12,"FFFF00")
+                    
                     ; IF WE FIND RED SKIP IT
                     PixelSearch, Px, Py, DetX-12, DetY-12, DetX+12, DetY+12, 0x1B239C, 5, Fast
                     RedErrorLevel := ErrorLevel
@@ -176,7 +179,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     currentPI := getPI(temp1, temp2, temp1 + 0.11, temp2 + 0.055, "numeric")
                     
                     If(!currentPI) {
-                         ToolTip, [%OmegaLoop%][%OuterLoop%] CHAMPION PORTRAIT NOT FOUND1`nAttempting to fix..., ToolTipX, ToolTipY, 1
+                         ToolTip, [%OmegaLoop%][%OuterLoop%] OCR GOT CONFUSED`nProbably tried to scan a face`nAttempting to fix..., ToolTipX, ToolTipY, 1
                          
                          MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
                          Sleep, 2000
@@ -206,12 +209,12 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                               MouseMove, Px, Py, 1
                               Goto, TopScan
                          }
-                         If ((winStreak = 12 OR winStreak = 13) AND currentPI < 2900 ) {
+                         If ((winStreak = 12 OR winStreak = 13) AND currentPI < 2400 ) {
                               ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1
                               MouseMove, Px, Py, 1
                               Goto, TopScan
                          }
-                         If (winStreak > 8 AND currentPI < 1200){
+                         If (winStreak > 8 AND currentPI < 1400){
                               ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1
                               MouseMove, Px, Py, 1
                               if ( winStreak < ReverseFilter) {
@@ -222,6 +225,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                               Goto, TopScan
                          }
                     }
+                    
                     If (WhichWar = "WAR-B") {
                          If (winStreak > 20 AND currentPI < 400){
                               ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n4.Skipping low PI champions...'%currentPI%'`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1

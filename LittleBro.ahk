@@ -71,6 +71,7 @@ IF (CreateConfig = False) {
      IniRead, LBCCMax, LBConfig.ini, C-B, CMax
      IniRead, LBCBMin, LBConfig.ini, C-B, BMin
      IniRead, LBCBMax, LBConfig.ini, C-B, BMax
+     IniRead, LBHitRatio, LBConfig.ini, COMBAT, HitRatio
 } Else {
      ;add additional local settings here
      IniWrite, Yes, LBConfig.ini, HELP, AutoHelp
@@ -80,6 +81,7 @@ IF (CreateConfig = False) {
      IniWrite, 7, LBConfig.ini, C-B, CMax
      IniWrite, 2, LBConfig.ini, C-B, BMin
      IniWrite, 4, LBConfig.ini, C-B, BMax
+     IniWrite, 0.28, LBConfig.ini, COMBAT, HitRatio
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

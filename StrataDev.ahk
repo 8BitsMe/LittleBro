@@ -146,7 +146,7 @@ StrataDev() {
           ; IF THEY ARE SMASHING BLOCKS THEN YOU NEED TO MAKE IT HIGHER. EXPERIMENT BY ADJUSTING
           ; IT BY 0.3 OR SO UP OR DOWN TO FIND THE SWEET SPOT
           
-          HAvg := Round(HMax*0.28,1)
+          HAvg := Round(HMax*LBHitRatio,1)
           DamageLevel := HAvg
      }
      
