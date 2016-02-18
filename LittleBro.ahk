@@ -60,29 +60,26 @@ If not A_IsAdmin
 #Include OCR.ahk
 
 ;Import local config or create if it doesn't exist. No error checking on keys not found in config file yet.
-IfExist, LBConfig.ini
-     CreateConfig := False
-IF (CreateConfig = False) {
-     ;add additional local settings here
-     IniRead, LBCAutoHelp, LBConfig.ini, HELP, AutoHelp
-     IniRead, LBCOnlyLVL3, LBConfig.ini, SPECIALS, OnlyLVL3
-     IniRead, LBCOLoopCount, LBConfig.ini, OMEGALOOP, OLoopCount
-     IniRead, LBCCMin, LBConfig.ini, C-B, CMin
-     IniRead, LBCCMax, LBConfig.ini, C-B, CMax
-     IniRead, LBCBMin, LBConfig.ini, C-B, BMin
-     IniRead, LBCBMax, LBConfig.ini, C-B, BMax
-     IniRead, LBHitRatio, LBConfig.ini, COMBAT, HitRatio
-} Else {
-     ;add additional local settings here
-     IniWrite, Yes, LBConfig.ini, HELP, AutoHelp
-     IniWrite, Yes, LBConfig.ini, SPECIALS, OnlyLVL3
-     IniWrite, 3, LBConfig.ini, OMEGALOOP, OLoopCount
-     IniWrite, 5, LBConfig.ini, C-B, CMin
-     IniWrite, 7, LBConfig.ini, C-B, CMax
-     IniWrite, 2, LBConfig.ini, C-B, BMin
-     IniWrite, 4, LBConfig.ini, C-B, BMax
-     IniWrite, 0.28, LBConfig.ini, COMBAT, HitRatio
-}
+;add additional local settings here
+IniRead, LBCAutoHelp, LBConfig.ini, HELP, AutoHelp, Yes
+IniRead, LBCOnlyLVL3, LBConfig.ini, SPECIALS, OnlyLVL3, Yes
+IniRead, LBCOLoopCount, LBConfig.ini, OMEGALOOP, OLoopCount, 3
+IniRead, LBCCMin, LBConfig.ini, C-B, CMin, 5
+IniRead, LBCCMax, LBConfig.ini, C-B, CMax, 7
+IniRead, LBCBMin, LBConfig.ini, C-B, BMin, 2
+IniRead, LBCBMax, LBConfig.ini, C-B, BMax, 4
+IniRead, LBHitRatio, LBConfig.ini, COMBAT, HitRatio, 0.28
+
+
+;add additional local settings here
+IniWrite, %LBCAutoHelp%, LBConfig.ini, HELP, AutoHelp
+IniWrite, %LBCOnlyLVL3%, LBConfig.ini, SPECIALS, OnlyLVL3
+IniWrite, %LBCOLoopCount%, LBConfig.ini, OMEGALOOP, OLoopCount
+IniWrite, %LBCCMin%, LBConfig.ini, C-B, CMin
+IniWrite, %LBCCMax%, LBConfig.ini, C-B, CMax
+IniWrite, %LBCBMin%, LBConfig.ini, C-B, BMin
+IniWrite, %LBCBMax%, LBConfig.ini, C-B, BMax
+IniWrite, %LBHitRatio%, LBConfig.ini, COMBAT, HitRatio
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; PRESS F1 TO SOMETHING
