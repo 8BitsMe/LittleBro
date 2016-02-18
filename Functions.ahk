@@ -267,7 +267,6 @@ ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
 
      cicX := getXCoord(ratioX)
      cicY := getYCoord(ratioY)
-     cicScanner := wHeight * 0.5
 
      DrawRect(cicX-10,cicY-10,cicX+10,cicY+10,"FF00FF")
 
