@@ -13,8 +13,8 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      HelpStepY := wHeight * 0.281
 
      ; INITIAL DRAG AND DROP LOCATION
-     ChampDestinationX := wLeft + wWidth * 0.155
-     ChampDestinationY := wTop + wHeight * 0.308
+     ChampDestinationX := getXCoord( 0.155 )
+     ChampDestinationY := getYCoord( 0.455 )
 
      ; SIDE PANEL
      tx := ChampDestinationX - (wWidth * 0.09)
@@ -147,8 +147,6 @@ ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nIn else..., ToolTipX, ToolTipY, 1
                     If (RedErrorLevel < 1 || GreenErrorLevel < 1) {
                          ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nSkipping busy champions..., ToolTipX, ToolTipY, 1
                          MouseMove, Px, Py, 1
-                         ;                         sleep, 1000
-                         ;                         DetX += HelpStepX
                          Repeats++
                          continue
                     } Else {
@@ -177,7 +175,7 @@ ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nIn else..., ToolTipX, ToolTipY, 1
                     temp1 := ((DetX - wLeft)/wWidth) + 0.015
                     temp2 := ((DetY - wTop)/wHeight) + 0.177
 
-                    currentPI := getPI(temp1, temp2, temp1 + 0.148, temp2 + 0.045, "numeric")
+                    currentPI := getPI(temp1, temp2, temp1 + 0.11, temp2 + 0.045, "numeric")
 
 	            ;msgbox current PI: '%currentPI%'
 ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nCurrent PI...%currentPI%, ToolTipX, ToolTipY, 1

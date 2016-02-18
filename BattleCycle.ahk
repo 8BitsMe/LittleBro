@@ -55,19 +55,19 @@ BattleMatchFights() {
 		 loopOffset := .134 * (A_Index-1)
 
          ; DETERMINING IF THERE WAS ALREADY A WIN/LOSS IN THIS ROUND OF THE FIGHT
-          WaitForColor("SERIES MATCH - LINEUP`nLooking for loss in round",0.283,0.443+ loopOffset,0X1A1A72,.5)
+          WaitForColor("SERIES MATCH - LINEUP`nLooking for loss in round",0.283,0.443+ loopOffset,0X1A1A72,1)
           If ( ErrorLevel = 0 )
-          continue
-          WaitForColor("SERIES MATCH - LINEUP`nLooking for win in round",0.283,0.443+ loopOffset,0X2F5428,.5)
+	          continue
+          WaitForColor("SERIES MATCH - LINEUP`nLooking for win in round",0.283,0.443+ loopOffset,0X2F5428,1)
           If ( ErrorLevel = 0 )
-          continue
+	          continue
 
           curHero := GetOCRArea(0.130, 0.472 + loopOffset, 0.301, 0.506 + loopOffset, "alpha")
           curStars := GetOCRArea(0.130, 0.435 + loopOffset, 0.235, 0.475 + loopOffset)
           duped := ""
 
           IfInString, curStars, &
-          duped := "(Unduped)"
+	          duped := "(Unduped)"
 
           curStars := StrLen(curStars) . "*" . duped
 
