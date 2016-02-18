@@ -33,12 +33,12 @@ FullLoop(WhichWar,LoopLimit) {
           }
 
           If (WhichWar = "WAR-B") {
-               winStreak := GetOCRArea(0.49, 0.35, 0.54, 0.39, "numeric")
+               winStreak := GetOCRArea(0.49, 0.347, 0.54, 0.39, "numeric")
                WaitFoRButton(1, "First 3v3 versus match Button...", 0.3, 0.83, 0.46, 0.93, 0X024B04)
           }
 
           If (WhichWar = "WAR-C") {
-               winStreak := GetOCRArea(0.95, 0.35, 1.0, 0.39, "numeric")
+               winStreak := GetOCRArea(0.95, 0.348, 1.0, 0.398, "numeric")
                WaitFoRButton(1, "Second 3v3 versus match Button...", 0.76, 0.83, 0.92,0.93, 0X024B04)
           }
 

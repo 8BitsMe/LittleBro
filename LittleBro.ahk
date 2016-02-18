@@ -72,7 +72,7 @@ IF (CreateConfig = False) {
      IniRead, LBCBMin, LBConfig.ini, C-B, BMin
      IniRead, LBCBMax, LBConfig.ini, C-B, BMax
 } Else {
-     ;add additional local settings here 
+     ;add additional local settings here
      IniWrite, Yes, LBConfig.ini, HELP, AutoHelp
      IniWrite, Yes, LBConfig.ini, SPECIALS, OnlyLVL3
      IniWrite, 3, LBConfig.ini, OMEGALOOP, OLoopCount
@@ -176,9 +176,13 @@ ShowMouseRatio()
 Return
 
 F11:: ; testing hotkey
-title := getOCRArea(0.251, 0.119, 0.725, 0.226, "ALPHA")
 
-msgBox '%title%'
+; ReadResultsPlaque()
+
+
+          title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
+
+ msgBox '%title%'
 
 ;HeroFilter("Level^", "Purple","4*")
 ;NavigateToScreen("Fight", "Event")
@@ -235,10 +239,10 @@ Loop {
      FullLoop("WAR-C",A)
      Random, A , LBCBMin, LBCBMax
      FullLoop("WAR-B",A)
-     
+
      If (OmegaLoop > LBCOLoopCount)
      break
-     
+
 }
 
 WinClose, BlueStacks

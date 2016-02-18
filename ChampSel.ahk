@@ -14,7 +14,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
 
      ; INITIAL DRAG AND DROP LOCATION
      ChampDestinationX := wLeft + wWidth * 0.155
-     ChampDestinationY := wTop + wHeight * 0.455
+     ChampDestinationY := wTop + wHeight * 0.308
 
      ; SIDE PANEL
      tx := ChampDestinationX - (wWidth * 0.09)
@@ -174,13 +174,9 @@ ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nIn else..., ToolTipX, ToolTipY, 1
                     ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
                     ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nGetting current PI..., ToolTipX, ToolTipY, 1
-                    temp1 := ((DetX - wLeft)/wWidth) + 0.010
-                    temp2 := ((DetY - wTop)/wHeight) + 0.175
+                    temp1 := ((DetX - wLeft)/wWidth) + 0.015
+                    temp2 := ((DetY - wTop)/wHeight) + 0.177
 
-                    ;		    MouseMove, getXCoord(temp1), getYCoord(temp2)
-
-                    ;		    Sleep, 3000
-                    ;		    MouseMove, getXCoord(temp1 + 0.074), getYCoord(temp2 + 0.040)
                     currentPI := getPI(temp1, temp2, temp1 + 0.148, temp2 + 0.045, "numeric")
 
 	            ;msgbox current PI: '%currentPI%'

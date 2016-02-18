@@ -165,7 +165,7 @@ getPI(tlX, tlY, brX, brY, options) {
      loop, 15 {
  ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nGetting current PI...`nloop: %A_Index%, ToolTipX, ToolTipY, 1
 
-	cPI := getOCRArea(tlX, tlY, brX-=.02, brY+=.005, options)
+	cPI := getOCRArea(tlX, tlY, brX-=.01, brY+=.005, options)
 	cPI := RegExReplace(cPI, "i)[^0-9]")
 ;	msgbox PI: '%cPI%' Loop: '%A_Index%'
 	if  (cPI > 100 ) AND (cPI < 9000)
