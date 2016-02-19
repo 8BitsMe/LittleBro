@@ -130,20 +130,20 @@ global OmegaLoop = 0
 
 ; ICON LOCATIONS
 global OurIconsX := wLeft + wWidth * 0.357
-global OurIconsA := wTop + wHeight * 0.390
-global OurIconsB := wTop + wHeight * 0.513
-global OurIconsC := wTop + wHeight * 0.634
+global OurIconsA := wTop + wHeight * 0.395
+global OurIconsB := wTop + wHeight * 0.530
+global OurIconsC := wTop + wHeight * 0.665
 
 global TheirIconsX := wLeft + wWidth * 0.680
-global TheirIconsA := wTop + wHeight * 0.414
-global TheirIconsB := wTop + wHeight * 0.539
-global TheirIconsC := wTop + wHeight * 0.653
+global TheirIconsA := wTop + wHeight * 0.415
+global TheirIconsB := wTop + wHeight * 0.550
+global TheirIconsC := wTop + wHeight * 0.685
 
 ; RED ARROW DETECTION ZONE
-global ArrowX := wLeft + wWidth * 0.429
+global ArrowX := wLeft + wWidth * 0.430
 global ArrowA := wTop + wHeight * 0.400
-global ArrowB := wTop + wHeight * 0.522
-global ArrowC := wTop + wHeight * 0.644
+global ArrowB := wTop + wHeight * 0.540
+global ArrowC := wTop + wHeight * 0.675
 
 ; ACTIONS ARE AT THE END OF LITTLEBRO.AHK
 
