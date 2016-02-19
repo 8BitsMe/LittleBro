@@ -22,12 +22,12 @@ SetBatchLines, -1
 ;~ is clicked/tapped just right. If this doesn't happen you'll have to figure out the ratios and set them up yourself
 ;~ HOW IT WORKS:
 ;~ Just use the bottom panel
-;~ QUEST – When in quest map screen or fight screen this will automatically continue by clicking nodes, starting fights,  skipping cutscenes. It can get stuck since it detects a certain area around the middle of the screen - in that case just use the mouse to scroll the screen a bit
-;~ FIGHT – Start a fight – any place, any time – will engage the LittleBro fight engine and try to pulverize whoever gets in the way.
-;~ BATTLE – Use from champion selection screen in an arena. Make your own roster and start a 3 fight battle.
-;~ WAR-B, WAR-C, WAR-Y, WAR-Z – In versus screen (where you pick arenas) imagine that each arena corresponds to a letter, so B is 2nd (usually 2*), C is 3rd (usually 4*) and Y and Z are the same, but from the end (so Catalyst arena, for example).
-;~ C-B – shuffle mode of given arenas – good when you don’t have enough guys or just want to get some points in lower arenas as well. You can change the number of fights on the bottom of LittleBro.ahk
-;~ PANIC – cancel script! Useful, also F12 on keyboard.
+;~ QUEST ? When in quest map screen or fight screen this will automatically continue by clicking nodes, starting fights,  skipping cutscenes. It can get stuck since it detects a certain area around the middle of the screen - in that case just use the mouse to scroll the screen a bit
+;~ FIGHT ? Start a fight ? any place, any time ? will engage the LittleBro fight engine and try to pulverize whoever gets in the way.
+;~ BATTLE ? Use from champion selection screen in an arena. Make your own roster and start a 3 fight battle.
+;~ WAR-B, WAR-C, WAR-Y, WAR-Z ? In versus screen (where you pick arenas) imagine that each arena corresponds to a letter, so B is 2nd (usually 2*), C is 3rd (usually 4*) and Y and Z are the same, but from the end (so Catalyst arena, for example).
+;~ C-B ? shuffle mode of given arenas ? good when you don?t have enough guys or just want to get some points in lower arenas as well. You can change the number of fights on the bottom of LittleBro.ahk
+;~ PANIC ? cancel script! Useful, also F12 on keyboard.
 
 ; WE TRY TO RUN THE SCRIPT AS ADMIN, SINCE SOME WINDOWS VERSIONS DON'T READ BLUESTACKS SCREEN RIGHT OTHERWISE
 If not A_IsAdmin

@@ -7,7 +7,7 @@ SmartSort() {
      
      WaitForColor("",0.377,0.333,0x1A1917,20)
      
-     ToolTip, SmartSort™ 1.23`nFinding weaklings..., ToolTipX, ToolTipY, 1
+     ToolTip, SmartSort? 1.23`nFinding weaklings..., ToolTipX, ToolTipY, 1
      
      FindWeaker(OurIconsX,OurIconsA,TheirIconsX,TheirIconsA)
      FindWeaker(OurIconsX,OurIconsA,TheirIconsX,TheirIconsB)
@@ -21,7 +21,7 @@ SmartSort() {
      FindWeaker(OurIconsX,OurIconsC,TheirIconsX,TheirIconsB)
      FindWeaker(OurIconsX,OurIconsC,TheirIconsX,TheirIconsC)
      
-     ToolTip, SmartSort™ 1.23`nAvoiding red arrows..., ToolTipX, ToolTipY, 1
+     ToolTip, SmartSort? 1.23`nAvoiding red arrows..., ToolTipX, ToolTipY, 1
      RedArrowCheck()
 }
 

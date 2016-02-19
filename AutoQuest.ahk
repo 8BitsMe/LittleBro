@@ -1,5 +1,5 @@
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-; AUTOQUEST™ - AUTOMATION AT ITS BEST
+; AUTOQUEST? - AUTOMATION AT ITS BEST
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 AutoQuest() {
@@ -45,7 +45,7 @@ AutoQuest() {
           
           Z++
           
-          ToolTip, AUTOQUEST™ 1.55`nDetection loop: %Z%`nFights so far: %F% , ToolTipX, ToolTipY, 1
+          ToolTip, AUTOQUEST? 1.55`nDetection loop: %Z%`nFights so far: %F% , ToolTipX, ToolTipY, 1
           
           ; IF WE SUDDENLY FIND OURSELVES FIGHTING
           DrawRect(PauseL, PauseT, PauseR, PauseB, "FFFF00")
@@ -87,7 +87,7 @@ AutoQuest() {
           If (ErrorLevel < 1) {
                MouseClick, L, FightL, FightT
                
-               WaitForChange(0.5, 0.75, "AUTOQUEST™ : Fight started...", 5)
+               WaitForChange(0.5, 0.75, "AUTOQUEST? : Fight started...", 5)
                SingleFight()
                F++
           }
