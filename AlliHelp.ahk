@@ -19,7 +19,6 @@ AlliHelp()
      {
           ToolTip, Helped %helpButtonClickCounter% times, ToolTipX, ToolTipY, 1
           MouseClick, left, HelpClickX, HelpClickY, 1, 10                         
-          Sleep, 500
           helpButtonClickCounter++
           if(helpButtonClickCounter > 40)
           {
@@ -30,31 +29,28 @@ AlliHelp()
      
      ToolTip, "AlliHelp Finished", HelpClickX+15, HelpClickY+15
      lblog("End AlliHelp",0,2)
-     ;HideRect()
 }
 checkHelpNeeded()
 {
      bHelpNeeded := 0
-     bluebarX := getXCoord(0.344)
-     bluebarY := getYCoord(0.45)
-
+     ;MsgBox, Checking for request
+     Sleep, 500
      ;Does the user have the blue 'my requests' bar?
-     ;DrawRect(bluebarX-2,bluebarY-2,bluebarX+2,bluebarY+2,"FFFF00")
-     PixelGetColor, HelpTabPanelColor, getXCoord(0.344),getYCoord(0.45)
+     PixelGetColor, HelpTabPanelColor, getXCoord(0.340),getYCoord(0.445)   
+     
      If HelpTabPanelColor = 0x533C15
      {
-          HelpNeededCheckX := getXCoord(0.353)
-          HelpNeededCheckY := getYCoord(0.555)
+          HelpNeededCheckX := getXCoord(0.305)
+          HelpNeededCheckY := getYCoord(0.540)
      }
      Else If HelpTabPanelColor = 0x111111
      {
           HelpNeededCheckX := getXCoord(0.344)
           HelpNeededCheckY := getYCoord(0.435)	
      }
-     ;HideRect()
-     ;DrawRect(HelpNeededCheckX-2,HelpNeededCheckY-2,HelpNeededCheckX+2,HelpNeededCheckY+2,"FFFF00")
+     
      PixelGetColor, helpCheckColor, HelpNeededCheckX, HelpNeededCheckY ; checking background of first help request bar (if there)
-
+     
      If helpCheckColor = 0x111111 ; black
      {
           bHelpNeeded := 1
@@ -72,3 +68,4 @@ checkHelpNeeded()
      
      return bHelpNeeded
 }
+
