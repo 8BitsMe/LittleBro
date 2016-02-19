@@ -81,8 +81,6 @@ BattleMatchFights() {
 
           ToolTip, Found Green, ToolTipX, ToolTipY, 1
 
-
-
           SingleFight()
 
           ToolTip, Fight finished...`nWaiting on screenload, ToolTipX, ToolTipY, 1

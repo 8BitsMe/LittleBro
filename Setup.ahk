@@ -60,6 +60,10 @@ global MatchLeft := wLeft + wWidth * 0.28
 global MatchRight := wLeft + wWidth * 0.72
 global MatchY := wTop + wHeight * 0.5
 
+global QuestLeft := wLeft + wWidth * 0.2
+global QuestRight := wLeft + wWidth * 0.8
+global QuestY := wTop + wHeight * 0.3
+
 global MidX := wLeft + wWidth * 0.5
 global MidY := wTop + wHeight * 0.85
 
@@ -67,8 +71,6 @@ global MidY := wTop + wHeight * 0.85
 global LostA := wLeft + wWidth * 0.300
 global LostA := wLeft + wWidth * 0.700
 global LostY := wTop + wHeight * 0.300
-;0x302C2B
-;Button - 0.432x0.639 0x014903
 
 ; CONTINUE BUTTON LOCATION
 global ContinueButtonX := wLeft + wWidth * 0.840

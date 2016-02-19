@@ -4,6 +4,16 @@ Copy a piece of code to the Clipboard.  The hotkey will reformat the code and pa
 
 This script basically just determines proper line indentation by counting the number of open and closed braces encountered ("{").  However, it does a few other things, such as properly ignoring comments; there's also a little support for one-line indentation for if and loop statements, without the braces.
 */
+
+; Select all
+Send ^a
+
+; Wait a little
+Sleep, 200
+
+; Copy
+Send ^c
+
 skip = 0              ; skip is used to skip comments -- 0 means we are not currently in a comment section of code
 dp = 0                ; how far to indent, in increments of 5 spaces
 out := ""             ; out will ultimately hold the reformatted code
@@ -29,14 +39,9 @@ loop, Parse, c, `n
           {
                dp--
           }
-           
           
           if(Indent(ol) and Substr(nows, 1, 1) != "{" and oe != "{")  ; primitive one-line indentation for loop and if statements
                out := out . "     " 
-           
-           
-           
-           
           
           loop %dp%                                                    ; silly loop to indent
           {
@@ -54,37 +59,23 @@ loop, Parse, c, `n
      }     
 }
 
-
-
-
-
-
 Clipboard := out                    ; Clipboard has the reformatted code
 Send ^v                             ; paste reformatted code
 return
 
 
-
-
-
-
-
-
-
- 
 ; Indent(ol) will allow us to indent a line if the previous line was an if or loop, even without braces.  
 
 Indent(ol) {                                              
      ol .= "`n"
      return Regexmatch(ol, "if\(|loop,|(if|loop)\s") = 1
 }
- 
-   
+
 
 ; LastChar(str) will return the last non-whitespace character of a string excluding any comment
 ; The idea is that if that character is a brace, then the following lines should be indented.
 
 LastChar(str) {
-str .= "`n"
-return Substr(str, RegExMatch(str, "\S\s*(;|`n)") , 1)
+     str .= "`n"
+     return Substr(str, RegExMatch(str, "\S\s*(;|`n)") , 1)
 }

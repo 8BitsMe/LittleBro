@@ -78,6 +78,15 @@ BattleScan() {
           ToolTip, "Fight started prematurely in champion selection", wLeft, wTop-32, 9
      }
 
+     ; QUEST OVER PANEL?
+     aColor := fastPixelGetColor(QuestLeft, QuestY)
+     bColor := fastPixelGetColor(QuestRight, QuestY)
+
+     If (aColor = 0x302C2B) && (bColor = 0x302C2B) {
+          DoActions = 0
+          ToolTip, "Fight ended with quest end plaque", wLeft, wTop-32, 9
+     }
+
      ; FIGHT OVER PANEL?
      aColor := fastPixelGetColor(MatchLeft, MatchY)
      bColor := fastPixelGetColor(MatchRight, MatchY)
