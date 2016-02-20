@@ -181,12 +181,9 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     If(!currentPI) {
                          ToolTip, [%OmegaLoop%][%OuterLoop%] OCR GOT CONFUSED`nProbably tried to scan a face`nAttempting to fix..., ToolTipX, ToolTipY, 1
                          
-                         Repeats++
-                         continue
-                         
-                         ;~ MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
-                         ;~ Sleep, 2000
-                         ;~ Goto, TopScan
+                         MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
+                         Sleep, 2000
+                         Goto, TopScan
                     }
                     
                     ;msgbox current PI: '%currentPI%'
