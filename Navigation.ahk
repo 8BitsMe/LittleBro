@@ -20,6 +20,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           CloseMainMenu()
           
           ; first verification we're on the fight page
+	  Sleep, 500
           WaitForColor("",0.578,0.593,0x000000,0) ; black bottom half of alliance expanded box or versus box  ... TODO: find a better verification.
           
           ; Check if Alliance Mode box expanded
@@ -28,6 +29,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           {
                AllianceMode := 1
                ; verify we're on the Fight page
+	       Sleep, 500
                WaitForColor("",0.157,0.442,0x005C02,0) ; green view quests button ... TODO: find a better verification.
                
           }
@@ -35,6 +37,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           {
                AllianceMode := 0
                ; verify we're on the Fight page
+	       Sleep, 500
                WaitForColor("",0.304,0.466,0x005C02,0) ; green view quests button ... TODO: find a better verification.
           }
           
@@ -58,6 +61,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
                }
                
                ; verify we're on the Versus page
+	       Sleep, 500
                WaitForColor("",0.285,0.143,0xAD782C,0) ; light blue background behind 'multiverse arenas' ... TODO: find a better verification.
           }
           Else If	(Sub = "story")
