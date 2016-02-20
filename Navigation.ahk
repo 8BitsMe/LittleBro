@@ -123,7 +123,7 @@ OpenMainMenu()
 }
 CloseMainMenu()
 {
-     MouseClick, left, getXCoord(0.144), getYCoord(0.334), 1, 5
+     MouseClick, left, getXCoord(0.144), getYCoord(0.334), 1, 0
 }
 
 
