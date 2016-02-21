@@ -13,6 +13,7 @@ FullLoop(WhichWar,LoopLimit) {
           Sleep, 1000
 
           If (WhichWar = "CC") {
+	              winStreak := GetOCRArea(0.49, 0.347, 0.54, 0.39, "numeric")
 				  ClickB("WarCC")
 ;			  Loop, 60{
 ;				Px = 0
