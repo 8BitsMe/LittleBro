@@ -181,9 +181,12 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     If(!currentPI) {
                          ToolTip, [%OmegaLoop%][%OuterLoop%] OCR GOT CONFUSED`nProbably tried to scan a face`nAttempting to fix..., ToolTipX, ToolTipY, 1
                          
-                         MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
-                         Sleep, 2000
-                         Goto, TopScan
+                         Repeats++
+                         continue
+                         
+                         ;~ MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
+                         ;~ Sleep, 2000
+                         ;~ Goto, TopScan
                     }
                     
                     ;msgbox current PI: '%currentPI%'
@@ -200,23 +203,24 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     ToolTip, [%OuterLoop%] EDIT TEAM`nDragging champion...`nPI: %currentPI%`nWinStreak: %winStreak%, ToolTipX, ToolTipY
                     If (WhichWar != "WAR-B") {
                          If (winStreak > 20 AND currentPI < 1650){
-                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n2.Skipping low PI champions...'%currentPI%'`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1
-                              MouseMove, Px, Py, 1
-                              Goto, TopScan
+                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n2.Skipping low PI champions...'%currentPI%'`nGoing back to versus screen..., ToolTipX, ToolTipY, 1
+                              
+                              MouseClick, left, GetXCoord(0.04),GetYCoord(0.04),5
+                              WaitForChange(0.5,0.75,"Switching versus arenas...",5)
+                              OuterLoop += 100
+                              return
                          }
                          If ((winStreak > 13 AND winStreak < 21) AND currentPI < 2200) {
-                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1
-                              MouseMove, Px, Py, 1
+                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nWaiting for higher PI to show up, ToolTipX, ToolTipY, 1
                               Goto, TopScan
                          }
                          If ((winStreak = 12 OR winStreak = 13) AND currentPI < 2400 ) {
-                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1
+                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nWaiting for higher PI to show up, ToolTipX, ToolTipY, 1
                               MouseMove, Px, Py, 1
                               Goto, TopScan
                          }
                          If (winStreak > 8 AND currentPI < 1400){
-                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1
-                              MouseMove, Px, Py, 1
+                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nWaiting for higher PI to show up, ToolTipX, ToolTipY, 1
                               if ( winStreak < ReverseFilter) {
                                    MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.34, 20
                                    Sleep, 2000
@@ -228,18 +232,19 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     
                     If (WhichWar = "WAR-B") {
                          If (winStreak > 20 AND currentPI < 400){
-                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n4.Skipping low PI champions...'%currentPI%'`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1
-                              MouseMove, Px, Py, 1
-                              Goto, TopScan
+                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n4.Skipping low PI champions...'%currentPI%'`nGoing back to versus screen..., ToolTipX, ToolTipY, 1
+                              
+                              MouseClick, left, GetXCoord(0.04),GetYCoord(0.04),5
+                              WaitForChange(0.5,0.75,"Switching versus arenas...",5)
+                              OuterLoop += 100
+                              return
                          }
                          If ((winStreak > 13 AND winStreak < 21) AND currentPI < 450) {
-                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n3.Skipping low PI champions...'%currentPI%'`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1
-                              MouseMove, Px, Py, 1
+                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n3.Skipping low PI champions...'%currentPI%'`nWaiting for higher PI to show up, ToolTipX, ToolTipY, 1
                               Goto, TopScan
                          }
                          If ((winStreak = 12 OR winStreak = 13) AND currentPI < 500) {
-                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n3.Skipping low PI champions...'%currentPI%'`nwaiting for higher PI to show up, ToolTipX, ToolTipY, 1
-                              MouseMove, Px, Py, 1
+                              ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n3.Skipping low PI champions...'%currentPI%'`nWaiting for higher PI to show up, ToolTipX, ToolTipY, 1
                               Goto, TopScan
                          }
                     }
