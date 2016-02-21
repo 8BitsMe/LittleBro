@@ -114,3 +114,11 @@ AutoQuest() {
      }
      
 }
+
+; POWERLEVEL -- This function will continually hit the first node in 3.4.5 for 456xp per energy.
+PowerLevel()
+{
+     global
+     
+     NavigateToScreen("Fight","Story")
+}

@@ -17,28 +17,28 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           MouseClick, left, getXCoord(0.270), getYCoord(0.199), 1, 10
           
           ; In the case the user was already on the alliance tab, click the menu close button
-          CloseMainMenu()
+          ;CloseMainMenu()
           
           ; first verification we're on the fight page
-	  Sleep, 500
-          WaitForColor("",0.578,0.593,0x000000,0) ; black bottom half of alliance expanded box or versus box  ... TODO: find a better verification.
+	  Sleep, 1000
+          WaitForColor("looking for fight page (1)",0.548,0.729,0x000000,0) ; black bottom half of alliance expanded box or versus box  ... TODO: find a better verification.
           
           ; Check if Alliance Mode box expanded
-          PixelGetColor, AllianceBoxColor, getXCoord(0.975),getYCoord(0.385)
+          PixelGetColor, AllianceBoxColor, getXCoord(0.975),getYCoord(0.485)
           If AllianceBoxColor = 0x302C2B
           {
                AllianceMode := 1
                ; verify we're on the Fight page
-	       Sleep, 500
-               WaitForColor("",0.157,0.442,0x005C02,0) ; green view quests button ... TODO: find a better verification.
+	       Sleep, 1000
+               WaitForColor("looking for fight page (2: Alliquest up)",0.157,0.442,0x005C02,0) ; green view quests button ... TODO: find a better verification.
                
           }
           Else
           {
                AllianceMode := 0
                ; verify we're on the Fight page
-	       Sleep, 500
-               WaitForColor("",0.304,0.466,0x005C02,0) ; green view quests button ... TODO: find a better verification.
+	       Sleep, 1000
+               WaitForColor("looking for fight page (2: no Alliquest)",0.304,0.466,0x005C02,0) ; green view quests button ... TODO: find a better verification.
           }
           
           If (Sub = "default")
@@ -66,9 +66,20 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           }
           Else If	(Sub = "story")
           {
-               ; Click Story Box
-               MouseClick, left, getXCoord(0.290), getYCoord(0.337), 1, 10
-               
+
+               ; Check if Alliance Mode box expanded
+               PixelGetColor, AllianceBoxColor, getXCoord(0.969),getYCoord(0.484)
+               If AllianceMode
+               {
+                    ; Click Story Box
+                    MouseClick, left, getXCoord(0.085), getYCoord(0.350), 1, 10
+               }
+               Else
+               {
+                    ; Click Story Box
+                    MouseClick, left, getXCoord(0.290), getYCoord(0.337), 1, 10
+               }
+                              
                ; verify we're on the Story page
                ; WaitForColor(0.###,0.###,0x######,0) ; TODO: verification. // probably should try OCR on title
                

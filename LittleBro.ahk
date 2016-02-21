@@ -178,11 +178,9 @@ Return
 F11:: ; testing hotkey
 
 ; ReadResultsPlaque()
-
-
-          title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
-
- msgBox '%title%'
+;title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
+;msgBox '%title%'
+PowerLevel()
 
 ;HeroFilter("Level^", "Purple","4*")
 ;NavigateToScreen("Fight", "Event")
