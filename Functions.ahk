@@ -335,7 +335,7 @@ HeroFilter(params*) {
      xCoord = 0.860
      sorts := Object("Rank", 0.410,"Level", 0.489,"Rating",0.563,"Tier",0.718)
      class := Object("Green",0.441, "Red",0.441,"Yellow",0.547,"LBlue",0.547,"DBlue",0.655,"Purple",0.655)
-     tier  := Object("1*",0.588,"2*",0.663,"3*",0.738,"4*",0.817,"5*",0.890)
+     tier  := Object("1*",0.615,"2*",0.700,"3*",0.780,"4*",0.870,"5*",0.950)
      ;SINCE THE FILTER OPEN/CLOSE ISN'T DEPENDABLE, LOOP TO MAKE SURE OPEN
      
      while true {
@@ -378,7 +378,7 @@ HeroFilter(params*) {
           for k, v in class {
                If InStr(param, k){
                     ;CLICK FILTER
-                    MouseClick, left, getXCoord(xCoord), getYCoord(0.873),1,10
+                    MouseClick, left, getXCoord(xCoord), getYCoord(0.930),1,10
                     Sleep,500
                     ;MAY NEED TO SCROLL TO THE TOP - CHECK IF IT'S AT TOP
                     PixelGetColor, aColor, getXCoord(xCoord), getYCoord(0.481)
@@ -394,7 +394,7 @@ HeroFilter(params*) {
           for k, v in tier {
                If InStr(param, k){
                     ;CLICK FILTER
-                    MouseClick, left, getXCoord(xCoord), getYCoord(0.873),1,10
+                    MouseClick, left, getXCoord(xCoord), getYCoord(0.930),1,10
                     Sleep,500
                     ;MAY NEED TO SCROLL TO THE BOTTOM - CHECK IF IT'S AT BOTTOM
                     PixelGetColor, aColor, getXCoord(0.854), getYCoord(0.421)

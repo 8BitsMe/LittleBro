@@ -49,7 +49,11 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
      if (WhichWar = "WAR-B") OR (WhichWar = "WAR-C"){
           if(winStreak < ReverseFilter)
                HeroFilter("Rating^")
-     } else {
+     }
+     else if (WhichWar = "CC"){
+               HeroFilter("Rating^","2*", "3*", "4*")
+     }
+     else {
           if(winStreak < ReverseFilter)
                HeroFilter("Rating^","3*", "4*")
      }

@@ -107,7 +107,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           
           ;verify we're on Alliance page
           Sleep, 500  ; chill out
-          WaitForColor("",0.04,0.85,0x2B2C30,0) ; checks left margin for grey background (all other tabs are colorful)
+          WaitForColor("verifying Alliance page (0.04,0.85)",0.04,0.85,0x2B2C30,0) ; checks left margin for grey background (all other tabs are colorful)
           
           If (Sub = "Help")
           {
@@ -116,7 +116,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
                
                ; verify we're on the Help Tab
                Sleep, 500 ; chill out
-               WaitForColor("",0.225,0.34,0x302C2B,0) ;
+               WaitForColor("verifying Help Tab (0.225,0.34)",0.225,0.34,0x302C2B,0) ;
           }
      }
      Else If (Menu = "champions")
