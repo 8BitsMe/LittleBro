@@ -56,6 +56,8 @@ If not A_IsAdmin
 #Include AutoQuest.ahk
 #Include AlliHelp.ahk
 
+#Include NagKiller.ahk
+
 ;#Include OCR
 #Include OCR.ahk
 

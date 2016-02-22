@@ -1,6 +1,8 @@
 SingleFight() {
      global
      
+     ; Get rid of things obscuring our window
+     NagKiller()
      WinActivate, BlueStacks
      
      ; PRE-BATTLE SETUP

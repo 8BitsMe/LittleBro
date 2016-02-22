@@ -1,7 +1,7 @@
 BattleCycle(WhichWar := "WAR-B", winStreak := 0) {
      loop {
-          ;ToolTip, ARENA FIGHTS`nLooking for page name..., ToolTipX, ToolTipY, 1
-
+          ; Get rid of things obscuring our window
+          NagKiller()
 
           title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
 
@@ -80,8 +80,6 @@ BattleMatchFights() {
           WaitForColor("Waiting for pause button", 0.485, 0.045, 0x075309,30)
 
           ToolTip, Found Green, ToolTipX, ToolTipY, 1
-
-
 
           SingleFight()
 
