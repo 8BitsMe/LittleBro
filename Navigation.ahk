@@ -17,25 +17,28 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           MouseClick, left, getXCoord(0.270), getYCoord(0.199), 1, 10
           
           ; In the case the user was already on the alliance tab, click the menu close button
-          CloseMainMenu()
+          ;CloseMainMenu()
           
           ; first verification we're on the fight page
-          WaitForColor("",0.578,0.593,0x000000,0) ; black bottom half of alliance expanded box or versus box  ... TODO: find a better verification.
+	  Sleep, 1000
+          WaitForColor("looking for fight page (1)",0.548,0.729,0x000000,0) ; black bottom half of alliance expanded box or versus box  ... TODO: find a better verification.
           
           ; Check if Alliance Mode box expanded
-          PixelGetColor, AllianceBoxColor, getXCoord(0.975),getYCoord(0.385)
+          PixelGetColor, AllianceBoxColor, getXCoord(0.975),getYCoord(0.485)
           If AllianceBoxColor = 0x302C2B
           {
                AllianceMode := 1
                ; verify we're on the Fight page
-               WaitForColor("",0.157,0.442,0x005C02,0) ; green view quests button ... TODO: find a better verification.
+	       Sleep, 1000
+               WaitForColor("looking for fight page (2: Alliquest up)",0.157,0.442,0x005C02,0) ; green view quests button ... TODO: find a better verification.
                
           }
           Else
           {
                AllianceMode := 0
                ; verify we're on the Fight page
-               WaitForColor("",0.304,0.466,0x005C02,0) ; green view quests button ... TODO: find a better verification.
+	       Sleep, 1000
+               WaitForColor("looking for fight page (2: no Alliquest)",0.304,0.466,0x005C02,0) ; green view quests button ... TODO: find a better verification.
           }
           
           If (Sub = "default")
@@ -58,13 +61,25 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
                }
                
                ; verify we're on the Versus page
+	       Sleep, 500
                WaitForColor("",0.285,0.143,0xAD782C,0) ; light blue background behind 'multiverse arenas' ... TODO: find a better verification.
           }
           Else If	(Sub = "story")
           {
-               ; Click Story Box
-               MouseClick, left, getXCoord(0.290), getYCoord(0.337), 1, 10
-               
+
+               ; Check if Alliance Mode box expanded
+               PixelGetColor, AllianceBoxColor, getXCoord(0.969),getYCoord(0.484)
+               If AllianceMode
+               {
+                    ; Click Story Box
+                    MouseClick, left, getXCoord(0.085), getYCoord(0.350), 1, 10
+               }
+               Else
+               {
+                    ; Click Story Box
+                    MouseClick, left, getXCoord(0.290), getYCoord(0.337), 1, 10
+               }
+                              
                ; verify we're on the Story page
                ; WaitForColor(0.###,0.###,0x######,0) ; TODO: verification. // probably should try OCR on title
                
@@ -92,7 +107,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
           
           ;verify we're on Alliance page
           Sleep, 500  ; chill out
-          WaitForColor("",0.04,0.85,0x2B2C30,0) ; checks left margin for grey background (all other tabs are colorful)
+          WaitForColor("verifying Alliance page (0.04,0.85)",0.04,0.85,0x2B2C30,0) ; checks left margin for grey background (all other tabs are colorful)
           
           If (Sub = "Help")
           {
@@ -101,7 +116,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
                
                ; verify we're on the Help Tab
                Sleep, 500 ; chill out
-               WaitForColor("",0.225,0.34,0x302C2B,0) ;
+               WaitForColor("verifying Help Tab (0.225,0.34)",0.225,0.34,0x302C2B,0) ;
           }
      }
      Else If (Menu = "champions")
@@ -119,7 +134,7 @@ OpenMainMenu()
 }
 CloseMainMenu()
 {
-     MouseClick, left, getXCoord(0.144), getYCoord(0.334), 1, 5
+     MouseClick, left, getXCoord(0.144), getYCoord(0.334), 1, 0
 }
 
 

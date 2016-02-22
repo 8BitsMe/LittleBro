@@ -103,8 +103,9 @@ BattleMatchFights() {
           fightPoints := GetOCRArea(0.440, 0.481 + loopOffset, 0.512, 0.526 + loopOffset, "numeric")
           currentPoints := GetOCRArea(0.526, 0.146, 0.641, 0.204, "numeric")
           Everything := GetOCRArea(0.131, 0.436 + loopOffset, 0.300, 0.539 + loopOffset)
+		  enemyEverything := GetOCRArea(0.696, 0.436 + loopOffset, 0.870, 0.539 + loopOffset)
 
-          msg := curHero . " , " . curStars . " , " . CycleSum/1000 . " , " . fightPoints . " , " . currentPoints . " , " . winStreak . " , " . multiplier . " , " . sucHits . " , " . hitsRec . " , " . sucCombo . " , " . highCombo . " `n " . Everything
+          msg := curHero . " , " . curStars . " , " . CycleSum/1000 . " , " . fightPoints . " , " . currentPoints . " , " . winStreak . " , " . multiplier . " , " . sucHits . " , " . hitsRec . " , " . sucCombo . " , " . highCombo . " , `n " . Everything . " , VS , " . enemyEverything
           lbFightLog(msg)
      }
 

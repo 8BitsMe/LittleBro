@@ -1,33 +1,39 @@
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-; AUTOQUEST™ - AUTOMATION AT ITS BEST
+; AUTOQUEST? - AUTOMATION AT ITS BEST
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 AutoQuest() {
      global
      
-     SearchL := wLeft + wWidth * 0.15
-     SearchT := wTop + wHeight * 0.15
-     SearchR := wLeft + wWidth * 0.85
-     SearchB := wTop + wHeight * 0.85
+     ; GREEN NODE SEARCH AREA
+     SearchL := wLeft + wWidth * 0.1
+     SearchT := wTop + wHeight * 0.1
+     SearchR := wLeft + wWidth * 0.99
+     SearchB := wTop + wHeight * 0.9
      
+     ; FIGHT BUTTON SEARCH AREA
      FightL := wLeft + wWidth * 0.82
      FightT := wTop + wHeight * 0.88
      FightR := wLeft + wWidth * 0.99
      FightB := wTop + wHeight * 0.98
      
+     ; SKIP CUTSCENE TEXT SEARCH AREA
      SkipL := wLeft + wWidth * 0.47
      SkipT := wTop + wHeight * 0.91
      SkipR := wLeft + wWidth * 0.53
      SkipB := wTop + wHeight * 0.95
      
+     ; PAUSE BUTTON SEARCH AREA
      PauseL := wLeft + wWidth * 0.485
      PauseT := wTop + wHeight * 0.025
      PauseR := wLeft + wWidth * 0.515
      PauseB := wTop + wHeight * 0.075
      
+     ; CHAT CLOSE BUTTON LOCATION
      CloseX := wLeft + wWidth * 0.970
      CloseY := wTop + wHeight * 0.066
      
+     ; QUEST COMPLETE PLAQUE
      CompleteA := wLeft + wWidth * 0.200
      CompleteB := wLeft + wWidth * 0.800
      CompleteY := wTop + wHeight * 0.275
@@ -39,7 +45,7 @@ AutoQuest() {
           
           Z++
           
-          ToolTip, AUTOQUEST™`nDetection loop: %Z%`nFights so far: %F% , ToolTipX, ToolTipY, 1
+          ToolTip, AUTOQUEST? 1.55`nDetection loop: %Z%`nFights so far: %F% , ToolTipX, ToolTipY, 1
           
           ; IF WE SUDDENLY FIND OURSELVES FIGHTING
           DrawRect(PauseL, PauseT, PauseR, PauseB, "FFFF00")
@@ -77,14 +83,13 @@ AutoQuest() {
           ; FIGHT BUTTON VISIBLE?
           DrawRect(FightL, FightT, FightR, FightB, "FFFF00")
           
-          PixelSearch, Px, Py, FightL, FightT, FightR, FightB, 0x055A22, 32, Fast
+          PixelSearch, Px, Py, FightL, FightT, FightR, FightB, 0x055A22, 10, Fast
           If (ErrorLevel < 1) {
                MouseClick, L, FightL, FightT
                
-               WaitForChange(0.5, 0.75, "AUTOQUEST™ : Fight started...", 5)
+               WaitForChange(0.5, 0.75, "AUTOQUEST? : Fight started...", 5)
                SingleFight()
                F++
-               
           }
           
           Sleep, 200
@@ -95,16 +100,25 @@ AutoQuest() {
           PixelGetColor, aColor, CloseX, CloseY
           If (aColor = 0x726F6D) {
                MouseClick, L, CloseX, CloseY
+               Sleep, 500
           }
           
           ; QUEST COMPLETE?
           PixelGetColor, aColor, CompleteA, CompleteY
           PixelGetColor, bColor, CompleteB, CompleteY
           If (aColor = 0x302C2B) && (bColor = 0x302C2B){
-               ToolTip, Quest Complete!`nOr out of energy... :(, ToolTipX, ToolTipY, 1
+               ToolTip, Quest Complete! :)`nOr out of energy... :(, ToolTipX, ToolTipY, 1
                Break
           }
           
      }
      
+}
+
+; POWERLEVEL -- This function will continually hit the first node in 3.4.5 for 456xp per energy.
+PowerLevel()
+{
+     global
+     
+     NavigateToScreen("Fight","Story")
 }
