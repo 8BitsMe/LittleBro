@@ -16,10 +16,11 @@ FullLoop(WhichWar,LoopLimit) {
 			  Loop, 60{
 				Px = 0
 				  ;NORMAL CC LOCATION
-				  WaitForButton(0, "First 3v3 versus match Button...", 0.46, 0.850,0.47,0.87, 0X024B04,1)
+				  WaitForButton(0, "First 3v3 versus match Button...", 0.442, 0.825, 0.610, 0.922, 0x549060,1)
 				  if (Px > 0 ) {
 					  winStreak := GetOCRArea(0.635, 0.347, 0.685, 0.39, "numeric")
-					  WaitFoRButton(1, "First 3v3 versus match Button...", 0.46, 0.850, 0.47,0.87, 0X024B04,1)
+					  ClickCC1("First 3v3 versus match Button...")
+;					  WaitFoRButton(1, "First 3v3 versus match Button...", 0.46, 0.850, 0.47,0.87, 0X024B04,1)
 					  break
 				  }
 
