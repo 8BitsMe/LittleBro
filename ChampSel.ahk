@@ -121,10 +121,9 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
 
                     If (Repeats >= 8) or (DetY > (wTop + wHeight*0.7)) {
 
-                         ;		    msgbox %Repeats% %DetY% > half of screen
+                         ; msgbox %Repeats% %DetY% > half of screen
                          MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.34, 20
                          Sleep, 2000
-                         ;			Goto, Rescan
                          Goto, TopScan
                     }
 
@@ -179,18 +178,14 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
 
                     currentPI := getPI(temp1, temp2, temp1 + 0.11, temp2 + 0.05, "numeric")
 
-                    If(!currentPI) {
+                    If(currentPI < 100) {
                          ToolTip, [%OmegaLoop%][%OuterLoop%] OCR GOT CONFUSED`nProbably tried to scan a face`nAttempting to fix..., ToolTipX, ToolTipY, 1
-
-                         Repeats++
-                         continue
 
                          MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
                          Sleep, 2000
                          Goto, TopScan
                     }
-
-                    ;msgbox current PI: '%currentPI%'
+                    
                     ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nCurrent PI...%currentPI%, ToolTipX, ToolTipY, 1
 
 

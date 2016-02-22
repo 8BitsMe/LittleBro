@@ -171,7 +171,7 @@ getPI(tlX, tlY, brX, brY, options) {
           if  (cPI > 200 ) AND (cPI < 9000)
                return cPI
      }
-     return False
+     return 0
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
