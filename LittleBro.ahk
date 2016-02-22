@@ -71,6 +71,7 @@ IniRead, LBCCMax, LBConfig.ini, C-B, CMax, 7
 IniRead, LBCBMin, LBConfig.ini, C-B, BMin, 2
 IniRead, LBCBMax, LBConfig.ini, C-B, BMax, 4
 IniRead, LBHitRatio, LBConfig.ini, COMBAT, HitRatio, 0.28
+IniRead, LBStreak_13_21_PI, LBConfig.ini, COMBAT, Streak_13_21_PI, 2200
 
 
 ;add additional local settings here
@@ -82,6 +83,7 @@ IniWrite, %LBCCMax%, LBConfig.ini, C-B, CMax
 IniWrite, %LBCBMin%, LBConfig.ini, C-B, BMin
 IniWrite, %LBCBMax%, LBConfig.ini, C-B, BMax
 IniWrite, %LBHitRatio%, LBConfig.ini, COMBAT, HitRatio
+IniWrite, %LBStreak_13_21_PI%, LBConfig.ini, COMBAT, Streak_13_21_PI
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; PRESS F1 TO SOMETHING

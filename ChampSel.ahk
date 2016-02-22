@@ -211,7 +211,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                               OuterLoop += 100
                               return
                          }
-                         If ((winStreak > 13 AND winStreak < 21) AND currentPI < 2200) {
+                         If ((winStreak > 13 AND winStreak < 21) AND currentPI < LBStreak_13_21_PI) {
                               ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nWaiting for higher PI to show up, ToolTipX, ToolTipY, 1
                               Goto, TopScan
                          }
