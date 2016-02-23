@@ -118,7 +118,7 @@ RedArrowCheck() {
           GreenArrows := (GreenA + GreenB + GreenC)
           RedArrows := (RedA + RedB + RedC)
           
-          ShowOSD("SmartSort™ 1.24`n(" GreenA GreenB GreenC ") " GreenArrows " vs " RedArrows " ("RedA RedB RedC")")
+          ShowOSD("SmartSort™ 1.24`n(" GreenA GreenB GreenC ") " GreenArrows " vs " RedArrows " (" RedA RedB RedC ")")
           
           ; IF IT'S 2v1 OF REDvGREEN THEN IT'S WORTH IT AND WE DON'T EVEN BOTHER (AND ANY GREENvNO RED, OF COURSE)
           If (RedArrows >= GreenArrows) {
