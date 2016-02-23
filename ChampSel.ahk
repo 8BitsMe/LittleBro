@@ -52,7 +52,6 @@ ChampSel() {
           if(winStreak < ReverseFilter) {
                HeroFilter("Rating^")
                Sleep, 500
-               ShowOSD("Try UP")
                ScrollUP()
           }
      }
@@ -60,7 +59,6 @@ ChampSel() {
           if(winStreak < ReverseFilter) {
                HeroFilter("Rating^","3*", "4*")
                Sleep, 500
-               ShowOSD("Try UP")
                ScrollUP()
           }
      }
@@ -215,7 +213,7 @@ ChampSel() {
                          If (winStreak > 8 AND currentPI < LBStreak_Above_8_PI){
                               ShowOSD("EDIT TEAM`n1.Skipping low PI champions... " currentPI "`nWaiting for higher PI to show up...")
                               if ( winStreak < ReverseFilter) {
-                                   MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.34, 20
+                                   MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.3, 20
                                    Sleep, 2000
                                    Goto, TopScan
                               }
@@ -272,7 +270,7 @@ ScrollUp() {
      A := Floor(WinStreak/2)
      Loop, %A% {
           ShowOSD("EDIT TEAM`nPre-skipping lower PI/busy champions")
-          MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.25, 15
+          MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.3, 15
           Sleep, 1000
      }
 }
