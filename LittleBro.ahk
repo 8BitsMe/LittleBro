@@ -73,6 +73,7 @@ IniRead, LBCBMax, LBConfig.ini, C-B, BMax, 4
 IniRead, LBHitRatio, LBConfig.ini, COMBAT, HitRatio, 0.28
 IniRead, LBStreak_13_21_PI, LBConfig.ini, COMBAT, Streak_13_21_PI, 2200
 IniRead, LBStreak_above_8_PI, LBConfig.ini, COMBAT, LBStreak_above_8_PI, 1400
+IniRead, LBStreak_Infinite_PI, LBConfig.ini, COMBAT, LBStreak_Infinite_PI, 1650
 
 ;add additional local settings here
 IniWrite, %LBCAutoHelp%, LBConfig.ini, HELP, AutoHelp
@@ -85,6 +86,7 @@ IniWrite, %LBCBMax%, LBConfig.ini, C-B, BMax
 IniWrite, %LBHitRatio%, LBConfig.ini, COMBAT, HitRatio
 IniWrite, %LBStreak_13_21_PI%, LBConfig.ini, COMBAT, Streak_13_21_PI
 IniWrite, %LBStreak_above_8_PI%, LBConfig.ini, COMBAT, LBStreak_above_8_PI
+IniWrite, %LBStreak_Infinite_PI%, LBConfig.ini, COMBAT, LBStreak_Infinite_PI
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; PRESS F1 TO SOMETHING
@@ -99,8 +101,8 @@ Return
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 F2::
-;MatchSelection()
-BattleCycle()
+winStreak = 8
+ScrollUP()
 Return
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

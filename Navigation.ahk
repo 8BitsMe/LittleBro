@@ -62,7 +62,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
                
                ; verify we're on the Versus page
                Sleep, 500
-               WaitForColor("",0.285,0.143,0xAD782C,0) ; light blue background behind 'multiverse arenas' ... TODO: find a better verification.
+               WaitForColor("Looking for versus page",0.285,0.143,0xAD782C,0) ; light blue background behind 'multiverse arenas' ... TODO: find a better verification.
           }
           Else If	(Sub = "story")
           {
@@ -85,7 +85,7 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
                
                ; TODO: eventually find a path to 3.4.1 for xp/gold farming via auto quest
           }
-          Else If	(Sub = "event")
+          Else If (Sub = "event")
           {
                ; Click Event Box
                MouseClick, left, getXCoord(0.290), getYCoord(0.681), 1, 10

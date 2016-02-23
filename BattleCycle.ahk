@@ -1,4 +1,4 @@
-BattleCycle(winStreak := 0) {
+BattleCycle() {
      global
      
      loop {
@@ -22,7 +22,7 @@ BattleCycle(winStreak := 0) {
           }
           else if ( InStr(title,"EDIT T_AM") OR InStr(title,"EDIT TEAM")){
                ShowOSD("EDIT TEAM`nLaunching ChampSel...")
-               ChampSel(winStreak)
+               ChampSel()
                ; CLICK FIND MATCH BUTTON
                ShowOSD("EDIT TEAM`nFinding match...")
                MouseClick, left, FindMatchButtonX, FindMatchButtonY,1, 5

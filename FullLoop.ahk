@@ -75,7 +75,7 @@ FullLoop(LoopLimit) {
                
                WaitForNoChange(0.5,0.75,"EDIT TEAM")
                
-               BattleCycle(winStreak)
+               BattleCycle()
                
                If (LoopLimit > 0 && OuterLoop >= LoopLimit)
                Break
