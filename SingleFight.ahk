@@ -57,12 +57,11 @@ SingleFight() {
           
           BattleScan()
           
-          ToolTip, [%OmegaLoop%][%OuterLoop%] Action: %Action%`n[%Strategy%]`nC: %Cycles% @ %CycleTime% (%AvgCycle%) T: %CycleSec% D: %DynaRatio%, ToolTipX, ToolTipY, 1
+          ShowOSD("Action: " Action "`n[" Strategy "]`nC: " Cycles " @ " CycleTime "(" AvgCycle ") T: " CycleSec " D:" DynaRatio)
           
           ToolTip, NoDmg: %NoDmg% - DamageLevel: %DamageLevel%`nHAvg: %HAvg% [HMin: %HMin% - HMax: %HMax%] [%HCount%], ToolTipX+wWidth*0.15, ToolTipY, 6
           
           StrataDev()
-          
      }
      
      ; o=-=-=-=-=-=-=o

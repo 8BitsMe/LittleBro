@@ -5,7 +5,7 @@ SetTitleMatchMode, 2
 SetBatchLines, -1
 
 ;~ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-;~ ydobemos LittleBro v 0.9992 & PEOPLE
+;~ ydobemos LittleBro v 0.9995
 ;~ Thanks to those who contribute with code, tips and ideas, I won't mention you here in
 ;~ case some salty person ever leaks this to Kabam so only I go down with the ship ;)
 ;~ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -21,12 +21,12 @@ SetBatchLines, -1
 ;~ When you run the script it will find the BlueStacks window and in a perfect world adjust itself so that everything
 ;~ is clicked/tapped just right. If this doesn't happen you'll have to figure out the ratios and set them up yourself
 ;~ HOW IT WORKS:
-;~ Just use the bottom panel
-;~ QUEST ? When in quest map screen or fight screen this will automatically continue by clicking nodes, starting fights,  skipping cutscenes. It can get stuck since it detects a certain area around the middle of the screen - in that case just use the mouse to scroll the screen a bit
-;~ FIGHT ? Start a fight ? any place, any time ? will engage the LittleBro fight engine and try to pulverize whoever gets in the way.
-;~ BATTLE ? Use from champion selection screen in an arena. Make your own roster and start a 3 fight battle.
+;~ Just use the side panel
+;~ QUEST - When in quest map screen or fight screen this will automatically continue by clicking nodes, starting fights,  skipping cutscenes. It can get stuck since it detects a certain area around the middle of the screen - in that case just use the mouse to scroll the screen a bit
+;~ FIGHT - Start a fight ? any place, any time ? will engage the LittleBro fight engine and try to pulverize whoever gets in the way.
+;~ BATTLE - Use from champion selection screen in an arena. Make your own roster and start a 3 fight battle.
 ;~ WAR-B, WAR-C, WAR-Y, WAR-Z ? In versus screen (where you pick arenas) imagine that each arena corresponds to a letter, so B is 2nd (usually 2*), C is 3rd (usually 4*) and Y and Z are the same, but from the end (so Catalyst arena, for example).
-;~ C-B ? shuffle mode of given arenas ? good when you don?t have enough guys or just want to get some points in lower arenas as well. You can change the number of fights on the bottom of LittleBro.ahk
+;~ C-B - shuffle mode of given arenas ? good when you don?t have enough guys or just want to get some points in lower arenas as well. You can change the number of fights on the bottom of LittleBro.ahk
 ;~ PANIC ? cancel script! Useful, also F12 on keyboard.
 
 ; WE TRY TO RUN THE SCRIPT AS ADMIN, SINCE SOME WINDOWS VERSIONS DON'T READ BLUESTACKS SCREEN RIGHT OTHERWISE
@@ -100,7 +100,7 @@ Return
 
 F2::
 ;MatchSelection()
-SmartSort()
+BattleCycle()
 Return
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -217,10 +217,12 @@ ShowMouseRatio()
 Return
 
 ButtonHelp:
+WhichWar := "HELPING"
 AlliHelp()
 Return
 
 ButtonQuest:
+WhichWar := "AutoQuest™"
 AutoQuest()
 Return
 
@@ -229,6 +231,7 @@ SingleFight()
 Return
 
 ButtonBattle:
+WhichWar := "WAR-B"
 BattleCycle()
 Return
 
@@ -239,13 +242,14 @@ OmegaLoop = 0
 Loop {
      OmegaLoop++
      Random, A , LBCCMin, LBCCMax
-     FullLoop("WAR-C",A)
+     WhichWar := "WAR-C"
+     FullLoop(A)
      Random, A , LBCBMin, LBCBMax
-     FullLoop("WAR-B",A)
-
+     WhichWar := "WAR-B"
+     FullLoop(A)
+     
      If (OmegaLoop > LBCOLoopCount)
      break
-
 }
 
 WinClose, BlueStacks
@@ -261,35 +265,42 @@ OmegaLoop = 0
 Loop {
      OmegaLoop++
      Random, A , 1, 3
-     FullLoop("WAR-B",A)
+     WhichWar := "WAR-A"
+     FullLoop(A)
      Random, A , 7, 9
-     FullLoop("WAR-Z",A)
+     WhichWar := "WAR-Z"
+     FullLoop(A)
 }
 Return
 
 ButtonCC:
 NavigateToScreen("Fight","Versus")
-FullLoop("CC",0)
+WhichWar := "CC"
+FullLoop(0)
 Return
 
 ButtonWAR-B:
 NavigateToScreen("Fight","Versus")
-FullLoop("WAR-B",0)
+WhichWar := "WAR-B"
+FullLoop(0)
 Return
 
 ButtonWAR-C:
 NavigateToScreen("Fight","Versus")
-FullLoop("WAR-C",0)
+WhichWar := "WAR-C"
+FullLoop(0)
 Return
 
 ButtonWAR-Y:
 NavigateToScreen("Fight","Versus")
-FullLoop("WAR-Y",0)
+WhichWar := "WAR-Y"
+FullLoop(0)
 Return
 
 ButtonWAR-Z:
 NavigateToScreen("Fight","Versus")
-FullLoop("WAR-Z",0)
+WhichWar := "WAR-Z"
+FullLoop(0)
 Return
 
 ButtonF9:

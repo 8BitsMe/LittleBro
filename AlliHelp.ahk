@@ -17,11 +17,11 @@ AlliHelp()
      helpButtonClickCounter :=0
      While checkHelpNeeded()
      {
-          ToolTip, Helped %helpButtonClickCounter% times, ToolTipX, ToolTipY, 1
+          ShowOSD("Helped " helpButtonClickCounter++ " times")
           MouseClick, left, HelpClickX, HelpClickY, 1, 10                         
-          helpButtonClickCounter++
           if(helpButtonClickCounter > 40)
           {
+               ShowOSD("Exceeded help limit (you heartless bastard!)")
                lblog("helpButtonClickCounter exceeded limit")
                break
           }				
@@ -30,6 +30,7 @@ AlliHelp()
      ToolTip, "AlliHelp Finished", HelpClickX+15, HelpClickY+15
      lblog("End AlliHelp",0,2)
 }
+
 checkHelpNeeded()
 {
      bHelpNeeded := 0
@@ -68,4 +69,3 @@ checkHelpNeeded()
      
      return bHelpNeeded
 }
-

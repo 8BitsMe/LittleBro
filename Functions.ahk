@@ -19,8 +19,7 @@ CountDown(Why,TimeOut) {
      global
      Skip := false
      While TimeOut && !Skip {
-          ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`n(Press F9 to skip) : " TimeOut, ToolTipX, ToolTipY, 1
-          TimeOut--
+          ShowOSD(Why "`n(Press F9 to skip) : " TimeOut--)
           Sleep, 1000
      }
 }
@@ -39,7 +38,8 @@ WaitForChange(X,Y,Why,Timeout := 0) {
      Skip := false
      While (aColor = bColor) && !Skip {
           PixelGetColor, bColor, X, Y
-          ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`nWaiting for change... (Press F9 to skip)`n" aColor " - " bColor " : " Z++, ToolTipX, ToolTipY, 1
+          ShowOSD(Why "`nWaiting for change... (Press F9 to skip)`n" aColor " - " bColor " : " Z++)
+          
           Sleep, 1500
           If (Timeout > 0 && Z > Timeout)
           Skip := true
@@ -61,7 +61,7 @@ WaitForNoChange(X,Y,Why,Timeout := 0) {
      While (aColor <> bColor) && !Skip {
           aColor := bColor
           PixelGetColor, bColor, X, Y
-          ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`nWaiting for no change... (Press F9 to skip)`n" aColor " - " bColor " : " Z++ , ToolTipX, ToolTipY, 1
+          ShowOSD(Why "`nWaiting for no change... (Press F9 to skip)`n" aColor " - " bColor " : " Z++)
           Sleep, 1500
           If (Timeout > 0 && Z > Timeout)
           Skip := true
@@ -163,7 +163,7 @@ GetOCRArea(tlX, tlY, brX, brY, options="") {
 getPI(tlX, tlY, brX, brY, options) {
      
      loop, 10 {
-          ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nGetting current PI...`nLoop: %A_Index%, ToolTipX, ToolTipY, 1
+          ShowOSD("EDIT TEAM`nGetting current PI...`nLoop: " A_Index)
           
           cPI := getOCRArea(tlX, tlY, brX-=.01, brY, options)
           cPI := RegExReplace(cPI, "i)[^0-9]")
@@ -299,7 +299,7 @@ WaitForColor(Why,X,Y,Color,Timeout)
      PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
      While ErrorLevel > 0 && !Skip {
           PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
-          ToolTip, % "[" OmegaLoop "][" OuterLoop "] " Why "`nWaiting for color..." "(Press F9 to skip)`n" ComColor " - " Color " : " Z++ , ToolTipX, ToolTipY, 1
+          ShowOSD(Why "`nWaiting for color..." "(Press F9 to skip)`n" ComColor " - " Color " : " Z++)
           Sleep, 1000
           If (Timeout > 0 && Z > Timeout)
           Skip := true
@@ -455,4 +455,13 @@ DrawRect(Left,Top,Right,Bottom,BorderColor) {
 ; HIDES A RECTANGLE
 HideRect() {
      Gui, 99: Destroy
+}
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; UNIVERSAL MAIN TOOLTIP FUNCTION 0.1
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+ShowOSD(Content) {
+     global
+     ToolTip, % "[" OmegaLoop "][" OuterLoop "] - " WhichWar " - [Streak: " winStreak "]`n" Content, ToolTipX, ToolTipY, 1
 }

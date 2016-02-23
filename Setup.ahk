@@ -125,9 +125,6 @@ global AvgCycle = 0
 global DynaRatio = 0.75
 global DamageLevel = 0
 
-global OuterLoop = 0
-global OmegaLoop = 0
-
 ; ICON LOCATIONS
 global OurIconsX := wLeft + wWidth * 0.357
 global OurIconsA := wTop + wHeight * 0.395
@@ -144,6 +141,12 @@ global ArrowX := wLeft + wWidth * 0.430
 global ArrowA := wTop + wHeight * 0.400
 global ArrowB := wTop + wHeight * 0.540
 global ArrowC := wTop + wHeight * 0.675
+
+;INFORMATION SYSTEM
+global WhichWar = "Startup"
+global winStreak = 0
+global OuterLoop = 0
+global OmegaLoop = 0
 
 ; ACTIONS ARE AT THE END OF LITTLEBRO.AHK
 
@@ -196,4 +199,4 @@ gIY += gPad + gHeight
 gX := wLeft + wWidth + 4
 gY := wTop
 
-Gui, Show, NoActivate x%gX% y%gY% w%gFWidth% h%gIY%, LittleBro 0.9993
+Gui, Show, NoActivate x%gX% y%gY% w%gFWidth% h%gIY%, LittleBro 0.9995

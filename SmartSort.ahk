@@ -7,7 +7,7 @@ SmartSort() {
      
      WaitForColor("",0.377,0.333,0x1A1917,20)
      
-     ToolTip, SmartSort? 1.23`nFinding weaklings..., ToolTipX, ToolTipY, 1
+     ShowOSD("SmartSort™ 1.24`nFinding weaklings")
      
      FindWeaker(OurIconsX,OurIconsA,TheirIconsX,TheirIconsA)
      FindWeaker(OurIconsX,OurIconsA,TheirIconsX,TheirIconsB)
@@ -21,7 +21,7 @@ SmartSort() {
      FindWeaker(OurIconsX,OurIconsC,TheirIconsX,TheirIconsB)
      FindWeaker(OurIconsX,OurIconsC,TheirIconsX,TheirIconsC)
      
-     ToolTip, SmartSort? 1.23`nAvoiding red arrows..., ToolTipX, ToolTipY, 1
+     ShowOSD("SmartSort™ 1.24`nRed arrow check")
      RedArrowCheck()
 }
 
@@ -118,7 +118,7 @@ RedArrowCheck() {
           GreenArrows := (GreenA + GreenB + GreenC)
           RedArrows := (RedA + RedB + RedC)
           
-          ToolTip, [%OuterLoop%] SET LINEUP`nRedCheck in Progress...`n(%GreenA% %GreenB% %GreenC%) %GreenArrows% vs %RedArrows% (%RedA% %RedB% %RedC%), ToolTipX, ToolTipY, 1
+          ShowOSD("SmartSort™ 1.24`n(" GreenA GreenB GreenC ") " GreenArrows " vs " RedArrows " ("RedA RedB RedC")")
           
           ; IF IT'S 2v1 OF REDvGREEN THEN IT'S WORTH IT AND WE DON'T EVEN BOTHER (AND ANY GREENvNO RED, OF COURSE)
           If (RedArrows >= GreenArrows) {
