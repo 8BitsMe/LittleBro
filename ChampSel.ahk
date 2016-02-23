@@ -188,7 +188,6 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                     
                     ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`nCurrent PI...%currentPI%, ToolTipX, ToolTipY, 1
 
-
                     If (currentPI < 100 OR currentPI > 8000) {
                          Repeats++
                          continue
@@ -215,7 +214,7 @@ ChampSel(WhichWar := "WAR-B", winStreak := 0) {
                               MouseMove, Px, Py, 1
                               Goto, TopScan
                          }
-                         If (winStreak > 8 AND currentPI < 1400){
+                         If (winStreak > 8 AND currentPI < LBStreak_Above_8_PI){
                               ToolTip, [%OmegaLoop%][%OuterLoop%] EDIT TEAM`n1.Skipping low PI champions...%currentPI%`nWaiting for higher PI to show up, ToolTipX, ToolTipY, 1
                               if ( winStreak < ReverseFilter) {
                                    MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.34, 20
