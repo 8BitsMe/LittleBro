@@ -129,7 +129,7 @@ GetOCR(topLeftX="", topLeftY="", widthToScan="", heightToScan="", options="")
       additionalParams .= "-C 0-9 "
    if isAlphaMode
       additionalParams .= "-C [A-Z.\-] "
-   
+
    runCmd=gocr.exe %additionalParams% %filenamePnm%
    Runwait, %comspec% /c %runCmd% > %filenameTxt%,, Hide
    while NOT FileExist(filenameTxt)
@@ -153,7 +153,7 @@ GetOCR(topLeftX="", topLeftY="", widthToScan="", heightToScan="", options="")
 
    if isNumericMode
    {
-      result := RegExReplace(result, "[ _]+", " ")
+      result := RegExReplace(result, "[ _]+", "")
    }
 
    if NOT isDebugMode
