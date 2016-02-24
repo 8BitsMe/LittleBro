@@ -12,6 +12,11 @@ BattleCycle() {
                WaitForChange(0.5,0.75,"Switching versus arenas...",5)
           }
           
+          If (gColor = 0x0C0B0B) {
+               MouseClick, left, GetXCoord(0.150),GetYCoord(0.500),5
+               WaitForChange(0.5,0.75,"Getting out of a misclick...",5)
+          }
+          
           title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
           
           ShowOSD("ARENA FIGHTS`nFound page name: "title)
