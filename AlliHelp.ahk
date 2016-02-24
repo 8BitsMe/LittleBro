@@ -12,7 +12,7 @@ AlliHelp()
      
      HelpClickX := getXCoord(0.781)
      HelpClickY := getYCoord(0.357) 
-     
+     Sleep, 500
      lblog("Beginning while help click loop")
      helpButtonClickCounter :=0
      While checkHelpNeeded()
