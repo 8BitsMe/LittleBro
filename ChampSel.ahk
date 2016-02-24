@@ -46,7 +46,7 @@ ChampSel() {
      
      ; SORT CHAMPIONS ACCORDING TO STREAK AND TRY TO PRE-SCROLL TO AVOID UNNECESSARY OCR
      
-     ReverseFilter := 12
+     ReverseFilter := 11
      
      if (WhichWar = "WAR-B") OR (WhichWar = "WAR-C"){
           if(winStreak < ReverseFilter) {
@@ -206,7 +206,7 @@ ChampSel() {
                               ShowOSD("EDIT TEAM`n1.Skipping low PI champions... " currentPI "`nWaiting for higher PI to show up...")
                               Goto, TopScan
                          }
-                         If ((winStreak = 12 OR winStreak = 13) AND currentPI < 2400 ) {
+                         If ((winStreak > 10 AND winStreak < 14) AND currentPI < 2400 ) {
                               ShowOSD("EDIT TEAM`n1.Skipping low PI champions... " currentPI "`nWaiting for higher PI to show up...")
                               Goto, TopScan
                          }

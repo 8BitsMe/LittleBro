@@ -1,9 +1,16 @@
 BattleCycle() {
      global
-     
+          
      loop {
           ; Get rid of things obscuring our window
           NagKiller()
+          
+          ; IN 1v1 BY ACCIDENT? LET'S GO BACK!
+          PixelGetColor, gColor, getXCoord(0.150), getYCoord(0.500)
+          If (gColor = 0x302C2B) {
+               MouseClick, left, GetXCoord(0.04),GetYCoord(0.04),5
+               WaitForChange(0.5,0.75,"Switching versus arenas...",5)
+          }
           
           title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
           
@@ -42,9 +49,11 @@ BattleCycle() {
           }
           
           ; Need a better way to wait between pages
-          WaitForNoChange(0.850,0.876,"Page done, Looking for current page",5)
+          WaitForNoChange(0.5,0.5,"Page done, Looking for current page",5)
           
      } Until (InStr(title, "ARENA") OR InStr(title, "MULTIVERSE"))
+
+     ShowOSD("Back on ARENA selection")
 }
 
 BattleMatchFights() {
