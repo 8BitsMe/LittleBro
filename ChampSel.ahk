@@ -311,9 +311,9 @@ MatchSel() {
      PiB :=  0.582
      PiC :=  0.824
 
-	 val1 := getPI( PiX, PiA, PiX + 0.052, PiA + 0.033, "numeric" )
-	 val2 := getPI( PiX, PiB, PiX + 0.052, PiB + 0.033, "numeric" )
-	 val3 := getPI( PiX, PiC, PiX + 0.052, PiC + 0.033, "numeric" )
+;	 val1 := getPI( PiX, PiA, PiX + 0.052, PiA + 0.033, "numeric" )
+;	 val2 := getPI( PiX, PiB, PiX + 0.052, PiB + 0.033, "numeric" )
+;	 val3 := getPI( PiX, PiC, PiX + 0.052, PiC + 0.033, "numeric" )
 
      ShowOSD("OPPONENT SELECT`nPicking easy match with most points`nOr medium among hard ones")
      Sleep, 1000
@@ -350,11 +350,18 @@ MatchSel() {
 		 BestMatchx := Px
 		 BestMatchy := Py
 		 MatchB = 'orange'
+		 MouseClick, left, Px, Py
+          Sleep, 1000
+          Return
+
      }
 
      PixelSearch, Px, Py, ScanX-8, ScanB-8, ScanX+8, ScanB+8, 0x0D57C6, 5, Fast
 
      If (ErrorLevel < 1) {
+		 MouseClick, left, Px, Py
+		           Sleep, 1000
+          Return
 		If ( !InStr(MatchB, "orange") OR ( InStr(MatchB, "orange") AND (val2 < val1) ))  {
 			BestMatchx := Px
 		 	BestMatchy := Py
@@ -362,7 +369,7 @@ MatchSel() {
      }
 
 
-     MouseClick, left, BestMatchx, BestMatchy
-     Sleep, 1000
-     Return
+  ;   MouseClick, left, BestMatchx, BestMatchy
+  ;   Sleep, 1000
+  ;   Return
 }
