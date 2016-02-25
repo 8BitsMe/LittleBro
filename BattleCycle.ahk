@@ -73,10 +73,12 @@ BattleCycle() {
 BattleMatchFights() {
      global
 
-     multiplier := GetOCRArea(0.385, 0.154, 0.419, 0.196)
+     multiplier := GetOCRArea(0.38, 0.15, 0.42, 0.2)
 
      Loop, 3 {
           loopOffset := .134 * (A_Index-1)
+
+          currentPoints := GetOCRArea(0.52, 0.15, 0.66, 0.2, "numeric")
 
           ; DETERMINING IF THERE WAS ALREADY A WIN/LOSS IN THIS ROUND OF THE FIGHT
           WaitForColor("SERIES MATCH - LINEUP`nLooking for loss in round",0.283,0.443+ loopOffset,0X1A1A72,1)
@@ -117,10 +119,8 @@ BattleMatchFights() {
 
           WaitForNoChange(getXCoord(0.250), getYCoord(0.425 + loopOffset),"Calculating Score...", 20)
 
-
           ; GET CURRENT POINTS
           fightPoints := GetOCRArea(0.440, 0.481 + loopOffset, 0.512, 0.526 + loopOffset, "numeric")
-          currentPoints := GetOCRArea(0.526, 0.146, 0.641, 0.204, "numeric")
           Everything := GetOCRArea(0.131, 0.436 + loopOffset, 0.300, 0.539 + loopOffset)
           enemyEverything := GetOCRArea(0.696, 0.436 + loopOffset, 0.870, 0.539 + loopOffset)
 

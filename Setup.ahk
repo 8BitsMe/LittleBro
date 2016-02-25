@@ -148,6 +148,8 @@ global winStreak = 0
 global OuterLoop = 0
 global OmegaLoop = 0
 
+global currentPoints = 0
+
 ; ACTIONS ARE AT THE END OF LITTLEBRO.AHK
 
 ; SHOW US WHAT WE DETECTED AS OUR INSIDE WINDOW
