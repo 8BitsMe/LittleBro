@@ -463,5 +463,5 @@ HideRect() {
 
 ShowOSD(Content) {
      global
-     ToolTip, % "[" OmegaLoop "][" OuterLoop "] - " WhichWar " - [Streak: " winStreak "]`n" Content, ToolTipX, ToolTipY, 1
+     ToolTip, % "[" OmegaLoop "][" OuterLoop "] - " WhichWar " - [Streak: " winStreak "][" currentPoints "]`n" Content, ToolTipX, ToolTipY, 1
 }
