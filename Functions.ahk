@@ -144,6 +144,9 @@ XPercentage() {
 GetOCRArea(tlX, tlY, brX, brY, options="") {
      global
 
+if tlX > brX
+return ""
+
      topLeftX := wLeft + wWidth * tlX
      topLeftY := wTop + wHeight * tlY
      widthToScan := (wLeft + wWidth * brX) - topLeftX
@@ -168,7 +171,7 @@ getPI(tlX, tlY, brX, brY, options) {
           cPI := getOCRArea(tlX, tlY, brX-=.01, brY, options)
           cPI := RegExReplace(cPI, "i)[^0-9]")
           ;	msgbox PI: '%cPI%' Loop: '%A_Index%'
-          if  (cPI > 200 ) AND (cPI < 9000)
+          if  (cPI > 150 ) AND (cPI < 9000)
                return cPI
      }
      return 0
