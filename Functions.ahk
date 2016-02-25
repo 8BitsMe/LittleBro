@@ -463,11 +463,14 @@ HideRect() {
 
 ShowOSD(Content) {
      global
-     ToolTip, % "[" OmegaLoop "][" OuterLoop "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep(currentPoints) "]`n" Content, ToolTipX, ToolTipY, 1
+     ToolTip, % "[" OmegaLoop "][" OuterLoop "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep( currentPoints ) "]`n" Content, ToolTipX, ToolTipY, 1
 }
 
 
 
 ThousandsSep(x, s=",") {
-   return RegExReplace(x, "\G\d+?(?=(\d{3})+(?:\D|$))", "$0" s)
+	tmpError := ErrorLevel
+	newPoints := RegExReplace(x, "\G\d+?(?=(\d{3})+(?:\D|$))", "$0" s)
+    ErrorLevel := tmpError
+   return newPoints
 }
