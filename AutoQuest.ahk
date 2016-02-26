@@ -99,6 +99,7 @@ AutoQuest() {
           PixelGetColor, aColor, CompleteA, CompleteY
           PixelGetColor, bColor, CompleteB, CompleteY
           If (aColor = 0x302C2B) && (bColor = 0x302C2B){
+	       LineReport("Quest Complete! :) -- Or out of energy... :(", "AUTOQUEST")
                ToolTip, Quest Complete! :)`nOr out of energy... :(, ToolTipX, ToolTipY, 1
                Break
           }

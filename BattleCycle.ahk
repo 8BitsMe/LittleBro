@@ -131,4 +131,5 @@ BattleMatchFights() {
      }
 
      ShowOSD(Battles complete!)
+     LineReport("BattleCycle Ended - [" OmegaLoop "][" OuterLoop "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep( currentPoints ) "]", "ARENA")  
 }

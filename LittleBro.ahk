@@ -58,6 +58,8 @@ If not A_IsAdmin
 
 #Include NagKiller.ahk
 
+#Include LINE.ahk
+
 ;#Include OCR
 #Include OCR.ahk
 
@@ -244,9 +246,11 @@ OmegaLoop = 0
 Loop {
      OmegaLoop++
      Random, A , LBCCMin, LBCCMax
+     LineReport("Starting B-C War-C ( x " . A . " )", "ARENA")
      WhichWar := "WAR-C"
      FullLoop(A)
      Random, A , LBCBMin, LBCBMax
+     LineReport("Starting B-C War-C ( x " . A . " )", "ARENA")
      WhichWar := "WAR-B"
      FullLoop(A)
      
