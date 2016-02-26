@@ -46,13 +46,14 @@ If not A_IsAdmin
 #Include StrataDev.ahk
 #Include Actions.ahk
 
+#Include BattleCycle.ahk
+
 #Include Functions.ahk
 #Include Navigation.ahk
 #Include ChampSel.ahk
 #Include SmartSort.ahk
 
 #Include FullLoop.ahk
-#Include BattleCycle.ahk
 #Include AutoQuest.ahk
 #Include AlliHelp.ahk
 
@@ -247,21 +248,21 @@ NavigateToScreen("Fight","Versus")
 OmegaLoop = 0
 Loop {
      OmegaLoop++
-     Random, A , LBCCMin, LBCCMax
-     LineReport("Starting B-C War-C ( x " . A . " )", "ARENA")
+     Random, LoopLimit, LBCCMin, LBCCMax
+     LineReport("[C-B] War-C x" . LoopLimit, "ARENA")
      WhichWar := "WAR-C"
-     FullLoop(A)
-     Random, A , LBCBMin, LBCBMax
-     LineReport("Starting B-C War-B ( x " . A . " )", "ARENA")
+     FullLoop()
+     Random, LoopLimit, LBCBMin, LBCBMax
+     LineReport("[C-B] War-B x" . LoopLimit, "ARENA")
      WhichWar := "WAR-B"
-     FullLoop(A)
+     FullLoop()
      
      If (OmegaLoop > LBCOLoopCount)
      break
 }
 
 WinClose, BlueStacks
-LineReport("B-C over, shutting down LB", "ARENA")
+LineReport("C-B over, shutting down LB", "ARENA")
 FormatTime, TimeString,, Time
 MsgBox OmegaLoop finished at: %TimeString%.
 Return
@@ -272,43 +273,58 @@ NavigateToScreen("Fight","Versus")
 OmegaLoop = 0
 Loop {
      OmegaLoop++
-     Random, A , 1, 3
-     WhichWar := "WAR-A"
-     FullLoop(A)
-     Random, A , 7, 9
+     Random, LoopLimit, LBCBMin, LBCBMax
+     LineReport("[B-Z] War-C x" . LoopLimit, "ARENA")
+     WhichWar := "WAR-B"
+     FullLoop()
+     Random, LoopLimit, LBCCMin, LBCCMax
+     LineReport("[B-Z] War-B x" . LoopLimit, "ARENA")
      WhichWar := "WAR-Z"
-     FullLoop(A)
+     FullLoop()
+     
+     If (OmegaLoop > LBCOLoopCount)
+     break
 }
+
+WinClose, BlueStacks
+LineReport("B-Z over, shutting down LB", "ARENA")
+FormatTime, TimeString,, Time
+MsgBox OmegaLoop finished at: %TimeString%.
 Return
 
 ButtonCC:
 NavigateToScreen("Fight","Versus")
 WhichWar := "CC"
-FullLoop(0)
+LoopLimit = 0
+FullLoop()
 Return
 
 ButtonWAR-B:
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-B"
-FullLoop(0)
+LoopLimit = 0
+FullLoop()
 Return
 
 ButtonWAR-C:
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-C"
-FullLoop(0)
+LoopLimit = 0
+FullLoop()
 Return
 
 ButtonWAR-Y:
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-Y"
-FullLoop(0)
+LoopLimit = 0
+FullLoop()
 Return
 
 ButtonWAR-Z:
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-Z"
-FullLoop(0)
+LoopLimit = 0
+FullLoop()
 Return
 
 ButtonF9:
