@@ -24,8 +24,6 @@ BattleCycle() {
 				 SingleFight()
 			}
 
-
-
           title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
 
           ShowOSD("ARENA FIGHTS`nFound page name: "title)
@@ -131,5 +129,5 @@ BattleMatchFights() {
      }
 
      ShowOSD(Battles complete!)
-     LineReport("BattleCycle Ended - [" OmegaLoop "][" OuterLoop "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep( currentPoints ) "]", "ARENA")  
+     LineReport("[" OmegaLoop "][" OuterLoop "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep( currentPoints ) "]", "ARENA") 
 }
