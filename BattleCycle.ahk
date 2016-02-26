@@ -79,14 +79,9 @@ BattleMatchFights() {
           currentPoints := GetOCRArea(0.52, 0.15, 0.66, 0.2, "numeric")
 
           ; DETERMINING IF THERE WAS ALREADY A WIN/LOSS IN THIS ROUND OF THE FIGHT
-          WaitForColor("SERIES MATCH - LINEUP`nLooking for win in round",0.283,0.443+ loopOffset,0X2F5428,1)
-          If ( ErrorLevel = 0 ) {
-          	continue
-		  }
-
-          WaitForColor("SERIES MATCH - LINEUP`nLooking for loss in round",0.283,0.443+ loopOffset,0X1A1A72,1)
-          If ( ErrorLevel = 0 ) {
-          	continue
+          PixelGetColor, aColor, getXCoord(0.283), getYCoord(0.443+ loopOffset)
+          If ( ( aColor = 0X2F5428 ) OR ( aColor = 0X1A1A72 ) ) {
+			  continue
 		  }
 
           curHero := GetOCRArea(0.130, 0.472 + loopOffset, 0.301, 0.506 + loopOffset, "alpha")
@@ -129,5 +124,5 @@ BattleMatchFights() {
      }
 
      ShowOSD(Battles complete!)
-     LineReport("[" OmegaLoop "][" OuterLoop "/" LoopLimit "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep( currentPoints ) "]", "ARENA") 
+     LineReport("[" OmegaLoop "][" OuterLoop "/" LoopLimit "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep( currentPoints ) "]", "ARENA")
 }
