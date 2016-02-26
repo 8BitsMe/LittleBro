@@ -34,8 +34,8 @@ AlliHelp()
 checkHelpNeeded()
 {
      bHelpNeeded := 0
-     ;MsgBox, Checking for request
      Sleep, 500
+     
      ;Does the user have the blue 'my requests' bar?
      PixelGetColor, HelpTabPanelColor, getXCoord(0.340),getYCoord(0.445)   
      

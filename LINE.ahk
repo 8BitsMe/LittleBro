@@ -30,7 +30,7 @@ WriteToLINE(message, newline := "no")
 LineReport(message:="", report:="")
 {
      global
-     WriteToLINE("[" LBUsername "]" . report . " REPORT", "newline")
+     WriteToLINE("[" LBUsername "] " . report . " REPORT", "newline")
      WriteToLINE(message)
 }
 
