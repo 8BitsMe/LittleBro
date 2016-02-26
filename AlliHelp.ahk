@@ -19,7 +19,7 @@ AlliHelp()
      {
           ShowOSD("Helped " helpButtonClickCounter++ " times")
           MouseClick, left, HelpClickX, HelpClickY, 1, 10                         
-          if(helpButtonClickCounter > 40)
+          if(helpButtonClickCounter > 100)
           {
                ShowOSD("Exceeded help limit (you heartless bastard!)")
                lblog("helpButtonClickCounter exceeded limit")
@@ -27,15 +27,15 @@ AlliHelp()
           }				
      }	    
      
-     ToolTip, "AlliHelp Finished", HelpClickX+15, HelpClickY+15
+     ShowOSD("AlliHelp Finished")
      lblog("End AlliHelp",0,2)
 }
 
 checkHelpNeeded()
 {
      bHelpNeeded := 0
-     ;MsgBox, Checking for request
      Sleep, 500
+     
      ;Does the user have the blue 'my requests' bar?
      PixelGetColor, HelpTabPanelColor, getXCoord(0.340),getYCoord(0.445)   
      

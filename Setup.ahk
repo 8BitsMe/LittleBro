@@ -147,6 +147,7 @@ global WhichWar = "Startup"
 global winStreak = 0
 global OuterLoop = 0
 global OmegaLoop = 0
+global LoopLimit = 0
 
 global currentPoints = 0
 
@@ -201,4 +202,4 @@ gIY += gPad + gHeight
 gX := wLeft + wWidth + 4
 gY := wTop
 
-Gui, Show, NoActivate x%gX% y%gY% w%gFWidth% h%gIY%, LittleBro 0.9995
+Gui, Show, NoActivate x%gX% y%gY% w%gFWidth% h%gIY%, LittleBro 0.9996

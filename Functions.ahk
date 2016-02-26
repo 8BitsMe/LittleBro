@@ -469,8 +469,6 @@ ShowOSD(Content) {
      ToolTip, % "[" OmegaLoop "][" OuterLoop "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep( currentPoints ) "]`n" Content, ToolTipX, ToolTipY, 1
 }
 
-
-
 ThousandsSep(x, s=",") {
 	tmpError := ErrorLevel
 	newPoints := RegExReplace(x, "\G\d+?(?=(\d{3})+(?:\D|$))", "$0" s)
