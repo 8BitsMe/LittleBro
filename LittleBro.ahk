@@ -250,7 +250,7 @@ Loop {
      WhichWar := "WAR-C"
      FullLoop(A)
      Random, A , LBCBMin, LBCBMax
-     LineReport("Starting B-C War-C ( x " . A . " )", "ARENA")
+     LineReport("Starting B-C War-B ( x " . A . " )", "ARENA")
      WhichWar := "WAR-B"
      FullLoop(A)
      
@@ -259,7 +259,7 @@ Loop {
 }
 
 WinClose, BlueStacks
-
+LineReport("B-C over, shutting down LB", "ARENA")
 FormatTime, TimeString,, Time
 MsgBox OmegaLoop finished at: %TimeString%.
 Return
