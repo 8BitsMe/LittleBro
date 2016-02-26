@@ -90,7 +90,7 @@ BattleMatchFights() {
 			  If (LBSaveStreak = "no") {
 				continue
 			  }
-                          Else If (winStreak > 0) {
+                          Else If (winStreak > 10) {
 				LineAlert("Potential to LOSE STREAK ... pausing LB")
 				MsgBox, Streak loss possible ... Click OK to let LB continue or F12 to take over.
 			  }
