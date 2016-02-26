@@ -22,6 +22,10 @@ ClickAccept(Why, timeout := 10){
      WaitFoRButton(1, Why, 0.790, 0.895, 0.955, 0.992, 0x075009, timeout)
 }
 
+ClickReconnect(Why, timeout := 10){
+     WaitFoRButton(1, Why, 0.414, 0.596, 0.585, 0.687, 0x075009, timeout)
+}
+
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; UNIVERSAL BUTTON WAIT FUNCTION, DATA IN SAME FORMAT AS F10 SCAN
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

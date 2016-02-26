@@ -88,6 +88,30 @@ IniWrite, %LBStreak_13_21_PI%, LBConfig.ini, COMBAT, Streak_13_21_PI
 IniWrite, %LBStreak_above_8_PI%, LBConfig.ini, COMBAT, LBStreak_above_8_PI
 IniWrite, %LBStreak_Infinite_PI%, LBConfig.ini, COMBAT, LBStreak_Infinite_PI
 
+
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+; ALWAYS WATCH FOR DISCONNECT SCREEN AND FIX THE ISSUE
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+;#Persistent
+;SetTimer,CheckInternet,3000
+;return
+
+CheckInternet:
+text := GetOCRArea(0.392, 0.291, 0.610, 0.341, "alpha")
+; msgbox, % text
+if( InStr(text, "LOST CONN") ) {
+	ClickReconnect("Lost Connection, reconnecting")
+	Sleep, 2000
+}
+if( InStr(text, "LOST CONN") ) {
+	ClickReconnect("Failed, reconnecting")
+	Sleep, 2000
+}
+; msgbox, CheckingInternet
+return
+
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ; PRESS F1 TO SOMETHING
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -249,7 +273,7 @@ Loop {
      Random, A , LBCBMin, LBCBMax
      WhichWar := "WAR-B"
      FullLoop(A)
-     
+
      If (OmegaLoop > LBCOLoopCount)
      break
 }
