@@ -36,6 +36,7 @@ LineReport(message:="", report:="")
 LineAlert(message)
 {
      global
-     WriteToLINE("[" LBUsername "] ******* ALERT *******", "newline")    
-     WriteToLINE(message)
+     WriteToLINE("[" LBUsername "] *** ALERT ***", "newline")    
+     WriteToLINE(message, "newline")
+     WriteToLINE("[" LBUsername "] *** ALERT ***")    
 }

@@ -77,6 +77,7 @@ IniRead, LBHitRatio, LBConfig.ini, COMBAT, HitRatio, 0.28
 IniRead, LBStreak_13_21_PI, LBConfig.ini, COMBAT, Streak_13_21_PI, 2200
 IniRead, LBStreak_above_8_PI, LBConfig.ini, COMBAT, LBStreak_above_8_PI, 1400
 IniRead, LBStreak_Infinite_PI, LBConfig.ini, COMBAT, LBStreak_Infinite_PI, 1650
+IniRead, LBSaveStreak, LBConfig.ini, COMBAT, SaveStreak, No
 IniRead, LBUsername, LBConfig.ini, GENERAL, Username, anonymous
 
 ;add additional local settings here
@@ -91,6 +92,7 @@ IniWrite, %LBHitRatio%, LBConfig.ini, COMBAT, HitRatio
 IniWrite, %LBStreak_13_21_PI%, LBConfig.ini, COMBAT, Streak_13_21_PI
 IniWrite, %LBStreak_above_8_PI%, LBConfig.ini, COMBAT, LBStreak_above_8_PI
 IniWrite, %LBStreak_Infinite_PI%, LBConfig.ini, COMBAT, LBStreak_Infinite_PI
+IniWrite, %LBSaveStreak%, LBConfig.ini, COMBAT, SaveStreak
 IniWrite, %LBUsername%, LBConfig.ini, GENERAL, Username
 
 

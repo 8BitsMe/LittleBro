@@ -80,7 +80,20 @@ BattleMatchFights() {
 
           ; DETERMINING IF THERE WAS ALREADY A WIN/LOSS IN THIS ROUND OF THE FIGHT
           PixelGetColor, aColor, getXCoord(0.283), getYCoord(0.443+ loopOffset)
-          If ( ( aColor = 0X2F5428 ) OR ( aColor = 0X1A1A72 ) ) {
+
+          If ( aColor = 0X2F5428 ) {
+			  ; Win spotted
+			  continue
+		  }
+          If ( aColor = 0X1A1A72 ) {
+			  ; Loss spotted
+			  If (LBSaveStreak = "no") {
+				continue
+			  }
+                          Else If (winStreak > 0) {
+				LineAlert("Potential to LOSE STREAK ... pausing LB")
+				MsgBox, Streak loss possible ... Click OK to let LB continue or F12 to take over.
+			  }
 			  continue
 		  }
 
