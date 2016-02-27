@@ -16,7 +16,7 @@ WriteToLINE(message, newline := "no")
      global
      
      ControlSend, , %message%, LBLINE
-     
+     Sleep, 200
      If (newline = "newline")
      {
           ControlSend, , +{Enter}, LBLINE
@@ -33,10 +33,38 @@ LineReport(message:="", report:="")
      WriteToLINE("[" LBUsername "] - " message)
 }
 
-LineAlert(message)
+LineAlert(message, newline:="no")
 {
      global
      WriteToLINE("[" LBUsername "] *** ALERT ***", "newline")    
      WriteToLINE(message, "newline")
-     WriteToLINE("[" LBUsername "] *** ALERT ***")    
+     If (newline != "newline") {
+          WriteToLINE("[" LBUsername "] *** ALERT ***")    
+     }
 }
+
+ScreenshotWindow()
+{
+     global
+     
+     gocrPath=gocr.exe
+     
+     ;take a screenshot of BlueStacks window
+     pToken:=Gdip_Startup()
+     pBitmap:=Gdip_BitmapFromScreen(wLeft "|" wTop "|" wWidth "|" wHeight)
+     
+     ;send image to clipboard
+     Gdip_SetBitmapToClipboard(pBitmap)
+     
+     ; paste image in line
+     Sleep, 1000
+     WinActivate, LBLINE
+     Send ^v
+     Sleep, 500
+     ControlSend, , {Enter}, LBLINE
+     
+     WinActivate, BlueStacks
+     
+     Gdip_Shutdown(pToken)
+}
+

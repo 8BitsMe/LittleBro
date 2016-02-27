@@ -64,6 +64,7 @@ If not A_IsAdmin
 ;#Include OCR
 #Include OCR.ahk
 
+
 ;Import local config or create if it doesn't exist. No error checking on keys not found in config file yet.
 ;add additional local settings here
 IniRead, LBCAutoHelp, LBConfig.ini, HELP, AutoHelp, Yes
@@ -218,7 +219,8 @@ F11:: ; testing hotkey
 ; ReadResultsPlaque()
 ;title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
 ;msgBox '%title%'
-PowerLevel()
+; PowerLevel()
+ScreenshotWindow()
 
 ;HeroFilter("Level^", "Purple","4*")
 ;NavigateToScreen("Fight", "Event")
