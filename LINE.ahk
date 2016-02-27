@@ -57,7 +57,7 @@ ScreenshotWindow()
      Gdip_SetBitmapToClipboard(pBitmap)
      
      ; paste image in line
-     Sleep, 1000
+     Sleep, 500
      WinActivate, LBLINE
      Send ^v
      Sleep, 500

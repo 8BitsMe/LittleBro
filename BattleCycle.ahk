@@ -127,9 +127,7 @@ BattleMatchFights() {
                     break
                sleep, 250
           }
-          
-          WaitForNoChange(getXCoord(0.250), getYCoord(0.425 + loopOffset),"Calculating Score...", 20)
-          If ( A_Index = 3 ){
+	   If ( A_Index = 3 ){
                LossCount := 0
                Loop, 3 {
                     loopOffset := .134 * (A_Index-1)
@@ -141,10 +139,13 @@ BattleMatchFights() {
                }
                If ( LossCount > 1 ) {
                     ; We lost series	
-                    LineAlert("SeriesLost", "newline")	
                     ScreenshotWindow()
+                    LineAlert("SeriesLost", "newline")	
                }
           }
+          
+          WaitForNoChange(getXCoord(0.250), getYCoord(0.425 + loopOffset),"Calculating Score...", 20)
+          
           ; GET CURRENT POINTS
           fightPoints := GetOCRArea(0.440, 0.481 + loopOffset, 0.512, 0.526 + loopOffset, "numeric")
           Everything := GetOCRArea(0.131, 0.436 + loopOffset, 0.300, 0.539 + loopOffset)
