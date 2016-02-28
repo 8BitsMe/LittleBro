@@ -338,6 +338,7 @@ ButtonWAR-C:
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-C"
 LoopLimit = 0
+LineReport("War-C x" . LoopLimit, "ARENA")
 FullLoop()
 Return
 

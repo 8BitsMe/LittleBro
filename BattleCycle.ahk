@@ -90,13 +90,14 @@ BattleMatchFights() {
                If (LBSaveStreak = "no") {
                     continue
                }
-               Else If (winStreak > 9) {
+               Else If (winStreak > 0) {
                     LineAlert("Potential to LOSE STREAK ... pausing LB", "newline")
                     Sleep, 1000
                     ScreenshotWindow()
                     MsgBox, Streak loss possible ... Click OK to let LB continue or F12 to take over.
+                    continue
                }
-               continue
+
           }
           
           curHero := GetOCRArea(0.130, 0.472 + loopOffset, 0.301, 0.506 + loopOffset, "alpha")
@@ -127,6 +128,9 @@ BattleMatchFights() {
                     break
                sleep, 250
           }
+
+          
+          WaitForNoChange(getXCoord(0.250), getYCoord(0.425 + loopOffset),"Calculating Score...", 20)
 	   If ( A_Index = 3 ){
                LossCount := 0
                Loop, 3 {
@@ -137,15 +141,12 @@ BattleMatchFights() {
                          LossCount++	
                     }	
                }
-               If ( LossCount > 1 ) {
+               If ( LossCount > 0 ) {
                     ; We lost series	
                     ScreenshotWindow()
-                    LineAlert("SeriesLost", "newline")	
+                    LineAlert("Loss Detected", "newline")	
                }
-          }
-          
-          WaitForNoChange(getXCoord(0.250), getYCoord(0.425 + loopOffset),"Calculating Score...", 20)
-          
+          }          
           ; GET CURRENT POINTS
           fightPoints := GetOCRArea(0.440, 0.481 + loopOffset, 0.512, 0.526 + loopOffset, "numeric")
           Everything := GetOCRArea(0.131, 0.436 + loopOffset, 0.300, 0.539 + loopOffset)

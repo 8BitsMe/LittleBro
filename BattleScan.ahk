@@ -83,8 +83,17 @@ BattleScan() {
      bColor := fastPixelGetColor(MatchRight, MatchY)
 
      If (aColor = 0x302C2B) && (bColor = 0x302C2B) {
+	  ; Determine Victory or Loss
+ 	  PixelGetColor, tColor, getXCoord(0.67), getYCoord(0.355)
+          PixelGetColor, uColor, getXCoord(0.7), getYCoord(0.41)
+	  If ( ( tColor != "0x302C2B" ) and ( uColor != "0x25201B" ) ) {
+          	; Loss
+	  	  Sleep, 1500
+		  ScreenshotWindow()
+                  LineReport("Lost Fight","Arena")
+	  }
           ReadResultsPlaque()
-          DoActions = 0
+       	  DoActions = 0
           ToolTip, "Fight ended cleanly with result plaque", wLeft, wTop-32, 9
      }
 }
