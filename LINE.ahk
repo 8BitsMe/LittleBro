@@ -47,17 +47,20 @@ ScreenshotWindow()
 {
      global
      
-     gocrPath=gocr.exe
+     ;gocrPath=gocr.exe
      
      ;take a screenshot of BlueStacks window
-     pToken:=Gdip_Startup()
-     pBitmap:=Gdip_BitmapFromScreen(wLeft "|" wTop "|" wWidth "|" wHeight)
+     ;pToken:=Gdip_Startup()
+     ;pBitmap:=Gdip_BitmapFromScreen(wLeft "|" wTop "|" wWidth "|" wHeight)
      
      ;send image to clipboard
-     Gdip_SetBitmapToClipboard(pBitmap)
+     ;Gdip_SetBitmapToClipboard(pBitmap)
+
+     WinActivate, BlueStacks
+     Send !{PrintScreen}
      
      ; paste image in line
-     Sleep, 500
+     ; Sleep, 500
      WinActivate, LBLINE
      Send ^v
      Sleep, 500
@@ -65,6 +68,6 @@ ScreenshotWindow()
      
      WinActivate, BlueStacks
      
-     Gdip_Shutdown(pToken)
+     ;Gdip_Shutdown(pToken)
 }
 
