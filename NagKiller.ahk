@@ -7,4 +7,6 @@ NagKiller() {
           ControlClick, OK
           WinClose, Sponsored session
      }
+     
+     WinActivate, BlueStacks
 }

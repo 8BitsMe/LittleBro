@@ -1,13 +1,13 @@
 ClickB(Why, timeout := 10){
-     WaitFoRButton(1, Why, 0.300, 0.825, 0.466, 0.922, 0x549060, timeout)
+     WaitFoRButton(1, Why, 0.300, 0.825, 0.465, 0.93, 0x549060, timeout)
 }
 
 ClickC(Why, timeout := 10){
-     WaitFoRButton(1, Why, 0.760, 0.825, 0.926, 0.922, 0x549060, timeout)
+     WaitFoRButton(1, Why, 0.760, 0.825, 0.926, 0.3, 0x549060, timeout)
 }
 
 ClickCC1(Why, timeout := 10){
-     WaitFoRButton(1, Why, 0.442, 0.825, 0.610, 0.922, 0x549060, timeout)
+     WaitFoRButton(1, Why, 0.442, 0.825, 0.610, 0.93, 0x549060, timeout)
 }
 
 ClickMatch(Why, timeout := 10){
@@ -60,10 +60,8 @@ WaitForButton(Click, Why, L, T, R, B, Color, TimeOut := 0) {
      ; TRY TO CLICK IT UNTIL IT FINALLY GIVES IN
      While (ErrorLevel < 1 && Click && !Skip) {
           MouseClick, left, Px, Py
-;          Sleep, 200
           ToolTip, Tap!, Px+12, Py+24, 2
           PixelSearch, Px, Py, L, T, R, B, Color, 30, Fast
           ErrorLevel := 1
      }
-
 }

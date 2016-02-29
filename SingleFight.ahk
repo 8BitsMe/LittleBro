@@ -3,7 +3,6 @@ SingleFight() {
      
      ; Get rid of things obscuring our window
      NagKiller()
-     WinActivate, BlueStacks
      
      ; PRE-BATTLE SETUP
      Cycles = 0
@@ -13,15 +12,10 @@ SingleFight() {
      DoActions = 1
      SameColors = 0
      
-     SMin = 0
-     SMax = 0
-     SCount = 0
-     SAvg = 0
-     
-     TMin = 0
-     TMax = 0
-     TCount = 0
-     TAvg = 0
+     HMin = 0
+     HMax = 8
+     HCount = 0
+     HAvg = 2
      
      OurDmg = 0
      OurAvgDmg = 0

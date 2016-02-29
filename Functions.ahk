@@ -39,7 +39,7 @@ WaitForChange(X,Y,Why,Timeout := 0) {
      While (aColor = bColor) && !Skip {
           PixelGetColor, bColor, X, Y
           ShowOSD(Why "`nWaiting for change... (Press F9 to skip)`n" aColor " - " bColor " : " Z++)
-
+          
           Sleep, 1500
           If (Timeout > 0 && Z > Timeout)
           Skip := true
@@ -77,23 +77,23 @@ ShowMouseRatio() {
      MouseGetPos,X,Y
      RatioX := Round((X - wLeft)/wWidth,3)
      RatioY := Round((Y - wTop)/wHeight,3)
-
+     
      PixelGetColor, gColor, X, Y
      B := BrightnessIndex(gColor)
-
+     
      ReverseColor := SubStr(gColor, 7 , 2) . SubStr(gColor, 5 , 2) . SubStr(gColor, 3 , 2)
-
+     
      X += 16
-
+     
      ToolTip, %RatioX% x %RatioY% B: %B% C:%gColor% R:%ReverseColor% - W: %wWidth% - H: %wHeight%, X+21, Y
-
+     
      Gui, 98: Destroy
      Gui, 98: Color, %ReverseColor%
      Gui 98: -Caption +AlwaysOnTop +ToolWindow +Border
-
+     
      ; SHOW WHAT WE CREATED
      Gui, 98: Show, NoActivate x%X% y%Y% w18 h18 ;The Gui will not steal keyboard focus
-
+     
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -102,16 +102,16 @@ ShowMouseRatio() {
 
 XPercentage() {
      global
-
+     
      A := wLeft + wWidth * 0.360
      B := wLeft + wWidth * 0.458
      BMAX := B
-
+     
      Y := wTop + wHeight * 0.09
-
+     
      C := (B-A)
      Sum := C
-
+     
      Loop, 9 {
           C := C/2
           PixelGetColor, gColor, A+C, Y
@@ -121,10 +121,10 @@ XPercentage() {
                B := (A+C)
           }
      }
-
+     
      X := wLeft + wWidth * 0.43
      Y := wTop + wHeight * 0.059
-
+     
      C := Round(100 + ((B - BMAX) / Sum) * 100, 1)
      ToolTip, %C%, X, Y
 }
@@ -143,31 +143,31 @@ XPercentage() {
 
 GetOCRArea(tlX, tlY, brX, brY, options="") {
      global
-
-if tlX > brX
-return ""
-
+     
+     if tlX > brX
+          return ""
+     
      topLeftX := wLeft + wWidth * tlX
      topLeftY := wTop + wHeight * tlY
      widthToScan := (wLeft + wWidth * brX) - topLeftX
      heightToScan := (wTop + wHeight * brY) - topLeftY
-
+     
      DrawRect(topLeftX,topLeftY,topLeftX+widthToScan,topLeftY+heightToScan,"00FFFF")
-
+     
      magicalText := GetOCR(topLeftX, topLeftY, widthToScan, heightToScan, options)
-
+     
      ;     	ToolTip, Says: %magicalText%, Px+12, Py+24, 2
      ;Sleep, 1000
-
+     
      Return SubStr(magicalText, 1,-2)
 }
 
 
 getPI(tlX, tlY, brX, brY, options) {
-
+     
      loop, 10 {
           ShowOSD("EDIT TEAM`nGetting current PI...`nLoop: " A_Index)
-
+          
           cPI := getOCRArea(tlX, tlY, brX-=.01, brY, options)
           cPI := RegExReplace(cPI, "i)[^0-9]")
           ;	msgbox PI: '%cPI%' Loop: '%A_Index%'
@@ -194,7 +194,7 @@ lblog(info, bOpen:=0, headerstyle:=0)
      headerstyle1 := "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
      headerstyle2 := "*******************************************"
      FormatTime, Timestamp, %A_now%, yyyy_MM_dd HH:mm:ss
-
+     
      info := Timestamp . " " . info
      If (headerstyle == 1)
      {
@@ -208,9 +208,9 @@ lblog(info, bOpen:=0, headerstyle:=0)
      {
           LogLine := info . "`n" . LogLine
      }
-
+     
      FileAppend, %LogLine%, %filename%
-
+     
      IF (bOpen) ; I use this with F10 or you can set this to 1 when LB knows it crashed to have the log open and waiting
      {
           WinClose, LBLog.txt - Notepad ; close it if already open
@@ -222,20 +222,20 @@ lbFightLog(info, bOpen:=0)
 {
      filename := a_scriptdir . "\LBFightLog.csv"
      FormatTime, Timestamp, %A_now%, yyyy_MM_dd HH:mm:ss
-
+     
      WinClose, Microsoft Excel - LBFightLog.csv ; close it if already open
-
+     
      IfNotExist, %filename%
      {
           header := "Timestamp,Hero,Stars, Fight Time, Fight Points,Current Points,Streak,Multiplier,Successful Hits, Hits Recieved,Successful Combos, Highest Combo`n" . LogLine
           FileAppend, %header%, %filename%
      }
-
+     
      info := Timestamp . "," . info
      LogLine := info . "`n" . LogLine
-
+     
      FileAppend, %LogLine%, %filename%
-
+     
      IF (bOpen) ; I use this with F10 or you can set this to 1 when LB knows it crashed to have the log open and waiting
      {
           WinClose, LBLog.txt - Notepad ; close it if already open
@@ -267,20 +267,20 @@ ClickIfColor(ratioX, ratioY, clickColor, speed := 2)
      bColorFound = 0
      clickX := wLeft + wWidth * ratioX
      clickY := wTop + wHeight * ratioY
-
+     
      cicX := getXCoord(ratioX)
      cicY := getYCoord(ratioY)
-
+     
      DrawRect(cicX-10,cicY-10,cicX+10,cicY+10,"FF00FF")
-
+     
      PixelSearch, Px, Py, clickX-8, clickY-8, clickX+8, clickY+8, clickColor, 10, Fast
-
+     
      If (ErrorLevel < 1)
      {
           bColorFound = 1
           MouseClick, left, clickX, clickY, 1, speed
      }
-
+     
      lblog("******** ClickIfColor ==> clickX: " . clickX . " - clickY: " . clickY . " ... clickColor: " . clickColor . " -- gColor: " . gColor . " .. Return: " . bColorFound)
      return bColorFound
 }
@@ -297,7 +297,7 @@ WaitForColor(Why,X,Y,Color,Timeout)
      PixelGetColor, ComColor, X, Y
      Z = 0
      Skip := false
-
+     
      DrawRect(X-6,Y-6,X+6,Y+6,"FF00FF")
      PixelSearch, Px, Py, X-4, Y-4, X+4, Y+4, Color, 30, Fast
      While ErrorLevel > 0 && !Skip {
@@ -340,7 +340,7 @@ HeroFilter(params*) {
      class := Object("Green",0.441, "Red",0.441,"Yellow",0.547,"LBlue",0.547,"DBlue",0.655,"Purple",0.655)
      tier  := Object("1*",0.615,"2*",0.700,"3*",0.780,"4*",0.870,"5*",0.950)
      ;SINCE THE FILTER OPEN/CLOSE ISN'T DEPENDABLE, LOOP TO MAKE SURE OPEN
-
+     
      while true {
           PixelGetColor, aColor, getXCoord(0.790), getYCoord(0.382)
           ; MsgBox, %aColor%
@@ -361,7 +361,7 @@ HeroFilter(params*) {
           }
      }
      Tooltip, , , , 2
-
+     
      ;RESET FILTERS
      MouseClick, left, getXCoord(xCoord), getYCoord(0.180), 2
      for index,param in params {
@@ -411,11 +411,11 @@ HeroFilter(params*) {
                }
           }
      }
-
+     
      ;CLOSE FILTER MENU
      MouseClick, left, getXCoord(0.753), getYCoord(0.845),1,10
      ;	ToolTip, DONE!, Px+12, Py+24, 2
-
+     
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -425,17 +425,17 @@ HeroFilter(params*) {
 ; DRAWS A RECTANGLE
 DrawRect(Left,Top,Right,Bottom,BorderColor) {
      Border := 2
-
+     
      ; MSGBOX %Left%,%Top%,%Right%,%Bottom%,%BorderColor%
-
+     
      Gui, 99: Destroy
-
+     
      ; MAKE A WINDOW, SET IT TO OUR COLOR OF CHOICE
      Gui, 99: Margin, %Border%, %Border%
-
+     
      ;Gui, 99: Color, FF0000
      Gui, 99: Color, %BorderColor%
-
+     
      ; GET WINDOW AND INSIDE SIZE
      tW := Right-Left
      tH := Bottom-Top
@@ -443,14 +443,14 @@ DrawRect(Left,Top,Right,Bottom,BorderColor) {
      H := tH + Border*2
      Left -= Border
      Top -= Border
-
-
+     
+     
      ; ADD AN AREA TO MAKE TRANSPARENT
      Gui, 99: Add, Text, w%tW% h%tH% 0x6 ; Draw a white static control
      Gui 99: +LastFound
      WinSet, TransColor, FFFFFF
      Gui 99: -Caption +AlwaysOnTop +ToolWindow
-
+     
      ; SHOW WHAT WE CREATED
      Gui, 99: Show, NoActivate x%Left% y%Top% w%W% h%H% ;The Gui will not steal keyboard focus
 }
@@ -470,8 +470,8 @@ ShowOSD(Content) {
 }
 
 ThousandsSep(x, s=",") {
-	tmpError := ErrorLevel
-	newPoints := RegExReplace(x, "\G\d+?(?=(\d{3})+(?:\D|$))", "$0" s)
-    ErrorLevel := tmpError
-   return newPoints
+     tmpError := ErrorLevel
+     newPoints := RegExReplace(x, "\G\d+?(?=(\d{3})+(?:\D|$))", "$0" s)
+     ErrorLevel := tmpError
+     return newPoints
 }

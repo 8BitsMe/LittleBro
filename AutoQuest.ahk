@@ -48,7 +48,7 @@ AutoQuest() {
                F++
           }
           
-          Sleep, 200
+          Sleep, 50
           
           ; LOOK FOR A GREEN NODE TO CLICK
           DrawRect(SearchL, SearchT, SearchR, SearchB, "FFFF00")
@@ -59,8 +59,6 @@ AutoQuest() {
                ToolTip, Tap!, Px+12, Py+24, 2
           }
           
-          Sleep, 200
-          
           ; PERHAPS WE NEED TO SKIP AN ANNOYING CUTSCENE?
           DrawRect(SkipL, SkipT, SkipR, SkipB, "FFFF00")
           
@@ -70,7 +68,7 @@ AutoQuest() {
                ToolTip, Blah!, Px+12, Py+24, 2
           }
           
-          Sleep, 200
+          Sleep, 50
           
           ; FIGHT BUTTON VISIBLE?
           DrawRect(FightL, FightT, FightR, FightB, "FFFF00")
@@ -84,7 +82,7 @@ AutoQuest() {
                F++
           }
           
-          Sleep, 200
+          Sleep, 50
           
           HideRect()
           

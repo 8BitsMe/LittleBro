@@ -78,6 +78,10 @@ IniRead, LBHitRatio, LBConfig.ini, COMBAT, HitRatio, 0.28
 IniRead, LBStreak_13_21_PI, LBConfig.ini, COMBAT, Streak_13_21_PI, 2200
 IniRead, LBStreak_above_8_PI, LBConfig.ini, COMBAT, LBStreak_above_8_PI, 1400
 IniRead, LBStreak_Infinite_PI, LBConfig.ini, COMBAT, LBStreak_Infinite_PI, 1650
+
+IniRead, LBRevFilterB, LBConfig.ini, COMBAT, LBRevFilterB, 0
+IniRead, LBRevFilterC, LBConfig.ini, COMBAT, LBRevFilterC, 11
+
 IniRead, LBSaveStreak, LBConfig.ini, COMBAT, SaveStreak, No
 IniRead, LBUsername, LBConfig.ini, GENERAL, Username, anonymous
 
@@ -93,6 +97,10 @@ IniWrite, %LBHitRatio%, LBConfig.ini, COMBAT, HitRatio
 IniWrite, %LBStreak_13_21_PI%, LBConfig.ini, COMBAT, Streak_13_21_PI
 IniWrite, %LBStreak_above_8_PI%, LBConfig.ini, COMBAT, LBStreak_above_8_PI
 IniWrite, %LBStreak_Infinite_PI%, LBConfig.ini, COMBAT, LBStreak_Infinite_PI
+
+IniWrite, %LBRevFilterB%, LBConfig.ini, COMBAT, LBRevFilterB
+IniWrite, %LBRevFilterC%, LBConfig.ini, COMBAT, LBRevFilterC
+
 IniWrite, %LBSaveStreak%, LBConfig.ini, COMBAT, SaveStreak
 IniWrite, %LBUsername%, LBConfig.ini, GENERAL, Username
 
@@ -133,8 +141,7 @@ Return
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 F2::
-winStreak = 8
-ScrollUP()
+ScreenshotWindow()
 Return
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
