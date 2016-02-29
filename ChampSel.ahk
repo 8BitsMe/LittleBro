@@ -33,7 +33,7 @@ ChampSel() {
      
      If (!bParanoidMode) {
           Loop {
-               PixelSearch, Px, Py, GetXCoord(0.25),GetYCoord(0.15),GetXCoord(0.85),GetYCoord(0.95), 0x096F16, 5, Fast
+               PixelSearch, Px, Py, GetXCoord(0.25),GetYCoord(0.15),GetXCoord(0.85),GetYCoord(0.95), 0x049759, 5, Fast
                if ( ErrorLevel < 1 ) {
                     MouseClick, left, Px, Py, 1
                     Sleep, 2222
