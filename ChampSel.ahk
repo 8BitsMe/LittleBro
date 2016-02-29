@@ -62,8 +62,6 @@ ChampSel() {
           ReverseFilter := LBRevFilterB
      }
      
-     MsgBox,,,%ReverseFilter%
-     
      if (WhichWar = "WAR-B") OR (WhichWar = "WAR-C"){
           if(winStreak < ReverseFilter) {
                HeroFilter("Rating^")
