@@ -36,7 +36,7 @@ ChampSel() {
                PixelSearch, Px, Py, GetXCoord(0.25),GetYCoord(0.15),GetXCoord(0.85),GetYCoord(0.95), 0x096F16, 5, Fast
                if ( ErrorLevel < 1 ) {
                     MouseClick, left, Px, Py, 1
-                    Sleep, 1000
+                    Sleep, 2222
                }
           } Until (ErrorLevel > 0 )
      }
@@ -193,8 +193,8 @@ ChampSel() {
                     ShowOSD("EDIT TEAM`nSeeing if this champion fits the streak`nPI: " currentPI)
                     
                     If (WhichWar != "WAR-B") {
-                         ; Streak = 1    2    3    4    5    6    7    8    9    10   11   12   13   14   15   16   17   18   19   20   21
-                         Sequence = 1000,1000,1000,1000,1000,1800,1800,1800,600,600,2200,2200,2200,2200,2200,2200,2200,2200,2200,2200,1600
+                         ; Streak = 1    2    3    4    5    6    7    8    9    10  11  12  13  14   15   16   17   18   19   20   21
+                         Sequence = 1000,1000,1000,1000,1000,1800,1800,1800,1800,600,600,600,600,2200,2200,2200,2200,2200,2200,2200,1600
                          StringSplit, Streaks, Sequence, `,
                          
                          If (!Winstreak is number)
