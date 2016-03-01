@@ -3,7 +3,7 @@ ClickB(Why, timeout := 10){
 }
 
 ClickC(Why, timeout := 10){
-     WaitFoRButton(1, Why, 0.760, 0.825, 0.926, 0.3, 0x549060, timeout)
+     WaitFoRButton(1, Why, 0.760, 0.825, 0.926, 0.93, 0x549060, timeout)
 }
 
 ClickCC1(Why, timeout := 10){
