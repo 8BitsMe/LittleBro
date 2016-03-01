@@ -111,17 +111,22 @@ IniWrite, %LBUsername%, LBConfig.ini, GENERAL, Username
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 ;#Persistent
-;SetTimer,CheckInternet,3000
+;SetTimer,CheckInternet,10000
 ;return
 
 CheckInternet:
-text := GetOCRArea(0.392, 0.291, 0.610, 0.341, "alpha")
+text := GetOCRArea(0.392, 0.200, 0.610, 0.341, "alpha")
+Gui, 99: Destroy
 ; msgbox, % text
+if( InStr(text, "RECENT") ) {
+	Send {Esc}
+	Sleep, 2000
+}
 if( InStr(text, "LOST CONN") ) {
 	ClickReconnect("Lost Connection, reconnecting")
 	Sleep, 2000
 }
-if( InStr(text, "LOST CONN") ) {
+if( InStr(text, "LOG") ) {
 	ClickReconnect("Failed, reconnecting")
 	Sleep, 2000
 }
