@@ -192,7 +192,7 @@ ChampSel() {
                     
                     ShowOSD("EDIT TEAM`nSeeing if this champion fits the streak`nPI: " currentPI)
                     
-                    If (WhichWar != "WAR-B" or WhichWar != "WAR-Y") {
+                    If (WhichWar = "WAR-C" or WhichWar = "WAR-Z" or WhichWar = "CC") {
                          ; Streak = 1    2    3    4    5    6    7    8    9    10  11  12  13  14   15   16   17   18   19   20   21
                          Sequence = 1000,1000,1000,1000,1000,1800,1800,1800,1800,600,600,600,600,2200,2200,2200,2200,2200,2200,2200,1600
                          StringSplit, Streaks, Sequence, `,
