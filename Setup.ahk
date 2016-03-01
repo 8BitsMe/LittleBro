@@ -183,6 +183,8 @@ gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , C-B
 gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , B-Z
+gIY += gPad/2 + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , Z-Y
 
 gIY += gPad + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-B

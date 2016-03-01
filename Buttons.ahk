@@ -10,6 +10,14 @@ ClickCC1(Why, timeout := 10){
      WaitFoRButton(1, Why, 0.442, 0.825, 0.610, 0.93, 0x549060, timeout)
 }
 
+ClickY(Why, timeout := 10){
+     WaitFoRButton(1, Why, 0.12, 0.825, 0.28, 0.93, 0x549060, timeout)
+}
+
+ClickZ(Why, timeout := 10){
+     WaitFoRButton(1, Why, 0.58, 0.825, 0.74, 0.93, 0x549060, timeout)
+}
+
 ClickMatch(Why, timeout := 10){
      WaitFoRButton(1, Why, 0.006, 0.876, 0.200, 0.972, 0x075009, timeout)
 }

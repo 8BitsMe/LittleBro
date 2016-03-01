@@ -111,10 +111,10 @@ BattleMatchFights() {
           
           WhatLoop := "Starting fight1... Loop " . A_Index
           
-          ClickContinue(WhatLoop, 60)
+          ClickContinue(WhatLoop, 30)
           
           ; LOOKING FOR GREEN AT THE TOP OF THE WINDOW
-          WaitForColor("Waiting for pause button", 0.485, 0.045, 0x075309,30)
+          WaitForColor("Waiting for pause button", 0.485, 0.045, 0x075309,15)
           
           SingleFight()
           

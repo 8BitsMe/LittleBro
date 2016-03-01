@@ -321,6 +321,31 @@ Loop {
      break
 }
 
+ButtonZ-Y:
+NavigateToScreen("Fight","Versus")
+
+OmegaLoop = 0
+Loop {
+     OmegaLoop++
+     Random, LoopLimit, LBCCMin, LBCCMax
+     LineReport("[Z-Y] War-Z x" . LoopLimit, "ARENA")
+     WhichWar := "WAR-Z"
+     FullLoop()
+     Random, LoopLimit, LBCBMin, LBCBMax
+     LineReport("[Z-Y] War-Y x" . LoopLimit, "ARENA")
+     WhichWar := "WAR-Y"
+     FullLoop()
+
+     If (OmegaLoop > LBCOLoopCount)
+     break
+}
+
+WinClose, BlueStacks
+LineReport("Z-Y over, shutting down LB", "ARENA")
+FormatTime, TimeString,, Time
+MsgBox OmegaLoop finished at: %TimeString%.
+Return
+
 WinClose, BlueStacks
 LineReport("B-Z over, shutting down LB", "ARENA")
 FormatTime, TimeString,, Time

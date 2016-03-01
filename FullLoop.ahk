@@ -30,17 +30,17 @@ FullLoop() {
           
           If (WhichWar = "WAR-B") {
                winStreak := GetOCRArea(0.49, 0.347, 0.54, 0.39, "numeric")
-               WaitFoRButton(1, "First 3v3 versus match Button...", 0.3, 0.83, 0.46, 0.93, 0X024B04)
+               ClickB("WAR-B")
           }
           
           If (WhichWar = "WAR-C") {
                winStreak := GetOCRArea(0.95, 0.348, 1.0, 0.398, "numeric")
-               WaitFoRButton(1, "Second 3v3 versus match Button...", 0.76, 0.83, 0.92,0.93, 0X024B04)
+               ClickB("WAR-C")
           }
           
           If (WhichWar = "WAR-Y") {
                
-               Loop, 4 {
+               Loop, 3 {
                     MouseClickDrag, left, MidX + wWidth * 0.4, wTop + wHeight * 0.5 , MidX - wWidth*0.2, wTop + wHeight * 0.5, 15
                     Sleep, 1000
                }
@@ -49,12 +49,12 @@ FullLoop() {
                
                winStreak := GetOCRArea(0.320, 0.345, 0.370, 0.393, "numeric")
                
-               WaitFoRButton(1, "Last versus match Button...", 0.18, 0.850, 0.20, 0.87, 0X024B04)
+               ClickY("WAR-Y")
           }
           
           If (WhichWar = "WAR-Z") {
                
-               Loop, 4 {
+               Loop, 3 {
                     MouseClickDrag, left, MidX + wWidth * 0.4, wTop + wHeight * 0.5 , MidX - wWidth*0.2, wTop + wHeight * 0.5, 15
                     Sleep, 1000
                }
@@ -63,7 +63,7 @@ FullLoop() {
                
                winStreak := GetOCRArea(0.769, 0.345, 0.836, 0.393, "numeric")
                
-               WaitFoRButton(1, "Last versus match Button...", 0.6, 0.850, 0.62, 0.87, 0X024B04)
+               ClickZ("WAR-Z")
           }
           
           WaitForNoChange(0.5,0.75,"EDIT TEAM")
