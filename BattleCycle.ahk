@@ -122,13 +122,14 @@ BattleMatchFights() {
           
           Sleep, 3000
           
-          loop 30 {
+          loop 90 {
                title := getOCRArea(0.3, 0.1, 0.7, 0.15, "alpha")
                if InStr(title, "LIN_UP")
                     break
                sleep, 250
           }
-
+          
+          WinOrLoss := ""
           
           WaitForNoChange(getXCoord(0.250), getYCoord(0.425 + loopOffset),"Calculating Score...", 20)
 	   If ( A_Index = 3 ){
@@ -139,9 +140,12 @@ BattleMatchFights() {
                     If ( aColor = 0X1A1A72 ) {
                          ; Loss spotted
                          LossCount++	
-                    }	
+                         WinOrLoss := WinOrLoss . "L"
+                    } else {
+                         WinOrLoss := WinOrLoss . "W"
+                    }
                }
-               If ( LossCount > 0 ) {
+               If ( LossCount > 1 ) {
                     ; We lost series	
                     ScreenshotWindow()
                     LineAlert("Loss Detected", "newline")	
@@ -157,5 +161,6 @@ BattleMatchFights() {
      }
      
      ShowOSD(Battles complete!)
-     LineReport("[" OmegaLoop "][" OuterLoop "/" LoopLimit "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep( currentPoints ) "]", "ARENA")
+     LineReport("[" OmegaLoop "][" OuterLoop "/" LoopLimit "] - " WhichWar " - [Streak: " winStreak "][" ThousandsSep( currentPoints ) "] [PI: " StreakPI "] [" WinOrLoss "][" (currentPoints - previousPoints) "]", "ARENA")
+     previousPoints := currentPoints
 }

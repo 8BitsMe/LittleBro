@@ -56,13 +56,13 @@ ChampSel() {
      ; SORT CHAMPIONS ACCORDING TO STREAK AND TRY TO PRE-SCROLL TO AVOID UNNECESSARY OCR
      ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
      
-     If (WhichWar != "WAR-B") {
+     If (WhichWar = "WAR-C" or WhichWar = "CC" or WhichWar = "WAR-Z") {
           ReverseFilter := LBRevFilterC
      } else {
           ReverseFilter := LBRevFilterB
      }
      
-     if (WhichWar = "WAR-B") OR (WhichWar = "WAR-C"){
+     if (WhichWar = "WAR-B" OR WhichWar = "WAR-C" or WhichWar = "WAR-Y" or WhichWar = "WAR-Z"){
           if(winStreak < ReverseFilter) {
                HeroFilter("Rating^")
                Sleep, 500
@@ -71,7 +71,7 @@ ChampSel() {
      }
      else {
           if(winStreak < ReverseFilter) {
-               HeroFilter("Rating^","3*", "4*")
+               HeroFilter("Rating^", "3*", "4*")
                Sleep, 500
                ScrollUP()
           }
@@ -193,8 +193,8 @@ ChampSel() {
                     ShowOSD("EDIT TEAM`nSeeing if this champion fits the streak`nPI: " currentPI)
                     
                     If (WhichWar = "WAR-C" or WhichWar = "WAR-Z" or WhichWar = "CC") {
-                         ; Streak = 1    2    3    4    5    6    7    8    9    10  11  12  13  14   15   16   17   18   19   20   21
-                         Sequence = 1000,1000,1000,1000,1000,1800,1800,1800,1800,600,600,600,600,2200,2200,2200,2200,2200,2200,2200,1600
+                         ; Streak = 1   2   3    4    5    6    7    8    9    10  11  12  13  14   15   16   17   18   19   20   21
+                         Sequence = 800,800,1000,1000,1000,1800,1800,1800,1800,500,500,500,500,2200,2200,2200,2200,2200,2200,2200,1600
                          StringSplit, Streaks, Sequence, `,
                          
                          If (!Winstreak is number)
@@ -287,11 +287,14 @@ ChampSel() {
 
 ScrollUp() {
      global
-     A := Floor(WinStreak/2)
-     Loop, %A% {
-          ShowOSD("EDIT TEAM`nPre-skipping lower PI/busy champions")
-          MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.35, 15
-          Sleep, 1000
+     
+     If (WinStreak < 10) {
+          A := Floor(WinStreak/2)
+          Loop, %A% {
+               ShowOSD("EDIT TEAM`nPre-skipping lower PI/busy champions")
+               MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.35, 15
+               Sleep, 1000
+          }
      }
 }
 

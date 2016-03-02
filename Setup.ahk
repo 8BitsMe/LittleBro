@@ -150,6 +150,8 @@ global OmegaLoop = 0
 global LoopLimit = 0
 
 global currentPoints = 0
+global previousPoints = 0
+global StreakPI = 0
 
 ; ACTIONS ARE AT THE END OF LITTLEBRO.AHK
 

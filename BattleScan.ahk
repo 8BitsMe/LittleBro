@@ -88,9 +88,9 @@ BattleScan() {
           PixelGetColor, uColor, getXCoord(0.7), getYCoord(0.41)
 	  If ( ( tColor != "0x302C2B" ) and ( uColor != "0x25201B" ) ) {
           	; Loss
-	  	  Sleep, 1500
-		  ScreenshotWindow()
-                  LineReport("Lost Fight","Arena")
+	  	  ; Sleep, 1500
+		  ; ScreenshotWindow()
+          ; LineReport("Lost Fight","Arena")
 	  }
           ReadResultsPlaque()
        	  DoActions = 0
