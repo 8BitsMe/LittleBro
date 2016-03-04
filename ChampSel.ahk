@@ -9,7 +9,13 @@ ChampSel() {
      bParanoidMode := 0
      
      ; DISTANCE BETWEEN PORTRAITS
-     HelpStepX := wWidth * 0.182
+     ;account for smaller resolution issues (PC:1440x900,BS:1152x720)
+     IF ( LBUsername = "oj") {
+          HelpStepX := wWidth * 0.181
+     }
+     else {
+          HelpStepX := wWidth * 0.182
+     }
      HelpStepY := wHeight * 0.308
      
      ; INITIAL DRAG AND DROP LOCATION

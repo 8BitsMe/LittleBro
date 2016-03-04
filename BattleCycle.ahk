@@ -55,7 +55,7 @@ BattleCycle() {
                ShowOSD("REWARDS screen`nClicking continue...")
                ClickContinue("REWARDS Screen green Button...")
           }
-          else if InStr(title, "ACHI_V_M_NTS" ) {
+          else if InStr(title, "ACHI" ) {
                ShowOSD("ACHIEVEMENTS`nClicking continue...")
                ClickContinue("ACHIEVEMENTS Screen green Button...")
           }

@@ -34,7 +34,13 @@ FullLoop() {
           }
 
           If (WhichWar = "WAR-C") {
-               winStreak := GetOCRArea(0.95, 0.348, 1.0, 0.398, "numeric")
+               ;account for smaller resolution issues (PC:1440x900,BS:1152x720)
+               If ( LBUsername = "oj") {
+                    winStreak := GetOCRArea(0.92, 0.348, 1.0, 0.398, "numeric")
+               }
+               else {
+                    winStreak := GetOCRArea(0.95, 0.348, 1.0, 0.398, "numeric")
+               }
                ClickC("WAR-C")
           }
 
