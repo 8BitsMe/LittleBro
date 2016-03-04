@@ -272,7 +272,11 @@ ChampSel() {
                     
                     MouseMove, ChampPortraitX,ChampPortraitY, 1
                     
-                    MouseClickDrag, left, ChampPortraitX,ChampPortraitY,ChampDestinationX,ChampDestinationY, 15
+                    Send {Click Down, ChampPortraitX, ChampPortraitY}
+                    MouseMove, -10, 0, 15, R
+                    MouseMove, ChampDestinationX,ChampDestinationY, 15
+                    Send {Click Up, ChampDestinationX,ChampDestinationY}
+                    
                     
                     Sleep, 1000
                }
