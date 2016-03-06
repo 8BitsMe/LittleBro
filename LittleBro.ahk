@@ -283,6 +283,7 @@ BattleCycle()
 Return
 
 ButtonC-B:
+SwitchOrWait = Switch
 NavigateToScreen("Fight","Versus")
 
 OmegaLoop = 0
@@ -296,6 +297,13 @@ Loop {
      LineReport("[C-B] War-B x" . LoopLimit, "ARENA")
      WhichWar := "WAR-B"
      FullLoop()
+     
+     Random, A, 0, 100
+     If (A>25) {
+     LineReport("[C-B] Automated AlliHelp - "A, "ARENA")
+     AlliHelp()
+     NavigateToScreen("Fight","Versus")
+     }
 
      If (OmegaLoop > LBCOLoopCount)
      break
@@ -308,17 +316,18 @@ MsgBox OmegaLoop finished at: %TimeString%.
 Return
 
 ButtonB-Z:
+SwitchOrWait = Switch
 NavigateToScreen("Fight","Versus")
 
 OmegaLoop = 0
 Loop {
      OmegaLoop++
      Random, LoopLimit, LBCBMin, LBCBMax
-     LineReport("[B-Z] War-C x" . LoopLimit, "ARENA")
+     LineReport("[B-Z] War-B x" . LoopLimit, "ARENA")
      WhichWar := "WAR-B"
      FullLoop()
      Random, LoopLimit, LBCCMin, LBCCMax
-     LineReport("[B-Z] War-B x" . LoopLimit, "ARENA")
+     LineReport("[B-Z] War-Z x" . LoopLimit, "ARENA")
      WhichWar := "WAR-Z"
      FullLoop()
 
@@ -327,6 +336,7 @@ Loop {
 }
 
 ButtonZ-Y:
+SwitchOrWait = Switch
 NavigateToScreen("Fight","Versus")
 
 OmegaLoop = 0
@@ -340,7 +350,13 @@ Loop {
      LineReport("[Z-Y] War-Y x" . LoopLimit, "ARENA")
      WhichWar := "WAR-Y"
      FullLoop()
-
+     
+     Random, A, 0, 100
+     If (A<50) {
+     LineReport("[Z-Y] Automated AlliHelp - "A, "ARENA")
+     AlliHelp()
+     NavigateToScreen("Fight","Versus")
+     }
      If (OmegaLoop > LBCOLoopCount)
      break
 }
@@ -351,13 +367,8 @@ FormatTime, TimeString,, Time
 MsgBox OmegaLoop finished at: %TimeString%.
 Return
 
-WinClose, BlueStacks
-LineReport("B-Z over, shutting down LB", "ARENA")
-FormatTime, TimeString,, Time
-MsgBox OmegaLoop finished at: %TimeString%.
-Return
-
 ButtonCC:
+SwitchOrWait = Wait
 NavigateToScreen("Fight","Versus")
 WhichWar := "CC"
 LoopLimit = 0
@@ -365,6 +376,7 @@ FullLoop()
 Return
 
 ButtonWAR-B:
+SwitchOrWait = Wait
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-B"
 LoopLimit = 0
@@ -372,6 +384,7 @@ FullLoop()
 Return
 
 ButtonWAR-C:
+SwitchOrWait = Wait
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-C"
 LoopLimit = 0
@@ -380,6 +393,7 @@ FullLoop()
 Return
 
 ButtonWAR-Y:
+SwitchOrWait = Wait
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-Y"
 LoopLimit = 0
@@ -387,6 +401,7 @@ FullLoop()
 Return
 
 ButtonWAR-Z:
+SwitchOrWait = Wait
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-Z"
 LoopLimit = 0

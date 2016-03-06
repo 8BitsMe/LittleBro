@@ -153,6 +153,8 @@ global currentPoints = 0
 global previousPoints = 0
 global StreakPI = 0
 
+global SwitchOrWait = "Wait"
+
 ; ACTIONS ARE AT THE END OF LITTLEBRO.AHK
 
 ; SHOW US WHAT WE DETECTED AS OUR INSIDE WINDOW

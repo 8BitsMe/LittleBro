@@ -223,11 +223,17 @@ ChampSel() {
                                    MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.3, 20
                                    Sleep, 2000
                                    Goto, TopScan
-                              } else {                              
-                                   MouseClick, left, GetXCoord(0.04),GetYCoord(0.04),5
-                                   WaitForChange(0.5,0.75,"EDIT TEAM`nAttempting to switch versus arenas",5)
-                                   OuterLoop += 100
-                                   return
+                              } else {              
+                                   If (SwitchOrWait = Wait) {
+                                        Random, WaitABit, 60,180
+                                        CountDown("EDIT TEAM`nChampions busy, waiting...",WaitABit)
+                                        Goto, TopScan
+                                   } else {
+                                        MouseClick, left, GetXCoord(0.04),GetYCoord(0.04),5
+                                        WaitForChange(0.5,0.75,"EDIT TEAM`nAttempting to switch versus arenas",5)
+                                        OuterLoop += 100
+                                        return false
+                                   }
                               }
                          }
                     }
@@ -258,10 +264,16 @@ ChampSel() {
                                    Sleep, 2000
                                    Goto, TopScan
                               } else {                              
-                                   MouseClick, left, GetXCoord(0.04),GetYCoord(0.04),5
-                                   WaitForChange(0.5,0.75,"EDIT TEAM`nAttempting to switch versus arenas",5)
-                                   OuterLoop += 100
-                                   return
+                                   If (SwitchOrWait = Wait) {
+                                        Random, WaitABit, 60,180
+                                        CountDown("EDIT TEAM`nChampions busy, waiting...",WaitABit)
+                                        Goto, TopScan
+                                   } else {
+                                        MouseClick, left, GetXCoord(0.04),GetYCoord(0.04),5
+                                        WaitForChange(0.5,0.75,"EDIT TEAM`nAttempting to switch versus arenas",5)
+                                        OuterLoop += 100
+                                        return False
+                                   }
                               }
                          }
                     }
@@ -288,7 +300,7 @@ ChampSel() {
           }
           
      }
-     return 1
+     return True
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

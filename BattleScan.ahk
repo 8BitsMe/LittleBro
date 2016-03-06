@@ -21,7 +21,7 @@ BattleScan() {
      gColor := fastPixelGetColor(Special3, SpecialY)
      WeHaveASpecial += ScanSpecials(gColor)
 
-     ToolTip, %WeHaveASpecial%, Special1, SpecialY + 24, 2
+     ; ToolTip, %WeHaveASpecial%, Special1, SpecialY + 24, 2
 
      TheyHaveASpecial = 0
 
@@ -32,7 +32,7 @@ BattleScan() {
      gColor := fastPixelGetColor(TheirSpecial3, TheirSpecialY)
      TheyHaveASpecial += ScanSpecials(gColor)
 
-     ToolTip, %TheyHaveASpecial%, TheirSpecial3, TheirSpecialY + 24, 3
+     ; ToolTip, %TheyHaveASpecial%, TheirSpecial3, TheirSpecialY + 24, 3
 
      ; =-=-=-=-=
      ;  DAMAGE
@@ -43,7 +43,7 @@ BattleScan() {
 
      OurHealthX := GetOurHealth()
      OurHealth := Round(100 + ((OurHealthX - OurMaxHealth) / HealthBar) * 100, 1)
-     ToolTip, %OurHealth%, OurHealthX, HealthY + 2, 4
+     ; ToolTip, %OurHealth%, OurHealthX, HealthY + 2, 4
 
      TheirDmg := Round((OldOurHealth - OurHealth),1)
 
@@ -52,7 +52,7 @@ BattleScan() {
 
      TheirHealthX := GetTheirHealth()
      TheirHealth := Round(100 - ((TheirHealthX - TheirMaxHealth) / HealthBar) * 100, 1)
-     ToolTip, %TheirHealth%, TheirHealthX, HealthY + 2, 5
+     ; ToolTip, %TheirHealth%, TheirHealthX, HealthY + 2, 5
 
      OurDmg := Round((OldTheirHealth - TheirHealth),1)
 
