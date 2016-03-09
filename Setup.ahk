@@ -148,12 +148,29 @@ global winStreak = 0
 global OuterLoop = 0
 global OmegaLoop = 0
 global LoopLimit = 0
+global SwitchOrWait = "Wait"
 
 global currentPoints = 0
 global previousPoints = 0
 global StreakPI = 0
 
-global SwitchOrWait = "Wait"
+;ANALYTICS
+global ReportLoop := "not specified"
+global 3StarPoints := 0
+global 4StarPoints := 0
+global 3StarSeries := 0
+global 4StarSeries := 0
+global 3StarLossCount := 0
+global 4StarLossCount := 0
+global 3StarStartTime := A_now  
+global 4StarStartTime := A_now 
+global 4StarRunDuration := 0
+global 3StarRunDuration := 0
+global SumHMinPerPI := 0
+global SumHMaxPerPI := 0
+global SumHAvgPerPI := 0
+global FightCounter := 0
+global curPI := 0
 
 ; ACTIONS ARE AT THE END OF LITTLEBRO.AHK
 
@@ -201,6 +218,8 @@ Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , WAR-Z
 
 gIY += gPad + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , F9
+gIY += gPad/2 + gHeight
+Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , EndRun
 gIY += gPad/2 + gHeight
 Gui, Add, Button, x%gPad% y%gIY% w%gWidth% h%gHeight% , PANIC
 gIY += gPad + gHeight

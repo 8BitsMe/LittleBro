@@ -74,6 +74,9 @@ BattleMatchFights() {
      
      multiplier := GetOCRArea(0.38, 0.15, 0.42, 0.2)
      
+     SeriesFightPoints := 0
+     SeriesPIs := ""
+
      Loop, 3 {
           loopOffset := .134 * (A_Index-1)
           
@@ -101,6 +104,7 @@ BattleMatchFights() {
 
           }
           
+	  curPI := GetOCRArea(0.310, 0.513 + loopOffset, 0.365, 0.540 + loopOffset, "numeric")
           curHero := GetOCRArea(0.130, 0.472 + loopOffset, 0.301, 0.506 + loopOffset, "alpha")
           curStars := GetOCRArea(0.130, 0.435 + loopOffset, 0.235, 0.475 + loopOffset)
           duped := ""
@@ -156,12 +160,37 @@ BattleMatchFights() {
           fightPoints := GetOCRArea(0.440, 0.481 + loopOffset, 0.512, 0.526 + loopOffset, "numeric")
           Everything := GetOCRArea(0.131, 0.436 + loopOffset, 0.300, 0.539 + loopOffset)
           enemyEverything := GetOCRArea(0.696, 0.436 + loopOffset, 0.870, 0.539 + loopOffset)
-          
+
+	  SeriesFightPoints += fightPoints
+	  SeriesPIs = %SeriesPIs% %curPI%
+	  FightHMinPI := (HMin/(curPI/1000))
+	  FightHMaxPI := (HMax/(curPI/1000))
+	  FightHAvgPI := (((HMin+HMax)/2)/(curPI/1000))
+	  SumHMinPerPI += FightHMinPI
+	  SumHMaxPerPI += FightHMaxPI
+	  SumHAvgPerPI += FightHAvgPI
+	  FightCounter++
+ ;MsgBox, %SumHMinPerPI% %SumHMaxPerPI% %SumHAvgPerPI% %FightCounter% %HMin% %HMax% %HAvg%
+
           msg := curHero . " , " . curStars . " , " . CycleSum/1000 . " , " . fightPoints . " , " . currentPoints . " , " . winStreak . " , " . multiplier . " , " . sucHits . " , " . hitsRec . " , " . sucCombo . " , " . highCombo . " , `n " . Everything . " , VS , " . enemyEverything
           lbFightLog(msg)
      }
      
      ShowOSD(Battles complete!)
-     LineReport("[" OmegaLoop "][" OuterLoop "/" LoopLimit "] - " WhichWar " - [Streak: " winStreak "][PI: " StreakPI "] [" ThousandsSep( currentPoints ) "][" WinOrLoss "][" (currentPoints - previousPoints) "]", "ARENA")
+
+	If(ReportCategory = 3)
+	{
+		3StarSeries ++
+		3StarLossCount += LossCount
+		3StarPoints += SeriesFightPoints
+	}
+	Else
+	{
+		4StarSeries ++
+		4StarLossCount += LossCount
+		4StarPoints += SeriesFightPoints
+	}
+
+     LineReport("[" OmegaLoop "][" OuterLoop "/" LoopLimit "] - " WhichWar " - [Streak: " winStreak "][PI: " StreakPI "] [" ThousandsSep( currentPoints ) "][" WinOrLoss "][" (SeriesFightPoints) "]", "ARENA")
      previousPoints := currentPoints
 }

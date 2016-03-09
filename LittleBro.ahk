@@ -119,16 +119,16 @@ text := GetOCRArea(0.392, 0.200, 0.610, 0.341, "alpha")
 Gui, 99: Destroy
 ; msgbox, % text
 if( InStr(text, "RECENT") ) {
-	Send {Esc}
-	Sleep, 2000
+     Send {Esc}
+     Sleep, 2000
 }
 if( InStr(text, "LOST CONN") ) {
-	ClickReconnect("Lost Connection, reconnecting")
-	Sleep, 2000
+     ClickReconnect("Lost Connection, reconnecting")
+     Sleep, 2000
 }
 if( InStr(text, "LOG") ) {
-	ClickReconnect("Failed, reconnecting")
-	Sleep, 2000
+     ClickReconnect("Failed, reconnecting")
+     Sleep, 2000
 }
 ; msgbox, CheckingInternet
 return
@@ -232,7 +232,15 @@ F11:: ; testing hotkey
 ;title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
 ;msgBox '%title%'
 ; PowerLevel()
-ScreenshotWindow()
+If(ReportCategory = 3)
+{
+     3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
+}
+Else 
+{
+     4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
+}
+EndRunReport("EndRun Button Pressed")
 
 ;HeroFilter("Level^", "Purple","4*")
 ;NavigateToScreen("Fight", "Event")
@@ -284,39 +292,55 @@ Return
 
 ButtonC-B:
 SwitchOrWait = Switch
+ReportLoop := "C-B"
+OmegaLoop = 0
+
 NavigateToScreen("Fight","Versus")
 
-OmegaLoop = 0
 Loop {
      OmegaLoop++
+     
      Random, LoopLimit, LBCCMin, LBCCMax
      LineReport("[C-B] War-C x" . LoopLimit, "ARENA")
      WhichWar := "WAR-C"
+     ReportCategory := 4
+     4StarStartTime := A_now
      FullLoop()
+     4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
+     
      Random, LoopLimit, LBCBMin, LBCBMax
      LineReport("[C-B] War-B x" . LoopLimit, "ARENA")
      WhichWar := "WAR-B"
+     ReportCategory := 3
+     3StarStartTime := A_now
      FullLoop()
+     3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)     	
      
      Random, A, 0, 100
      If (A>25) {
-     LineReport("[C-B] Automated AlliHelp - "A, "ARENA")
-     AlliHelp()
-     NavigateToScreen("Fight","Versus")
+          LineReport("[C-B] Automated AlliHelp - "A, "ARENA")
+          AlliHelp()
+          NavigateToScreen("Fight","Versus")
      }
-
+     
      If (OmegaLoop > LBCOLoopCount)
      break
 }
 
+EndRunReport("Loop Limit Reached")
+
 WinClose, BlueStacks
 LineReport("C-B over, shutting down LB", "ARENA")
+
 FormatTime, TimeString,, Time
 MsgBox OmegaLoop finished at: %TimeString%.
+
 Return
 
 ButtonB-Z:
 SwitchOrWait = Switch
+ReportLoop := "B-Z"
+
 NavigateToScreen("Fight","Versus")
 
 OmegaLoop = 0
@@ -326,17 +350,22 @@ Loop {
      LineReport("[B-Z] War-B x" . LoopLimit, "ARENA")
      WhichWar := "WAR-B"
      FullLoop()
+     
      Random, LoopLimit, LBCCMin, LBCCMax
      LineReport("[B-Z] War-Z x" . LoopLimit, "ARENA")
      WhichWar := "WAR-Z"
      FullLoop()
-
+     
      If (OmegaLoop > LBCOLoopCount)
      break
 }
 
+EndRunReport("Loop Limit Reached")
+
 ButtonZ-Y:
 SwitchOrWait = Switch
+ReportLoop := "Z-Y"
+
 NavigateToScreen("Fight","Versus")
 
 OmegaLoop = 0
@@ -345,21 +374,30 @@ Loop {
      Random, LoopLimit, LBCCMin, LBCCMax
      LineReport("[Z-Y] War-Z x" . LoopLimit, "ARENA")
      WhichWar := "WAR-Z"
+     ReportCategory := 4
+     4StarStartTime := A_now
      FullLoop()
+     4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
+     
      Random, LoopLimit, LBCBMin, LBCBMax
      LineReport("[Z-Y] War-Y x" . LoopLimit, "ARENA")
+     ReportCategory := 3
+     3StarStartTime := A_now
      WhichWar := "WAR-Y"
      FullLoop()
+     3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
      
      Random, A, 0, 100
      If (A<50) {
-     LineReport("[Z-Y] Automated AlliHelp - "A, "ARENA")
-     AlliHelp()
-     NavigateToScreen("Fight","Versus")
+          LineReport("[Z-Y] Automated AlliHelp - "A, "ARENA")
+          AlliHelp()
+          NavigateToScreen("Fight","Versus")
      }
      If (OmegaLoop > LBCOLoopCount)
      break
 }
+
+EndRunReport("Loop Limit Reached")
 
 WinClose, BlueStacks
 LineReport("Z-Y over, shutting down LB", "ARENA")
@@ -369,47 +407,86 @@ Return
 
 ButtonCC:
 SwitchOrWait = Wait
+ReportLoop := "CC"
 NavigateToScreen("Fight","Versus")
 WhichWar := "CC"
 LoopLimit = 0
+ReportCategory := 4
+4StarStartTime := A_now
 FullLoop()
+EndRunReport("Loop Limit Reached")
+4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
 Return
 
 ButtonWAR-B:
 SwitchOrWait = Wait
+ReportLoop := "WAR-B"
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-B"
 LoopLimit = 0
+ReportCategory := 3
+3StarStartTime := A_now
 FullLoop()
+3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
+EndRunReport("Loop Limit Reached")
 Return
 
 ButtonWAR-C:
 SwitchOrWait = Wait
+ReportLoop := "WAR-C"
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-C"
 LoopLimit = 0
 LineReport("War-C x" . LoopLimit, "ARENA")
+ReportCategory := 4
+4StarStartTime := A_now
 FullLoop()
+4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
+EndRunReport("Loop Limit Reached")
 Return
 
 ButtonWAR-Y:
 SwitchOrWait = Wait
+ReportLoop := "WAR-Y"
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-Y"
 LoopLimit = 0
+ReportCategory := 3
+3StarStartTime := A_now
 FullLoop()
+3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
+EndRunReport("Loop Limit Reached")
 Return
 
 ButtonWAR-Z:
 SwitchOrWait = Wait
+ReportLoop := "WAR-Z"
 NavigateToScreen("Fight","Versus")
 WhichWar := "WAR-Z"
+ReportCategory := 4
+4StarStartTime := A_now
 LoopLimit = 0
 FullLoop()
+4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
+EndRunReport("Loop Limit Reached")
 Return
 
 ButtonF9:
 skip := true
+Return
+
+ButtonEndRun:
+If(ReportCategory = 3)
+{
+     3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
+}
+Else 
+{
+     4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
+}
+EndRunReport("EndRun Button Pressed")
+Sleep, 1000
+Reload
 Return
 
 ButtonPANIC:

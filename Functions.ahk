@@ -475,3 +475,11 @@ ThousandsSep(x, s=",") {
      ErrorLevel := tmpError
      return newPoints
 }
+TimeDiff(EarlierTime, LaterTime)
+{
+     global
+     
+     tDifference := LaterTime
+     tDifference -= EarlierTime, minutes
+     return tDifference
+}
