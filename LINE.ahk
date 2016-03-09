@@ -87,7 +87,7 @@ EndRunReport(EndReason:= "Unknown")
      }
      WriteToLINE("HMin/PI: " . PIHMin,"newline")
      WriteToLINE("HMax/PI: " . PIHMax,"newline")
-     WriteToLINE("Avg HMin/PI: " . PIHAvg,"newline")
+     WriteToLINE("Avg HAvg/PI: " . PIHAvg,"newline")
      WriteToLINE("Total Fights: " . FightCounter,"newline")
      WriteToLINE("***********************")
 }
