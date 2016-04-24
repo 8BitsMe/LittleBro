@@ -61,12 +61,14 @@ If not A_IsAdmin
 
 #Include LINE.ahk
 
-;#Include OCR
 #Include OCR.ahk
 
 
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ;Import local config or create if it doesn't exist. No error checking on keys not found in config file yet.
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ;add additional local settings here
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 IniRead, LBCAutoHelp, LBConfig.ini, HELP, AutoHelp, Yes
 IniRead, LBCOnlyLVL3, LBConfig.ini, SPECIALS, OnlyLVL3, Yes
 IniRead, LBCOLoopCount, LBConfig.ini, OMEGALOOP, OLoopCount, 3
@@ -84,9 +86,16 @@ IniRead, LBRevFilterC, LBConfig.ini, COMBAT, LBRevFilterC, 11
 
 IniRead, LBSaveStreak, LBConfig.ini, COMBAT, SaveStreak, No
 IniRead, LBUsername, LBConfig.ini, GENERAL, Username, anonymous
+IniRead, LBWriteExcel, LBConfig.ini, GENERAL, WriteExcel, No
 
+; IniRead, LBStreakCnter, LBConfig.ini, COMBAT, LBStreakCnter, 1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16   17   18   19   20   21
+; IniRead, LBStreakMinPI, LBConfig.ini, COMBAT, LBStreakMinPI, 800,800,1000,1000,1000,1800,1800,1800,1800,500,500,500,500,2200,2200,2200,2200,2200,2200,2200,1600
+
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 ;add additional local settings here
 IniWrite, %LBCAutoHelp%, LBConfig.ini, HELP, AutoHelp
+; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 IniWrite, %LBCOnlyLVL3%, LBConfig.ini, SPECIALS, OnlyLVL3
 IniWrite, %LBCOLoopCount%, LBConfig.ini, OMEGALOOP, OLoopCount
 IniWrite, %LBCCMin%, LBConfig.ini, C-B, CMin
@@ -103,7 +112,10 @@ IniWrite, %LBRevFilterC%, LBConfig.ini, COMBAT, LBRevFilterC
 
 IniWrite, %LBSaveStreak%, LBConfig.ini, COMBAT, SaveStreak
 IniWrite, %LBUsername%, LBConfig.ini, GENERAL, Username
+IniWrite, %LBWriteExcel%, LBConfig.ini, GENERAL, WriteExcel
 
+; IniWrite, %LBStreakCnter%, LBConfig.ini, COMBAT, LBStreakCnter
+; IniWrite, %LBStreakMinPI%, LBConfig.ini, COMBAT, LBStreakMinPI
 
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -130,6 +142,13 @@ if( InStr(text, "LOG") ) {
      ClickReconnect("Failed, reconnecting")
      Sleep, 2000
 }
+
+; need to look for warning that is below normal OCRArea
+if( InStr(text, "WARNING") ) {
+     ClickReconnect("Lost Connection, reconnecting")
+     Sleep, 2000
+}
+
 ; msgbox, CheckingInternet
 return
 
@@ -229,14 +248,14 @@ Return
 F11:: ; testing hotkey
 
 ; ReadResultsPlaque()
-;title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
-;msgBox '%title%'
+title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
+msgBox '%title%'
 ; PowerLevel()
 If(ReportCategory = 3)
 {
      3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
 }
-Else 
+Else
 {
      4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
 }
@@ -314,7 +333,7 @@ Loop {
      ReportCategory := 3
      3StarStartTime := A_now
      FullLoop()
-     3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)     	
+     3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
      
      Random, A, 0, 100
      If (A>25) {
@@ -480,7 +499,7 @@ If(ReportCategory = 3)
 {
      3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
 }
-Else 
+Else
 {
      4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
 }
@@ -492,3 +511,5 @@ Return
 ButtonPANIC:
 Reload
 Return
+
+

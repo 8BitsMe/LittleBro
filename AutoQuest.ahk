@@ -58,12 +58,14 @@ AutoQuest() {
           if (ErrorLevel < 1) {
                MouseClick, L, Px, Py, 1
                ToolTip, Tap!, Px+12, Py+24, 2
-               CurY := Py+4
-          } else if ( Mod( Z, 3) = 0 ) {
+               CurY := Py+8
+          } else {
 			CurY := SearchT
 			Middle := wTop + wHeight * 0.5
-            MouseClick, R, SkipL, Middle, 1
-			Send ^{WheelDown 10}
+			if ( Mod( Z, 3) = 0 ) {
+	            MouseClick, R, SkipL, Middle, 1
+				Send ^{WheelDown 10}
+			}
 		  }
 
           ; PERHAPS WE NEED TO SKIP AN ANNOYING CUTSCENE?

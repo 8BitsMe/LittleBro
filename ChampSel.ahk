@@ -68,7 +68,7 @@ ChampSel() {
           ReverseFilter := LBRevFilterB
      }
      
-     if (WhichWar = "WAR-B" OR WhichWar = "WAR-C" or WhichWar = "WAR-Y" or WhichWar = "WAR-Z"){
+     if (WhichWar = "WAR-B" OR WhichWar = "WAR-C"){
           if(winStreak < ReverseFilter) {
                HeroFilter("Rating^")
                Sleep, 500
@@ -77,7 +77,7 @@ ChampSel() {
      }
      else {
           if(winStreak < ReverseFilter) {
-               HeroFilter("Rating^", "3*", "4*")
+               HeroFilter("Rating^", "3*", "4*", "5*")
                Sleep, 500
                ScrollUP()
           }
@@ -203,9 +203,13 @@ ChampSel() {
                          Sequence = 800,800,1000,1000,1000,1800,1800,1800,1800,500,500,500,500,2200,2200,2200,2200,2200,2200,2200,1600
                          StringSplit, Streaks, Sequence, `,
                          
-                         If (!Winstreak is number)
-                         Winstreak = 1
+                         ; msgbox, test |%winStreak%|
+                         If (!winStreak is integer) {
+                              winStreak = 1
+                              ;   msgbox, inside |%winStreak%|
+                         }
                          
+                         ;   msgbox, |%winStreak%|
                          ; SET OUR CURRENT PI TARGET
                          If (winStreak < Streaks0) Then {
                               StreakPI := Streaks%winStreak%
@@ -223,7 +227,7 @@ ChampSel() {
                                    MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.3, 20
                                    Sleep, 2000
                                    Goto, TopScan
-                              } else {              
+                              } else {
                                    If (SwitchOrWait = Wait) {
                                         Random, WaitABit, 60,180
                                         CountDown("EDIT TEAM`nChampions busy, waiting...",WaitABit)
@@ -263,7 +267,7 @@ ChampSel() {
                                    MouseClickDrag, left, MidX,MidY,MidX,MidY-wHeight*0.3, 20
                                    Sleep, 2000
                                    Goto, TopScan
-                              } else {                              
+                              } else {
                                    If (SwitchOrWait = Wait) {
                                         Random, WaitABit, 60,180
                                         CountDown("EDIT TEAM`nChampions busy, waiting...",WaitABit)
@@ -418,3 +422,5 @@ MatchSel() {
      ;   Sleep, 1000
      ;   Return
 }
+
+

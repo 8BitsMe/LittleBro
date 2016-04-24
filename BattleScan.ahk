@@ -92,7 +92,10 @@ BattleScan() {
 		  ; ScreenshotWindow()
           ; LineReport("Lost Fight","Arena")
 	  }
-          ReadResultsPlaque()
+
+		  if (LBWriteExcel != "No") {
+	          ReadResultsPlaque()
+		  }
        	  DoActions = 0
           ToolTip, "Fight ended cleanly with result plaque", wLeft, wTop-32, 9
      }

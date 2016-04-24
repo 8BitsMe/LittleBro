@@ -61,8 +61,13 @@ NavigateToScreen(Menu, Sub := "default", Subsub := "default")
                }
 
                ; verify we're on the Versus page
-               Sleep, 500
-               WaitForColor("Looking for versus page",0.285,0.143,0xAD782C,0) ; light blue background behind 'multiverse arenas' ... TODO: find a better verification.
+			   loop {
+				   Sleep, 250
+		           title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
+	           } Until (InStr(title, "ARENA") OR InStr(title, "MULTIVERSE"))
+
+;               Sleep, 500
+;               WaitForColor("Looking for versus page",0.285,0.143,0xAD782C,0) ; light blue background behind 'multiverse arenas' ... TODO: find a better verification.
           }
           Else If	(Sub = "story")
           {

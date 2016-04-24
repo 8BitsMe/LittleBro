@@ -351,7 +351,7 @@ HeroFilter(params*) {
                While(0 = found){
                     found := ClickIfColor(ssX, 0.904, 0X716E6E)
                     ;KEEP LOOKING
-                    ssX -= 0.002
+                    ssX -= 0.01
                }
                ToolTip, Hold on...Confirming panel is fully open, Px+12, Py+24, 2
                Sleep,500

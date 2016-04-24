@@ -60,6 +60,10 @@ FullLoop() {
 
           If (WhichWar = "WAR-Z") {
 
+ ;              winStreak := GetOCRArea(0.95, 0.348, 1.0, 0.398, "numeric")
+
+ ;              ClickC("WAR-Z")
+
                Loop, 2 {
                     MouseClickDrag, left, MidX + wWidth * 0.4, wTop + wHeight * 0.5 , MidX - wWidth*0.2, wTop + wHeight * 0.5, 15
                     Sleep, 1000
@@ -72,7 +76,7 @@ FullLoop() {
                ClickZ("WAR-Z")
           }
 
-          WaitForNoChange(0.5,0.75,"EDIT TEAM")
+;          WaitForNoChange(0.5,0.75,"EDIT TEAM")
 
           BattleCycle()
 
