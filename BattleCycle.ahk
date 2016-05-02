@@ -31,7 +31,7 @@ BattleCycle() {
           
           ShowOSD("ARENA FIGHTS`nFound page name: "title)
           
-          if ( InStr(title,"ET LINEUP") OR InStr(title,"SET LINEUP")) {
+          if ( InStr(title,"ET LINEUP") OR InStr(title,"SET LINEUP") OR InStr(title,"S_T LINEUP")) {
                
                ShowOSD("SET LINEUP`nDeciding hero vs hero...")
                Sleep, 1500
@@ -61,7 +61,7 @@ BattleCycle() {
                ShowOSD("REWARDS screen`nClicking continue...")
                ClickContinue("REWARDS Screen green Button...")
           }
-          else if InStr(title, "ACHI" ) {
+          else if ( InStr(title, "ACH" ) ) {
                ShowOSD("ACHIEVEMENTS`nClicking continue...")
                ClickContinue("ACHIEVEMENTS Screen green Button...")
           }
@@ -89,7 +89,7 @@ BattleMatchFights() {
      }
      SeriesFightPoints := 0
      SeriesPIs := ""
-
+     
      Loop, 3 {
           loopOffset := .134 * (A_Index-1)
           
@@ -215,3 +215,4 @@ BattleMatchFights() {
      LineReport("[" OmegaLoop "][" OuterLoop "/" LoopLimit "] - " WhichWar " - [Streak: " winStreak "][PI: " StreakPI "] [" ThousandsSep( currentPoints ) "][" WinOrLoss "][" (SeriesFightPoints) "]", "ARENA")
      previousPoints := currentPoints
 }
+

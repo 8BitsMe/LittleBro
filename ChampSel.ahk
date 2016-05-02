@@ -200,7 +200,7 @@ ChampSel() {
                     
                     If (WhichWar = "WAR-C" or WhichWar = "WAR-Z" or WhichWar = "CC") {
                          ; Streak = 1   2   3    4    5    6    7    8    9    10  11  12  13  14   15   16   17   18   19   20   21
-                         Sequence = 800,800,1000,1000,1000,1800,1800,1800,1800,500,500,500,500,2200,2200,2200,2200,2200,2200,2200,1600
+                         Sequence = 100,100,100,100,100,100,100,100,100,1600,1600,3600,3300,2500,2500,2500,2500,2500,2440,2300,1650
                          StringSplit, Streaks, Sequence, `,
                          
                          ; msgbox, test |%winStreak%|
@@ -337,7 +337,7 @@ FindChampionPlaque() {
      DrawRect(DetX-2,DetY,DetX+2,DetY+Scanner,"FFFF00")
      
      ; FIND A PIXEL ON THE CORNER OF THE CHAMPION FRAME
-     PixelSearch, Px, Py, DetX-2, DetY, DetX+2, DetY+Scanner, 0x35302D, 2, Fast
+     PixelSearch, Px, Py, DetX-2, DetY, DetX+2, DetY+Scanner, 0x414449, 2, Fast
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -357,18 +357,16 @@ MatchSel() {
      
      PiX :=  0.805
      PiA :=  0.342
-     PiB :=  0.582
+     PiB :=  0.580
      PiC :=  0.824
      
-     ;	 val1 := getPI( PiX, PiA, PiX + 0.052, PiA + 0.033, "numeric" )
-     ;	 val2 := getPI( PiX, PiB, PiX + 0.052, PiB + 0.033, "numeric" )
-     ;	 val3 := getPI( PiX, PiC, PiX + 0.052, PiC + 0.033, "numeric" )
+     EasiestMedium := 20000
      
      ShowOSD("OPPONENT SELECT`nPicking easy match with most points`nOr medium among hard ones")
      Sleep, 1000
      
      ; GREEN
-     PixelSearch, Px, Py, ScanX-8, ScanC-8, ScanX+8, ScanC+8, 0x33CB33, 5, Fast
+     PixelSearch, Px, Py, ScanX-8, ScanC-8, ScanX+8, ScanC+28, 0x33CB33, 5, Fast
      
      If (ErrorLevel < 1) {
           MouseClick, left, Px, Py
@@ -376,7 +374,7 @@ MatchSel() {
           Return
      }
      
-     PixelSearch, Px, Py, ScanX-8, ScanB-8, ScanX+8, ScanB+8, 0x33CB33, 5, Fast
+     PixelSearch, Px, Py, ScanX-8, ScanB-8, ScanX+8, ScanB+28, 0x33CB33, 5, Fast
      
      If (ErrorLevel < 1) {
           MouseClick, left, Px, Py
@@ -384,7 +382,7 @@ MatchSel() {
           Return
      }
      
-     PixelSearch, Px, Py, ScanX-8, ScanA-8, ScanX+8, ScanA+8, 0x33CB33, 5, Fast
+     PixelSearch, Px, Py, ScanX-8, ScanA-8, ScanX+8, ScanA+28, 0x33CB33, 5, Fast
      
      If (ErrorLevel < 1) {
           MouseClick, left, Px, Py
@@ -393,34 +391,43 @@ MatchSel() {
      }
      
      ; ORANGE
-     PixelSearch, Px, Py, ScanX-8, ScanA-8, ScanX+8, ScanA+8, 0x0D57C6, 5, Fast
+     PixelSearch, Px, Py, ScanX-8, ScanA-8, ScanX+8, ScanA+28, 0x0D57C6, 5, Fast
      
      If (ErrorLevel < 1) {
+          val1 := getPI( PiX, PiA, PiX + 0.052, PiA + 0.033, "numeric" )
+          EasiestMedium := val1
           BestMatchx := Px
           BestMatchy := Py
-          MatchB = 'orange'
-          MouseClick, left, Px, Py
-          Sleep, 1000
-          Return
-          
      }
      
-     PixelSearch, Px, Py, ScanX-8, ScanB-8, ScanX+8, ScanB+8, 0x0D57C6, 5, Fast
+     PixelSearch, Px, Py, ScanX-8, ScanB-8, ScanX+8, ScanB+28, 0x0D57C6, 5, Fast
      
      If (ErrorLevel < 1) {
-          MouseClick, left, Px, Py
-          Sleep, 1000
-          Return
-          If ( !InStr(MatchB, "orange") OR ( InStr(MatchB, "orange") AND (val2 < val1) ))  {
+          val2 := getPI( PiX, PiB, PiX + 0.052, PiB + 0.035, "numeric" )
+          if (val2 < EasiestMedium) {
+               EasiestMedium := val2
+               BestMatchx := Px
+               BestMatchy := Py
+          }
+     }
+     
+     PixelSearch, Px, Py, ScanX-8, ScanC-8, ScanX+8, ScanC+28, 0x0D57C6, 5, Fast
+     
+     If (ErrorLevel < 1) {
+          val3 := getPI( PiX, PiC, PiX + 0.065, PiC + 0.035, "numeric" )
+          ;    	  msgbox % "'" . val3 . "'"
+          if (val3 < EasiestMedium) {
+               EasiestMedium := val3
                BestMatchx := Px
                BestMatchy := Py
           }
      }
      
      
-     ;   MouseClick, left, BestMatchx, BestMatchy
-     ;   Sleep, 1000
-     ;   Return
+     MouseClick, left, BestMatchx, BestMatchy
+     Sleep, 500
+     Return
 }
+
 
 
