@@ -144,8 +144,9 @@ XPercentage() {
 GetOCRArea(tlX, tlY, brX, brY, options="") {
      global
      
-     if tlX > brX
-          return ""
+     if ( tlX > brX ) {
+          return "-1"
+     }
      
      topLeftX := wLeft + wWidth * tlX
      topLeftY := wTop + wHeight * tlY
@@ -168,13 +169,25 @@ getPI(tlX, tlY, brX, brY, options) {
      loop, 10 {
           ShowOSD("EDIT TEAM`nGetting current PI...`nLoop: " A_Index)
           
-          cPI := getOCRArea(tlX, tlY, brX-=.01, brY, options)
+          cPI := getOCRArea(tlX, tlY, brX - (.003 * A_Index), brY, options)
+          ;          msgbox % cPI
           cPI := RegExReplace(cPI, "i)[^0-9]")
+          
           ;	msgbox PI: '%cPI%' Loop: '%A_Index%'
-          if  (cPI > 150 ) AND (cPI < 9000)
-               return cPI
+          if  ( (cPI > 150 ) AND (cPI < 9000)) {
+               ;			  msgbox % "'" cPI "'"
+               if (A_Index > 1) {
+                    testPI := getOCRArea(brX - (.003 * A_Index), tlY, brX - (.015 * (A_Index-1)), brY, options)
+               }
+               
+               ;			msgbox % "'" cPI "'" . "'" testPI "'"
+               return cPI . testPI
+          }
      }
-     return 0
+/*     if !((cPI > 150 ) AND (cPI < 9000)) {
+	  	  return getPI(tlX-.001, tlY, brX+.001, brY, options)
+	 }
+*/     return 0
 }
 
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -483,3 +496,4 @@ TimeDiff(EarlierTime, LaterTime)
      tDifference -= EarlierTime, minutes
      return tDifference
 }
+
