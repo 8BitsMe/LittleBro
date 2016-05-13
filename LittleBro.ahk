@@ -122,29 +122,48 @@ IniWrite, %LBWriteExcel%, LBConfig.ini, GENERAL, WriteExcel
 ; ALWAYS WATCH FOR DISCONNECT SCREEN AND FIX THE ISSUE
 ; =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-;#Persistent
-;SetTimer,CheckInternet,10000
-;return
+; #Persistent
+; SetTimer,CheckInternet,10000
+; return
 
 CheckInternet:
+Suspend, Permit
 text := GetOCRArea(0.392, 0.200, 0.610, 0.341, "alpha")
 Gui, 99: Destroy
 ; msgbox, % text
 if( InStr(text, "RECENT") ) {
+	 ShowOSD("RECENT error")
+     LineReport("RECENT error")
      Send {Esc}
      Sleep, 2000
 }
 if( InStr(text, "LOST CONN") ) {
+	 ShowOSD("LOST CONNECTION error")
+     LineReport("LOST CONNECTION error")
      ClickReconnect("Lost Connection, reconnecting")
      Sleep, 2000
 }
 if( InStr(text, "LOG") ) {
+	 ShowOSD("LOG error")
+     LineReport("LOG error")
      ClickReconnect("Failed, reconnecting")
      Sleep, 2000
 }
 
+if( InStr(text, "RROR") ) {
+	 ShowOSD("RED ERROR error")
+	 LineReport("RED ERROR error")
+     Suspend
+	 Pause,,1
+     Send {Esc}
+     Sleep, 3000
+	 ClickChampionsGame()
+}
+
 ; need to look for warning that is below normal OCRArea
 if( InStr(text, "WARNING") ) {
+	 ShowOSD("WARNING error")
+     LineReport("WARNING error")
      ClickReconnect("Lost Connection, reconnecting")
      Sleep, 2000
 }
@@ -246,12 +265,16 @@ ShowMouseRatio()
 Return
 
 F11:: ; testing hotkey
+Suspend
+Pause,,1
 
+; ClickChampionsGame()
+; MatchSel()
 ; ReadResultsPlaque()
-title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
-msgBox '%title%'
+; title := getOCRArea(0.20, 0.1, 0.80, 0.17, "alpha")
+; msgBox '%title%'
 ; PowerLevel()
-If(ReportCategory = 3)
+/*If(ReportCategory = 3)
 {
      3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
 }
@@ -260,7 +283,7 @@ Else
      4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
 }
 EndRunReport("EndRun Button Pressed")
-
+*/
 ;HeroFilter("Level^", "Purple","4*")
 ;NavigateToScreen("Fight", "Event")
 Return
@@ -318,7 +341,7 @@ NavigateToScreen("Fight","Versus")
 
 Loop {
      OmegaLoop++
-     
+
      Random, LoopLimit, LBCCMin, LBCCMax
      LineReport("[C-B] War-C x" . LoopLimit, "ARENA")
      WhichWar := "WAR-C"
@@ -326,7 +349,7 @@ Loop {
      4StarStartTime := A_now
      FullLoop()
      4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
-     
+
      Random, LoopLimit, LBCBMin, LBCBMax
      LineReport("[C-B] War-B x" . LoopLimit, "ARENA")
      WhichWar := "WAR-B"
@@ -334,14 +357,14 @@ Loop {
      3StarStartTime := A_now
      FullLoop()
      3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
-     
+
      Random, A, 0, 100
      If (A>25) {
           LineReport("[C-B] Automated AlliHelp - "A, "ARENA")
           AlliHelp()
           NavigateToScreen("Fight","Versus")
      }
-     
+
      If (OmegaLoop > LBCOLoopCount)
      break
 }
@@ -369,12 +392,12 @@ Loop {
      LineReport("[B-Z] War-B x" . LoopLimit, "ARENA")
      WhichWar := "WAR-B"
      FullLoop()
-     
+
      Random, LoopLimit, LBCCMin, LBCCMax
      LineReport("[B-Z] War-Z x" . LoopLimit, "ARENA")
      WhichWar := "WAR-Z"
      FullLoop()
-     
+
      If (OmegaLoop > LBCOLoopCount)
      break
 }
@@ -397,7 +420,7 @@ Loop {
      4StarStartTime := A_now
      FullLoop()
      4StarRunDuration += TimeDiff(4StarStartTime, %A_now%)
-     
+
      Random, LoopLimit, LBCBMin, LBCBMax
      LineReport("[Z-Y] War-Y x" . LoopLimit, "ARENA")
      ReportCategory := 3
@@ -405,7 +428,7 @@ Loop {
      WhichWar := "WAR-Y"
      FullLoop()
      3StarRunDuration += TimeDiff(3StarStartTime, %A_now%)
-     
+
      Random, A, 0, 100
      If (A<50) {
           LineReport("[Z-Y] Automated AlliHelp - "A, "ARENA")

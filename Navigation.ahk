@@ -159,3 +159,25 @@ InAFight() {
 	PixelSearch, Px, Py, PauseL, PauseT, PauseR, PauseB, 0x9BB99B, 10, Fast
 
 }
+
+ClickChampionsGame() {
+
+	title := GetOCRArea(0.115, 0.230, 0.215, 0.275)
+
+; msgbox % title
+    if ( InStr(title,"Champions") ) {
+    	MouseClick, left, GetXCoord(0.160), GetYCoord(0.175)
+    	Reload
+	}
+
+
+	title := GetOCRArea(0.290, 0.230, 0.375, 0.275)
+; msgbox % title
+    if ( InStr(title,"Champions") ) {
+    	MouseClick, left, GetXCoord(0.325), GetYCoord(0.175)
+		Reload
+	}
+
+
+
+}
